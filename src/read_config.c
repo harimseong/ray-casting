@@ -52,7 +52,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 	while (1)
 	{
 		read_line = get_next_line(fd);
-		if (!read_line || is_map(read_line))
+		if (!read_line || map_check(read_line))
 			break ;
 		splited_words = ft_split(read_line, " \t");
 		free(read_line);
@@ -102,7 +102,6 @@ int	load_info(int texture_idx, t_texture_list *texture_list,
 		split_rgb = ft_split(option, ",");
 		*((uint32_t *)texture_list + texture_idx - 5) =
 			char_to_color(split_rgb);
-		
 	}
 	else
 	{
@@ -120,7 +119,6 @@ uint32_t	char_to_color(char **text)
 
 	idx = 0;
 	color = 0;
-	// TODO: fill config util
 	if (count_splited_words(text) != 3)
 		error_handler(CONFIG_INVALID_RGB_ERROR);
 	while (idx < 3)

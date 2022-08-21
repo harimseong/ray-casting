@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_check_util.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 18:57:58 by hseong            #+#    #+#             */
-/*   Updated: 2022/07/27 19:03:07 by hseong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	map_check(const char *read_line)
 {
@@ -32,3 +20,4 @@ int	map_line_check(const char *read_line)
 	}
 	return (1);
 }
+

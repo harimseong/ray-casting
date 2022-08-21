@@ -37,4 +37,6 @@ typedef struct s_mlx_data
 	t_texture_list	texture_list;
 }	t_mlx_data;
 
+int init_data(int argc, char** argv, t_mlx_data* mlx_data);
+
 #endif

@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	jump_to_map(t_mlx_data *data, char *map_path, int map_line_count)
 {
