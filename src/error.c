@@ -13,7 +13,8 @@ static const char	*g_error_msg_list[] = {
 	"config format error",
 	"config file has duplicate option",
 	"there is not enough options",
-	"invalid rgb value of floor or ceiling"
+	"invalid rgb value of floor or ceiling",
+	"invalid texture path or name"
 };
 
 void	error_handler(int status)

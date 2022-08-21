@@ -11,6 +11,7 @@ enum e_error_status
 	CONFIG_DUPLICATE_ERROR,
 	CONFIG_NOT_ENOUGH_OPTION_ERROR,
 	CONFIG_INVALID_RGB_ERROR,
+	TEXTURE_LOAD_ERROR
 };
 
 void	error_handler(int status);

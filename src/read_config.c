@@ -71,7 +71,6 @@ int	check_read_line(char **splited_words)
 	int		txt_idx;
 
 	words_size = count_splited_words(splited_words);
-	printf("%d\n", words_size);
 	if (words_size != 2)
 		error_handler(CONFIG_FORMAT_ERROR);
 	txt_idx = 0;
@@ -104,6 +103,8 @@ int	load_info(int texture_idx, t_texture_list *texture_list,
 	}
 	else
 	{
+		if (!mlx_load_png(option))
+			error_handler(TEXTURE_LOAD_ERROR);
 		*((mlx_texture_t **)&texture_list->wall + texture_idx) =
 			mlx_load_png(option);
 	}

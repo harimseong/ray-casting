@@ -3397,6 +3397,7 @@ TEST_DECLARE	mlx42/test/Tester.h	/^#define TEST_DECLARE(/;"	d
 TEST_EXIT	mlx42/test/Tester.h	/^#define TEST_EXIT(/;"	d
 TEST_EXPECT	mlx42/test/Tester.h	/^#define TEST_EXPECT(/;"	d
 TEXTURE_LIST_NUM	src/read_config.h	/^# define TEXTURE_LIST_NUM /;"	d
+TEXTURE_LOAD_ERROR	src/error.h	/^	TEXTURE_LOAD_ERROR$/;"	e	enum:e_error_status
 UNAME_S	mlx42/Makefile	/^	UNAME_S := $(shell uname -s)$/;"	m
 UNAME_S	mlx42/test/Makefile	/^	UNAME_S := $(shell uname -s)$/;"	m
 WHITE	mlx42/Makefile_Unix.mk	/^WHITE	:= \\033[37;1m$/;"	m
