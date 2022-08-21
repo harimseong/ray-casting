@@ -1,0 +1,101 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADD	Makefile	/^ADD = ft_execvpe.c ft_print_memory.c$/;"	m
+BNS	Makefile	/^BNS = ft_lstnew.c ft_lstadd_front.c\\$/;"	m
+BNS_FLAG	Makefile	/^BNS_FLAG =$/;"	m
+BNS_OBJS	Makefile	/^BNS_OBJS = $(BNS:%.c=%.o)$/;"	m
+CC	Makefile	/^CC = cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror$/;"	m
+HDR	Makefile	/^HDR = libft.h$/;"	m
+LIBFT_H	libft.h	/^# define LIBFT_H$/;"	d
+LLONG_MAX	ft_atoi.c	/^#define LLONG_MAX /;"	d	file:
+LLONG_MAX	ft_atoi_ptr.c	/^#define LLONG_MAX /;"	d	file:
+LLONG_MAX	ft_htoi.c	/^#define LLONG_MAX /;"	d	file:
+MAX_PATHNAME	ft_execvpe.c	/^#define MAX_PATHNAME /;"	d	file:
+NAME	Makefile	/^NAME = libft.a$/;"	m
+OBJS	Makefile	/^OBJS = $(SRC:%.c=%.o)$/;"	m
+SRC	Makefile	/^SRC = ft_isalpha.c ft_isdigit.c\\$/;"	m
+WORD_BYTES	ft_memset.c	/^# define WORD_BYTES /;"	d	file:
+WORD_BYTES	libft.h	/^# define WORD_BYTES /;"	d
+alloc_words	ft_split.c	/^char	**alloc_words(const char *str, size_t count, const char *delim)$/;"	f
+byte	ft_memset.c	/^	unsigned long long int	byte[WORD_BYTES];$/;"	m	struct:s_word	file:
+byte	libft.h	/^	unsigned long long int	byte[WORD_BYTES];$/;"	m	struct:s_word
+check_num	ft_putnbr_fd.c	/^int	check_num(int *n, int fd)$/;"	f
+content	libft.h	/^	void			*content;$/;"	m	struct:s_list
+dealloc_words	ft_split.c	/^void	dealloc_words(char ***str_arr_ptr, size_t size)$/;"	f
+ft_abs	ft_abs.c	/^int	ft_abs(int num)$/;"	f
+ft_atoi	ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
+ft_atoi_ptr	ft_atoi_ptr.c	/^int	ft_atoi_ptr(char **str_ptr)$/;"	f
+ft_bzero	ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
+ft_calloc	ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
+ft_execvpe	ft_execvpe.c	/^int	ft_execvpe(const char *filename, char *const *argv, char *const *envp,$/;"	f
+ft_htoi	ft_htoi.c	/^int	ft_htoi(const char *str)$/;"	f
+ft_isalnum	ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f
+ft_isalpha	ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f
+ft_isascii	ft_isascii.c	/^int	ft_isascii(int c)$/;"	f
+ft_isdigit	ft_isdigit.c	/^int	ft_isdigit(int c)$/;"	f
+ft_ishex	ft_ishex.c	/^int	ft_ishex(int c)$/;"	f
+ft_isprint	ft_isprint.c	/^int	ft_isprint(int c)$/;"	f
+ft_isspace	ft_atoi_ptr.c	/^int	ft_isspace(int c)$/;"	f
+ft_isspace	ft_isspace.c	/^int	ft_isspace(int c)$/;"	f
+ft_itoa	ft_itoa.c	/^char	*ft_itoa(int n)$/;"	f
+ft_lstadd_back	ft_lstadd_back.c	/^void	ft_lstadd_back(t_list **lst, t_list *new)$/;"	f
+ft_lstadd_front	ft_lstadd_front.c	/^void	ft_lstadd_front(t_list **lst, t_list *new)$/;"	f
+ft_lstclear	ft_lstclear.c	/^void	ft_lstclear(t_list **lst, void (*del)(void *))$/;"	f
+ft_lstdelone	ft_lstdelone.c	/^void	ft_lstdelone(t_list *lst, void (*del)(void *))$/;"	f
+ft_lstiter	ft_lstiter.c	/^void	ft_lstiter(t_list *lst, void (*f)(void *))$/;"	f
+ft_lstlast	ft_lstlast.c	/^t_list	*ft_lstlast(t_list *lst)$/;"	f
+ft_lstmap	ft_lstmap.c	/^t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))$/;"	f
+ft_lstnew	ft_lstnew.c	/^t_list	*ft_lstnew(void *content)$/;"	f
+ft_lstsize	ft_lstsize.c	/^int	ft_lstsize(t_list *lst)$/;"	f
+ft_max	ft_max.c	/^size_t	ft_max(size_t n1, size_t n2)$/;"	f
+ft_memchr	ft_memchr.c	/^void	*ft_memchr(const void *s, int c, size_t n)$/;"	f
+ft_memcmp	ft_memcmp.c	/^int	ft_memcmp(const void *s1, const void *s2, size_t n)$/;"	f
+ft_memcpy	ft_memcpy.c	/^void	*ft_memcpy(void *dst, const void *src, size_t len)$/;"	f
+ft_memmove	ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, size_t len)$/;"	f
+ft_memset	ft_memset.c	/^void	*ft_memset(void *b, int c, t_uint64 len)$/;"	f
+ft_print_memory	ft_print_memory.c	/^void	*ft_print_memory(void *addr, size_t size)$/;"	f
+ft_putchar_fd	ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f
+ft_putendl_fd	ft_putendl_fd.c	/^void	ft_putendl_fd(const char *s, int fd)$/;"	f
+ft_putnbr_fd	ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f
+ft_putstr_fd	ft_putstr_fd.c	/^void	ft_putstr_fd(const char *s, int fd)$/;"	f
+ft_revmemcpy	ft_memmove.c	/^static void	*ft_revmemcpy(void *dst, const void *src, size_t len)$/;"	f	file:
+ft_split	ft_split.c	/^char	**ft_split(const char *str, const char *delim)$/;"	f
+ft_str_rev	ft_itoa.c	/^static void	ft_str_rev(char *s, size_t size)$/;"	f	file:
+ft_strchr	ft_strchr.c	/^char	*ft_strchr(const char *s, int c)$/;"	f
+ft_strcmp	ft_strcmp.c	/^int	ft_strcmp(const char *s1, const char *s2)$/;"	f
+ft_strdup	ft_strdup.c	/^char	*ft_strdup(const char *s)$/;"	f
+ft_striteri	ft_striteri.c	/^void	ft_striteri(char *s, void (*f)(unsigned int, char *))$/;"	f
+ft_strjoin	ft_strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f
+ft_strlcat	ft_strlcat.c	/^size_t	ft_strlcat(char *dest, const char *src, size_t size)$/;"	f
+ft_strlcpy	ft_strlcpy.c	/^size_t	ft_strlcpy(char *dest, const char *src, size_t size)$/;"	f
+ft_strlen	ft_strlen.c	/^size_t	ft_strlen(const char *str)$/;"	f
+ft_strmapi	ft_strmapi.c	/^char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))$/;"	f
+ft_strncmp	ft_strncmp.c	/^int	ft_strncmp(const char *s1, const char *s2, size_t n)$/;"	f
+ft_strndup	ft_strndup.c	/^char	*ft_strndup(const char *src, size_t len)$/;"	f
+ft_strnstr	ft_strnstr.c	/^char	*ft_strnstr(const char *s1, const char *s2, size_t n)$/;"	f
+ft_strrchr	ft_strrchr.c	/^char	*ft_strrchr(const char *s, int c)$/;"	f
+ft_strtrim	ft_strtrim.c	/^char	*ft_strtrim(char const *s1, char const *set)$/;"	f
+ft_substr	ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
+ft_swap	ft_swap.c	/^void	ft_swap(int *a, int *b)$/;"	f
+ft_tolower	ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
+ft_toupper	ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
+g_hex_table	ft_htoi.c	/^static int	g_hex_table[23] = {$/;"	v	file:
+get_count	ft_split.c	/^size_t	get_count(const char *str, const char *delim)$/;"	f
+next	libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
+print_addr	ft_print_memory.c	/^void	print_addr(void	*addr)$/;"	f
+print_content	ft_print_memory.c	/^void	print_content(void *addr, size_t len)$/;"	f
+print_hex	ft_print_memory.c	/^void	print_hex(unsigned char hex)$/;"	f
+print_hexcontent	ft_print_memory.c	/^void	print_hexcontent(void *addr, size_t len)$/;"	f
+s_list	libft.h	/^typedef struct s_list$/;"	s
+s_word	ft_memset.c	/^typedef struct s_word$/;"	s	file:
+s_word	libft.h	/^typedef struct s_word$/;"	s
+set_word	ft_memset.c	/^void	set_word(int c, t_word *num)$/;"	f
+t_list	libft.h	/^}			t_list;$/;"	t	typeref:struct:s_list
+t_uint64	ft_memset.c	/^typedef unsigned long long int	t_uint64;$/;"	t	file:
+t_word	ft_memset.c	/^}			t_word;$/;"	t	typeref:struct:s_word	file:
+t_word	libft.h	/^}			t_word;$/;"	t	typeref:struct:s_word

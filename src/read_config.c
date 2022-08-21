@@ -50,10 +50,13 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 			break ;
 		splited_words = ft_split(read_line, " \t");
 		free(read_line);
-		collect_ptr_2d_garbage((void **)splited_words);
-		texture_idx = check_read_line(splited_words);
-		option_bit_flag = load_info(texture_idx, &mlx_data->texture_list,
-			splited_words[1]);
+		if (ft_strncmp(splited_words[0], "\n", 1))
+		{
+			collect_ptr_2d_garbage((void **)splited_words);
+			texture_idx = check_read_line(splited_words);
+			option_bit_flag = load_info(texture_idx, &mlx_data->texture_list, 
+					splited_words[1]);
+		}
 		free_splited_arr(splited_words);
 	}
 	if (option_bit_flag != ALL_OPTION_FILLED)
@@ -68,6 +71,7 @@ int	check_read_line(char **splited_words)
 	int		txt_idx;
 
 	words_size = count_splited_words(splited_words);
+	printf("%d\n", words_size);
 	if (words_size != 2)
 		error_handler(CONFIG_FORMAT_ERROR);
 	txt_idx = 0;
@@ -76,6 +80,7 @@ int	check_read_line(char **splited_words)
 		if (ft_strncmp(splited_words[0], g_texture_id_list[txt_idx],
 			ft_strlen(g_texture_id_list[txt_idx]) + 1) == 0)
 			break ;
+		txt_idx++;
 	}
 	if (txt_idx == TEXTURE_LIST_NUM)
 		error_handler(CONFIG_FORMAT_ERROR);

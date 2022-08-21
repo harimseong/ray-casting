@@ -1,4 +1,5 @@
 #include "init_data.h"
+#include <stdio.h>
 
 void	init_mlx(t_mlx_data *mlx_data);
 

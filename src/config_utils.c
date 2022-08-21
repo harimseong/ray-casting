@@ -2,10 +2,13 @@
 
 void	free_splited_arr(char **splited_words)
 {
-	while (*splited_words)
+	int idx;
+
+	idx = 0;
+	while (splited_words[idx])
 	{
-		free(*splited_words);
-		splited_words++;
+		free(splited_words[idx]);
+		idx++;
 	}
 	free(splited_words);
 }
