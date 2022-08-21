@@ -1,3 +1,4 @@
+#include "garbage_collector/garbage_collector.h"
 #include "libft.h"
 #include "read_config.h"
 
@@ -12,6 +13,7 @@ void	free_splited_arr(char **splited_words)
 		idx++;
 	}
 	free(splited_words);
+	collect_ptr_2d_garbage(NULL);
 }
 
 int	count_splited_words(char **splited_words)
@@ -24,7 +26,7 @@ int	count_splited_words(char **splited_words)
 	return (cnt);
 }
 
-char*	sub_newline(char *read_line)
+char*	remove_newline(char *read_line)
 {
 	char	*ret;
 

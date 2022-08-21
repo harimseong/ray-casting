@@ -46,7 +46,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 
 	while (1)
 	{
-		read_line = sub_newline(get_next_line(fd));
+		read_line = remove_newline(get_next_line(fd));
 		if (!read_line || is_map(read_line))
 			break ;
 		splited_words = ft_split(read_line, " \t");

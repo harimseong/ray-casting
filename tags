@@ -7318,6 +7318,7 @@ readChunk_zTXt	mlx42/lib/png/lodepng.c	/^static unsigned readChunk_zTXt(LodePNGI
 read_text_chunks	mlx42/include/lodepng/lodepng.h	/^  unsigned read_text_chunks; \/*if false but remember_unknown_chunks is true, they're stored in the unknown chunks*\/$/;"	m	struct:LodePNGDecoderSettings
 remember_unknown_chunks	mlx42/include/lodepng/lodepng.h	/^  unsigned remember_unknown_chunks;$/;"	m	struct:LodePNGDecoderSettings
 removePaddingBits	mlx42/lib/png/lodepng.c	/^static void removePaddingBits(unsigned char* out, const unsigned char* in,$/;"	f	file:
+remove_newline	src/config_utils.c	/^char*	remove_newline(char *read_line)$/;"	f
 render_queue	mlx42/include/MLX42/MLX42_Int.h	/^	mlx_list_t*		render_queue;$/;"	m	struct:mlx_ctx
 resize_hook	mlx42/include/MLX42/MLX42_Int.h	/^	mlx_resize_t	resize_hook;$/;"	m	struct:mlx_ctx
 resolveExitCode	mlx42/test/Tester.h	/^static int32_t resolveExitCode(void)$/;"	f
@@ -7358,7 +7359,6 @@ split_list	doubly_linked_list/dlinkedlist_mergesort.c	/^t_node	*split_list(t_nod
 srgb_defined	mlx42/include/lodepng/lodepng.h	/^  unsigned srgb_defined; \/* Whether an sRGB chunk is present (0 = not present, 1 = present). *\/$/;"	m	struct:LodePNGInfo
 srgb_intent	mlx42/include/lodepng/lodepng.h	/^  unsigned srgb_intent;  \/* Rendering intent: 0=perceptual, 1=rel. colorimetric, 2=saturation, 3=abs. colorimetric *\/$/;"	m	struct:LodePNGInfo
 string_cleanup	mlx42/lib/png/lodepng.c	/^static void string_cleanup(char** out) {$/;"	f	file:
-sub_newline	src/config_utils.c	/^char*	sub_newline(char *read_line)$/;"	f
 sys	mlx42/tools/xpm3_conv.py	/^import sys$/;"	i
 t_comp	doubly_linked_list/dlinkedlist.h	/^typedef int	(*t_comp)(const void *, const void *);$/;"	t
 t_dlist	doubly_linked_list/dlinkedlist.h	/^}				t_dlist;$/;"	t	typeref:struct:s_dlist
