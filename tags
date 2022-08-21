@@ -6895,6 +6895,8 @@ interlace_method	mlx42/include/lodepng/lodepng.h	/^  unsigned interlace_method; 
 isGrayICCProfile	mlx42/lib/png/lodepng.c	/^static unsigned isGrayICCProfile(const unsigned char* profile, unsigned size) {$/;"	f	file:
 isRGBICCProfile	mlx42/lib/png/lodepng.c	/^static unsigned isRGBICCProfile(const unsigned char* profile, unsigned size) {$/;"	f	file:
 is_all_option_load	src/init_cub_file_option.c	/^void	is_all_option_load(t_mlx_data *data)$/;"	f
+is_map	src/map_check_util.c	/^int	is_map(const char *read_line)$/;"	f
+is_map_line	src/map_check_util.c	/^int	is_map_line(const char *read_line)$/;"	f
 itext_keys	mlx42/include/lodepng/lodepng.h	/^  char** itext_keys; \/*the English keyword of the text chunk (e.g. "Comment")*\/$/;"	m	struct:LodePNGInfo
 itext_langtags	mlx42/include/lodepng/lodepng.h	/^  char** itext_langtags; \/*language tag for this text's language, ISO\/IEC 646 string, e.g. ISO 639 language tag*\/$/;"	m	struct:LodePNGInfo
 itext_num	mlx42/include/lodepng/lodepng.h	/^  size_t itext_num; \/*the amount of international texts in this PNG*\/$/;"	m	struct:LodePNGInfo
@@ -7088,8 +7090,6 @@ main	src/main.c	/^int main(int argc, char **argv)$/;"	f
 major	mlx42/include/glad/glad.h	/^    int major;$/;"	m	struct:gladGLversionStruct
 map	src/cub3d.h	/^	char	**map;$/;"	m	struct:s_map
 map	src/cub3d.h	/^	t_map			map;$/;"	m	struct:s_mlx_data
-map_check	src/map_check_util.c	/^int	map_check(const char *read_line)$/;"	f
-map_line_check	src/map_check_util.c	/^int	map_line_check(const char *read_line)$/;"	f
 max_icc_size	mlx42/include/lodepng/lodepng.h	/^  size_t max_icc_size;$/;"	m	struct:LodePNGDecoderSettings
 max_loaded_major	mlx42/lib/glad/glad.c	/^static int max_loaded_major;$/;"	v	file:
 max_loaded_minor	mlx42/lib/glad/glad.c	/^static int max_loaded_minor;$/;"	v	file:

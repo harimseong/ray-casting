@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "garbage_collector.h"
 
@@ -43,10 +44,13 @@ void	dump_garbage(void)
 		close(bucket->fd);
 	free(bucket->ptr);
 	temp = bucket->ptr_2d;
-	while (*temp)
+	if (temp)
 	{
-		free(*temp);
-		++temp;
+		while (*temp)
+		{
+			free(*temp);
+			++temp;
+		}
 	}
 	free(bucket->ptr_2d);
 }

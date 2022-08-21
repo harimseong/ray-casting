@@ -1,8 +1,6 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-# include "cub3d.h"
-
 enum e_error_status
 {
 	NONE,

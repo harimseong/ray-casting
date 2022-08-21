@@ -1,7 +1,4 @@
-#include "cub3d.h"
 #include "init_data.h"
-#include "read_config.h"
-#include "error.h"
 
 void	init_mlx(t_mlx_data *mlx_data);
 

@@ -8,7 +8,14 @@ RM		=	rm -f
 
 SRC		=	main.c\
 			get_next_line.c\
-			get_next_line_utils.c
+			get_next_line_utils.c\
+			config_utils.c\
+			error.c\
+			exit.c\
+			init_data.c\
+			map_check_util.c\
+			read_config.c\
+			garbage_collector/garbage_collector.c\
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)

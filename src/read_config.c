@@ -2,13 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "MLX42.h"
-#include "libft.h"
-#include "cub3d.h"
-#include "error.h"
-#include "get_next_line.h"
 #include "read_config.h"
-#include "garbage_collector/garbage_collector.h"
 
 static const char	*g_texture_id_list[TEXTURE_LIST_NUM] = {
 	"EA",
@@ -52,7 +46,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 	while (1)
 	{
 		read_line = get_next_line(fd);
-		if (!read_line || map_check(read_line))
+		if (!read_line || is_map(read_line))
 			break ;
 		splited_words = ft_split(read_line, " \t");
 		free(read_line);
