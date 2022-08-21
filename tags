@@ -2022,6 +2022,7 @@ INCLUDE_DIR	mlx42/Makefile	/^INCLUDE_DIR	:= include$/;"	m
 INCL_DIR	doubly_linked_list/Makefile	/^INCL_DIR= ..\/include$/;"	m
 INC_DIR	Makefile	/^INC_DIR	=$/;"	m
 INIT_DATA_H	src/init_data.h	/^# define INIT_DATA_H$/;"	d
+INIT_MAP_H	src/init_map.h	/^# define INIT_MAP_H$/;"	d
 INVALIDSYMBOL	mlx42/lib/png/lodepng.c	/^#define INVALIDSYMBOL /;"	d	file:
 IS_UWP	mlx42/lib/glad/glad.c	/^    #define IS_UWP /;"	d	file:
 KHRONOS_APIATTRIBUTES	mlx42/include/KHR/khrplatform.h	/^#define KHRONOS_APIATTRIBUTES /;"	d
@@ -3486,7 +3487,7 @@ char_to_color	src/read_config.c	/^uint32_t	char_to_color(char **text)$/;"	f
 checkColorValidity	mlx42/lib/png/lodepng.c	/^static unsigned checkColorValidity(LodePNGColorType colortype, unsigned bd) {$/;"	f	file:
 check_config_path	src/read_config.c	/^int	check_config_path(const char *path)$/;"	f
 check_file_option_vaild	src/init_cub_file_option.c	/^void	check_file_option_vaild(t_mlx_data *data)$/;"	f
-check_map	src/init_map.c	/^int	check_map(t_mlx_data *data, t_map *map_data, int fd)$/;"	f
+check_map	src/tmp_init_map.c	/^int	check_map(t_mlx_data *data, t_map *map_data, int fd)$/;"	f
 check_num	libft/ft_putnbr_fd.c	/^int	check_num(int *n, int fd)$/;"	f
 check_read_line	src/init_cub_file_option.c	/^int	check_read_line(char *read_line, t_mlx_data *data)$/;"	f
 check_read_line	src/read_config.c	/^int	check_read_line(char **splited_words)$/;"	f
@@ -3587,7 +3588,7 @@ filter_palette_zero	mlx42/include/lodepng/lodepng.h	/^  unsigned filter_palette_
 filter_strategy	mlx42/include/lodepng/lodepng.h	/^  LodePNGFilterStrategy filter_strategy;$/;"	m	struct:LodePNGEncoderSettings
 find_coreGL	mlx42/lib/glad/glad.c	/^static void find_coreGL(void) {$/;"	f	file:
 find_extensionsGL	mlx42/lib/glad/glad.c	/^static int find_extensionsGL(void) {$/;"	f	file:
-find_map	src/init_map.c	/^int	find_map(t_mlx_data *data, char *map_path, int *map_line_count)$/;"	f
+find_map	src/tmp_init_map.c	/^int	find_map(t_mlx_data *data, char *map_path, int *map_line_count)$/;"	f
 flag	doubly_linked_list/dlinkedlist.h	/^	int			flag;$/;"	m	struct:s_dlist
 floor_color	src/cub3d.h	/^	uint32_t		floor_color;$/;"	m	struct:s_texture_list
 fnotfound	mlx42/tools/compile_shader.bat	/^:fnotfound$/;"	l
@@ -6883,7 +6884,7 @@ info_png	mlx42/include/lodepng/lodepng.h	/^  LodePNGInfo info_png; \/*info of th
 info_raw	mlx42/include/lodepng/lodepng.h	/^  LodePNGColorMode info_raw; \/*specifies the format in which you would like to get the raw pixel buffer*\/$/;"	m	struct:LodePNGState
 init_cub_file_option	src/init_cub_file_option.c	/^void	init_cub_file_option(t_mlx_data *data)$/;"	f
 init_data	src/init_data.c	/^int	init_data(int argc, char **argv, t_mlx_data *mlx_data)$/;"	f
-init_map	src/init_map.c	/^int	init_map(t_mlx_data *data)$/;"	f
+init_map	src/tmp_init_map.c	/^int	init_map(t_mlx_data *data)$/;"	f
 init_mlx	src/init_data.c	/^void	init_mlx(t_mlx_data *mlx_data)$/;"	f
 init_text_to_null	src/init_cub_file_option.c	/^void	init_text_to_null(t_mlx_data *data)$/;"	f
 initialHeight	mlx42/include/MLX42/MLX42_Int.h	/^	uint32_t		initialHeight;$/;"	m	struct:mlx_ctx
@@ -6904,7 +6905,7 @@ itext_num	mlx42/include/lodepng/lodepng.h	/^  size_t itext_num; \/*the amount of
 itext_strings	mlx42/include/lodepng/lodepng.h	/^  char** itext_strings; \/*the actual international text - UTF-8 string*\/$/;"	m	struct:LodePNGInfo
 itext_transkeys	mlx42/include/lodepng/lodepng.h	/^  char** itext_transkeys; \/*keyword translated to the international language - UTF-8 string*\/$/;"	m	struct:LodePNGInfo
 join_list	doubly_linked_list/dlinkedlist_mergesort.c	/^t_node	*join_list(t_node **headptr, t_node *mid, size_t len, t_comp comp)$/;"	f
-jump_to_map	src/init_map.c	/^int	jump_to_map(t_mlx_data *data, char *map_path, int map_line_count)$/;"	f
+jump_to_map	src/tmp_init_map.c	/^int	jump_to_map(t_mlx_data *data, char *map_path, int map_line_count)$/;"	f
 key	mlx42/include/MLX42/MLX42.h	/^	keys_t			key;$/;"	m	struct:mlx_key_data
 key	mlx42/include/lodepng/lodepng.h	/^  unsigned key; \/*image is not opaque and color key is possible instead of full alpha*\/$/;"	m	struct:LodePNGColorStats
 key_b	mlx42/include/lodepng/lodepng.h	/^  unsigned key_b;       \/*blue component of color key*\/$/;"	m	struct:LodePNGColorMode
@@ -6974,7 +6975,8 @@ load_GL_VERSION_4_4	mlx42/lib/glad/glad.c	/^static void load_GL_VERSION_4_4(GLAD
 load_GL_VERSION_4_5	mlx42/lib/glad/glad.c	/^static void load_GL_VERSION_4_5(GLADloadproc load) {$/;"	f	file:
 load_GL_VERSION_4_6	mlx42/lib/glad/glad.c	/^static void load_GL_VERSION_4_6(GLADloadproc load) {$/;"	f	file:
 load_info	src/read_config.c	/^int	load_info(int texture_idx, t_texture_list *texture_list,$/;"	f
-load_map	src/init_map.c	/^int	load_map(t_map *map_data, int fd)$/;"	f
+load_map	src/init_map.c	/^void load_map(int fd, t_mlx_data *mlx_data)$/;"	f
+load_map	src/tmp_init_map.c	/^int	load_map(t_map *map_data, int fd)$/;"	f
 lodepng	mlx42/include/lodepng/lodepng.h	/^namespace lodepng {$/;"	n
 lodepng_add_itext	mlx42/lib/png/lodepng.c	/^unsigned lodepng_add_itext(LodePNGInfo* info, const char* key, const char* langtag,$/;"	f
 lodepng_add_itext_sized	mlx42/lib/png/lodepng.c	/^static unsigned lodepng_add_itext_sized(LodePNGInfo* info, const char* key, const char* langtag,$/;"	f	file:
