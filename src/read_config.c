@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include "libft.h"
 #include "read_config.h"
 
 static const char	*g_texture_id_list[TEXTURE_LIST_NUM] = {
@@ -45,7 +46,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 
 	while (1)
 	{
-		read_line = get_next_line(fd);
+		read_line = sub_newline(get_next_line(fd));
 		if (!read_line || is_map(read_line))
 			break ;
 		splited_words = ft_split(read_line, " \t");
@@ -54,7 +55,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 		{
 			collect_ptr_2d_garbage((void **)splited_words);
 			texture_idx = check_read_line(splited_words);
-			option_bit_flag = load_info(texture_idx, &mlx_data->texture_list, 
+			option_bit_flag = load_info(texture_idx, &mlx_data->texture_list,
 					splited_words[1]);
 		}
 		free_splited_arr(splited_words);
@@ -103,10 +104,10 @@ int	load_info(int texture_idx, t_texture_list *texture_list,
 	}
 	else
 	{
-		if (!mlx_load_png(option))
-			error_handler(TEXTURE_LOAD_ERROR);
 		*((mlx_texture_t **)&texture_list->wall + texture_idx) =
 			mlx_load_png(option);
+		if (!(*((mlx_texture_t **)&texture_list->wall + texture_idx)))
+			error_handler(TEXTURE_LOAD_ERROR);
 	}
 	return (duplicate_detector);
 }

@@ -7358,6 +7358,7 @@ split_list	doubly_linked_list/dlinkedlist_mergesort.c	/^t_node	*split_list(t_nod
 srgb_defined	mlx42/include/lodepng/lodepng.h	/^  unsigned srgb_defined; \/* Whether an sRGB chunk is present (0 = not present, 1 = present). *\/$/;"	m	struct:LodePNGInfo
 srgb_intent	mlx42/include/lodepng/lodepng.h	/^  unsigned srgb_intent;  \/* Rendering intent: 0=perceptual, 1=rel. colorimetric, 2=saturation, 3=abs. colorimetric *\/$/;"	m	struct:LodePNGInfo
 string_cleanup	mlx42/lib/png/lodepng.c	/^static void string_cleanup(char** out) {$/;"	f	file:
+sub_newline	src/config_utils.c	/^char*	sub_newline(char *read_line)$/;"	f
 sys	mlx42/tools/xpm3_conv.py	/^import sys$/;"	i
 t_comp	doubly_linked_list/dlinkedlist.h	/^typedef int	(*t_comp)(const void *, const void *);$/;"	t
 t_dlist	doubly_linked_list/dlinkedlist.h	/^}				t_dlist;$/;"	t	typeref:struct:s_dlist

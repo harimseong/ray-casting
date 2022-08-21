@@ -14,5 +14,6 @@ int		check_config_path(const char *path);
 int		is_map(const char *read_line);
 void	free_splited_arr(char **splited_words);
 int		count_splited_words(char **splited_words);
+char*	sub_newline(char *read_line);
 
 #endif
