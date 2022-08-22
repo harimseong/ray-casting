@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include "garbage_collector/garbage_collector.h"
 #include "libft.h"
 #include "read_config.h"
 
@@ -59,6 +60,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 					splited_words[1]);
 		}
 		free_splited_arr(splited_words);
+		collect_ptr_2d_garbage(NULL);
 	}
 	if (option_bit_flag != ALL_OPTION_FILLED)
 		error_handler(CONFIG_NOT_ENOUGH_OPTION_ERROR);
@@ -122,14 +124,21 @@ uint32_t	char_to_color(char **text)
 	idx = 0;
 	color = 0;
 	if (count_splited_words(text) != 3)
+	{
+		free_splited_arr(text);
 		error_handler(CONFIG_INVALID_RGB_ERROR);
+	}
 	while (idx < 3)
 	{
 		bytes = ft_atoi(text[idx++]);
 		if (bytes < 0 || bytes > 255)
+		{
+			free_splited_arr(text);
 			error_handler(CONFIG_INVALID_RGB_ERROR);
+		}
 		color |= (uint32_t)bytes << (3 - idx++) * 8;
 	}
 	color |= 190;
+	free_splited_arr(text);
 	return (color);
 }
