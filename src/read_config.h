@@ -1,10 +1,13 @@
 #ifndef READ_CONFIG_H
 # define READ_CONFIG_H
 
-#include "cub3d.h"
-#include "error.h"
-#include "get_next_line.h"
-#include "garbage_collector/garbage_collector.h"
+# include <fcntl.h>
+# include <unistd.h>
+
+# include "cub3d.h"
+# include "error.h"
+# include "get_next_line.h"
+# include "garbage_collector/garbage_collector.h"
 
 # define TEXTURE_LIST_NUM (7)
 # define ALL_OPTION_FILLED (0b1111111)

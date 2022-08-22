@@ -1,10 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "libft.h"
-#include "cub3d.h"
 #include "error.h"
-#include "garbage_collector/garbage_collector.h"
 
 static const char	*g_error_msg_list[] = {
 	"invalid argument",
@@ -17,7 +14,9 @@ static const char	*g_error_msg_list[] = {
 	"invalid texture path or name",
 	"can not find map",
 	"invalid map",
-	"memory allocation error"
+	"memory allocation error",
+	"mlx initializaion failed",
+	"mlx new image failed",
 };
 
 void	error_handler(int status)

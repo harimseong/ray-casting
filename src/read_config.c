@@ -1,9 +1,3 @@
-#include <err.h>
-#include <fcntl.h>
-#include <unistd.h>
-
-#include "garbage_collector/garbage_collector.h"
-#include "libft.h"
 #include "read_config.h"
 
 static const char	*g_texture_id_list[TEXTURE_LIST_NUM] = {
@@ -41,23 +35,21 @@ int	check_config_path(const char *path)
 void	get_config_info(int fd, t_mlx_data *mlx_data)
 {
 	char			*read_line;
-	int				texture_idx;
 	char			**splited_words;
 	int				option_bit_flag;
 
 	while (1)
 	{
-		read_line = remove_newline(get_next_line(fd));
+		read_line = get_next_line(fd);
 		if (!read_line || is_map(read_line))
 			break ;
-		splited_words = ft_split(read_line, " \t");
+		splited_words = ft_split(read_line, " \t\n");
 		free(read_line);
-		if (ft_strncmp(splited_words[0], "\n", 1))
+		if (splited_words[0] != NULL)
 		{
 			collect_ptr_2d_garbage((void **)splited_words);
-			texture_idx = check_read_line(splited_words);
-			option_bit_flag = load_info(texture_idx, &mlx_data->texture_list,
-					splited_words[1]);
+			option_bit_flag = load_info(check_read_line(splited_words),
+				&mlx_data->texture_list, splited_words[1]);
 		}
 		free_splited_arr(splited_words);
 		collect_ptr_2d_garbage(NULL);

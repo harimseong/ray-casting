@@ -44,13 +44,12 @@ void	dump_garbage(void)
 		close(bucket->fd);
 	free(bucket->ptr);
 	temp = bucket->ptr_2d;
-	if (temp)
+	if (temp == NULL)
+		return ;
+	while (*temp)
 	{
-		while (*temp)
-		{
-			free(*temp);
-			++temp;
-		}
+		free(*temp);
+		++temp;
 	}
 	free(bucket->ptr_2d);
 }

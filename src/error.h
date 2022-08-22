@@ -1,6 +1,9 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# include "cub3d.h"
+# include "garbage_collector/garbage_collector.h"
+
 enum e_error_status
 {
 	NONE,
@@ -14,7 +17,9 @@ enum e_error_status
 	TEXTURE_LOAD_ERROR,
 	MAP_FIND_ERROR,
 	MAP_INVALID_ERROR,
-	MALLOC_ERROR
+	MALLOC_ERROR,
+	MLX_INIT_ERROR,
+	MLX_IMG_ERROR,
 };
 
 void	error_handler(int status);

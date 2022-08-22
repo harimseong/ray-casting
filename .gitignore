@@ -54,3 +54,5 @@ dkms.conf
 #
 .cache/
 compile_commands.json
+.*.swp
+tags

@@ -1,5 +1,6 @@
-#include "cub3d.h"
 #include <stdio.h>
+
+#include "cub3d.h"
 
 int	is_map(const char *read_line)
 {

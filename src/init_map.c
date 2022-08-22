@@ -1,6 +1,3 @@
-#include "cub3d.h"
-#include "error.h"
-#include "garbage_collector/garbage_collector.h"
 #include "init_map.h"
 #include "read_config.h"
 
@@ -20,13 +17,15 @@ void print_map_info(t_map *map)
 
 void init_map(const char *path, t_mlx_data *mlx_data)
 {
-	int map_line_num;
+	int 	map_line_num;
 
+	mlx_data->player.grid = (t_ivec2){-1, -1};
 	map_line_num = get_map_line(path);
 	get_map_size(jump_to_map(path, map_line_num), mlx_data);
 	load_map(jump_to_map(path, map_line_num), mlx_data);
 	print_map_info(&mlx_data->map);
-	if (check_map_validity(mlx_data->map.map, mlx_data->map.height, mlx_data->map.width))
+	if (check_map_validity(mlx_data->map.map, mlx_data->map.height,
+		mlx_data->map.width, &mlx_data->player.grid))
 		error_handler(MAP_INVALID_ERROR);
 }
 

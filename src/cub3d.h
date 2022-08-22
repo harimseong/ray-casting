@@ -10,10 +10,13 @@
 # define SCREEN_HEIGHT (1440)
 # define SCREEN_TITLE ("cub3d")
 
-# define MAP_EAST (0)
-# define MAP_WEST (1)
-# define MAP_SOUTH (2)
-# define MAP_NORTH (3)
+# define GRID_LEN (512)
+
+typedef struct s_ivec2
+{
+	int64_t	x;
+	int64_t	y;
+}	t_ivec2;
 
 typedef struct s_map
 {
@@ -30,13 +33,22 @@ typedef struct s_texture_list
 	mlx_texture_t	*door;
 }	t_texture_list;
 
+typedef struct s_player
+{
+	double		angle;
+	double		x;
+	double		y;
+	t_ivec2		grid;
+}	t_player;
+
 typedef struct s_mlx_data
 {
 	mlx_t			*mlx_ptr;
+	mlx_image_t		*main_img;
+	mlx_image_t		*minimap;
 	t_map			map;
+	t_player		player;
 	t_texture_list	texture_list;
 }	t_mlx_data;
-
-int init_data(int argc, char** argv, t_mlx_data* mlx_data);
 
 #endif
