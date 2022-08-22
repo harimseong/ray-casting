@@ -16,6 +16,9 @@ SRC		=	main.c\
 			map_check_util.c\
 			read_config.c\
 			garbage_collector/garbage_collector.c\
+			check_map_validity.c\
+			init_map.c\
+			init_map_util.c\
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)

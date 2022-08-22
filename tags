@@ -47,6 +47,7 @@ CFLAGS	doubly_linked_list/Makefile	/^CFLAGS	= -Wall -Wextra -Werror$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS = -Wall -Wextra -Werror$/;"	m
 CFLAGS	mlx42/Makefile	/^CFLAGS :=	-Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare \\$/;"	m
 CFLAGS	mlx42/test/Makefile	/^CFLAGS		:= -Wextra -Wall -Wunreachable-code -Wno-char-subscripts -Wno-unused-variable$/;"	m
+CHECKED	src/check_map_validity.c	/^	CHECKED = 0b10000000$/;"	e	enum:e_map_element	file:
 CLCL_ORDER	mlx42/lib/png/lodepng.c	/^static const unsigned CLCL_ORDER[NUM_CODE_LENGTH_CODES]$/;"	v	file:
 COMPILE	Makefile	/^COMPILE			=	DEBUG.flag$/;"	m
 COMPILE	Makefile	/^COMPILE			=	RELEASE.flag$/;"	m
@@ -67,8 +68,10 @@ DISTANCEEXTRA	mlx42/lib/png/lodepng.c	/^static const unsigned DISTANCEEXTRA[30]$
 DLINKEDLIST_H	doubly_linked_list/dlinkedlist.h	/^# define DLINKEDLIST_H$/;"	d
 DLLIST	Makefile	/^DLLIST		=	libdlinkedlist.a$/;"	m
 DLLIST_DIR	Makefile	/^DLLIST_DIR	=	doubly_linked_list$/;"	m
+DOOR	src/check_map_validity.c	/^	DOOR = '3',$/;"	e	enum:e_map_element	file:
 DYLIB_EXISTS	mlx42/Makefile	/^			DYLIB_EXISTS := test -e $(BREW_GLFW_PREFIX)\/lib\/libglfw.3.dylib || echo "false"$/;"	m
 DYLIB_EXISTS	mlx42/Makefile	/^		DYLIB_EXISTS := test -e \/usr\/local\/lib\/libglfw.3.dylib || echo "false"$/;"	m
+EMPTY	src/check_map_validity.c	/^	EMPTY = '0',$/;"	e	enum:e_map_element	file:
 ERROR_BREAK	mlx42/lib/png/lodepng.c	/^#define ERROR_BREAK(/;"	d	file:
 ERROR_H	src/error.h	/^# define ERROR_H$/;"	d
 EXIT_H	src/exit.h	/^# define EXIT_H$/;"	d
@@ -2122,7 +2125,10 @@ LodePNGUnknownChunks_copy	mlx42/lib/png/lodepng.c	/^static unsigned LodePNGUnkno
 LodePNGUnknownChunks_init	mlx42/lib/png/lodepng.c	/^static void LodePNGUnknownChunks_init(LodePNGInfo* info) {$/;"	f	file:
 MAGENTA	mlx42/Makefile_Unix.mk	/^MAGENTA	:= \\033[35;1m$/;"	m
 MAGENTA	mlx42/test/Makefile	/^MAGENTA	:= \\033[35;1m$/;"	m
+MALLOC_ERROR	src/error.h	/^	MALLOC_ERROR$/;"	e	enum:e_error_status
 MAP_EAST	src/cub3d.h	/^# define MAP_EAST /;"	d
+MAP_FIND_ERROR	src/error.h	/^	MAP_FIND_ERROR,$/;"	e	enum:e_error_status
+MAP_INVALID_ERROR	src/error.h	/^	MAP_INVALID_ERROR,$/;"	e	enum:e_error_status
 MAP_NORTH	src/cub3d.h	/^# define MAP_NORTH /;"	d
 MAP_SOUTH	src/cub3d.h	/^# define MAP_SOUTH /;"	d
 MAP_WEST	src/cub3d.h	/^# define MAP_WEST /;"	d
@@ -3398,9 +3404,10 @@ TEST_DECLARE	mlx42/test/Tester.h	/^#define TEST_DECLARE(/;"	d
 TEST_EXIT	mlx42/test/Tester.h	/^#define TEST_EXIT(/;"	d
 TEST_EXPECT	mlx42/test/Tester.h	/^#define TEST_EXPECT(/;"	d
 TEXTURE_LIST_NUM	src/read_config.h	/^# define TEXTURE_LIST_NUM /;"	d
-TEXTURE_LOAD_ERROR	src/error.h	/^	TEXTURE_LOAD_ERROR$/;"	e	enum:e_error_status
+TEXTURE_LOAD_ERROR	src/error.h	/^	TEXTURE_LOAD_ERROR,$/;"	e	enum:e_error_status
 UNAME_S	mlx42/Makefile	/^	UNAME_S := $(shell uname -s)$/;"	m
 UNAME_S	mlx42/test/Makefile	/^	UNAME_S := $(shell uname -s)$/;"	m
+WALL	src/check_map_validity.c	/^	WALL = '1',$/;"	e	enum:e_map_element	file:
 WHITE	mlx42/Makefile_Unix.mk	/^WHITE	:= \\033[37;1m$/;"	m
 WHITE	mlx42/test/Makefile	/^WHITE	:= \\033[37;1m$/;"	m
 WINSTFU	mlx42/Makefile_WindowsNT.mk	/^WINSTFU	:= > NUL 2>&1 # In some cases we want windows to just stfu$/;"	m
@@ -3485,9 +3492,11 @@ chains1	mlx42/lib/png/lodepng.c	/^  BPMNode** chains1;$/;"	m	struct:BPMLists	fil
 chainz	mlx42/lib/png/lodepng.c	/^  unsigned short* chainz; \/*those with same amount of zeros*\/$/;"	m	struct:Hash	file:
 char_to_color	src/read_config.c	/^uint32_t	char_to_color(char **text)$/;"	f
 checkColorValidity	mlx42/lib/png/lodepng.c	/^static unsigned checkColorValidity(LodePNGColorType colortype, unsigned bd) {$/;"	f	file:
+check_closed	src/check_map_validity.c	/^static int	check_closed(char **map, t_ivec2 pos, t_ivec2 *boundary)$/;"	f	file:
 check_config_path	src/read_config.c	/^int	check_config_path(const char *path)$/;"	f
 check_file_option_vaild	src/init_cub_file_option.c	/^void	check_file_option_vaild(t_mlx_data *data)$/;"	f
 check_map	src/tmp_init_map.c	/^int	check_map(t_mlx_data *data, t_map *map_data, int fd)$/;"	f
+check_map_validity	src/check_map_validity.c	/^int	check_map_validity(char **map, int rows, int cols)$/;"	f
 check_num	libft/ft_putnbr_fd.c	/^int	check_num(int *n, int fd)$/;"	f
 check_read_line	src/init_cub_file_option.c	/^int	check_read_line(char *read_line, t_mlx_data *data)$/;"	f
 check_read_line	src/read_config.c	/^int	check_read_line(char **splited_words)$/;"	f
@@ -3567,6 +3576,7 @@ draw_queue	mlx42/include/MLX42/MLX42_Int.h	/^typedef struct draw_queue$/;"	s
 draw_queue_t	mlx42/include/MLX42/MLX42_Int.h	/^}	draw_queue_t;$/;"	t	typeref:struct:draw_queue
 dump_garbage	src/garbage_collector/garbage_collector.c	/^void	dump_garbage(void)$/;"	f
 e_error_status	src/error.h	/^enum e_error_status$/;"	g
+e_map_element	src/check_map_validity.c	/^enum e_map_element$/;"	g	file:
 enabled	mlx42/include/MLX42/MLX42.h	/^	bool			enabled;$/;"	m	struct:mlx_image
 enabled	mlx42/include/MLX42/MLX42.h	/^	bool	enabled;$/;"	m	struct:mlx_instance
 encodeLZ77	mlx42/lib/png/lodepng.c	/^static unsigned encodeLZ77(uivector* out, Hash* hash,$/;"	f	file:
@@ -3694,6 +3704,8 @@ get_count	libft/ft_split.c	/^size_t	get_count(const char *str, const char *delim
 get_exts	mlx42/lib/glad/glad.c	/^static int get_exts(void) {$/;"	f	file:
 get_front	doubly_linked_list/dlinkedlist_peek.c	/^void	*get_front(t_dlist *list)$/;"	f
 get_garbage_ptr	src/garbage_collector/garbage_collector.c	/^t_garbage	*get_garbage_ptr(void)$/;"	f
+get_map_line	src/init_map_util.c	/^int get_map_line(const char *path)$/;"	f
+get_map_size	src/init_map.c	/^void get_map_size(int fd, t_mlx_data *mlx_data)$/;"	f
 get_next_line	src/get_next_line.c	/^char	*get_next_line(int fd)$/;"	f
 get_proc	mlx42/lib/glad/glad.c	/^void* get_proc(const char *namez) {$/;"	f	file:
 glAccum	mlx42/include/glad/glad.h	/^#define glAccum /;"	d
@@ -6845,6 +6857,7 @@ glad_glWindowPos3s	mlx42/include/glad/glad.h	/^GLAPI PFNGLWINDOWPOS3SPROC glad_g
 glad_glWindowPos3s	mlx42/lib/glad/glad.c	/^PFNGLWINDOWPOS3SPROC glad_glWindowPos3s = NULL;$/;"	v
 glad_glWindowPos3sv	mlx42/include/glad/glad.h	/^GLAPI PFNGLWINDOWPOS3SVPROC glad_glWindowPos3sv;$/;"	v
 glad_glWindowPos3sv	mlx42/lib/glad/glad.c	/^PFNGLWINDOWPOS3SVPROC glad_glWindowPos3sv = NULL;$/;"	v
+gnl_flush	src/config_utils.c	/^void	gnl_flush(int fd)$/;"	f
 handle	mlx42/test/Tester.h	/^void handle(void)$/;"	f
 has_ext	mlx42/lib/glad/glad.c	/^static int has_ext(const char *ext) {$/;"	f	file:
 hash_cleanup	mlx42/lib/png/lodepng.c	/^static void hash_cleanup(Hash* hash) {$/;"	f	file:
@@ -6884,6 +6897,7 @@ info_png	mlx42/include/lodepng/lodepng.h	/^  LodePNGInfo info_png; \/*info of th
 info_raw	mlx42/include/lodepng/lodepng.h	/^  LodePNGColorMode info_raw; \/*specifies the format in which you would like to get the raw pixel buffer*\/$/;"	m	struct:LodePNGState
 init_cub_file_option	src/init_cub_file_option.c	/^void	init_cub_file_option(t_mlx_data *data)$/;"	f
 init_data	src/init_data.c	/^int	init_data(int argc, char **argv, t_mlx_data *mlx_data)$/;"	f
+init_map	src/init_map.c	/^void init_map(const char *path, t_mlx_data *mlx_data)$/;"	f
 init_map	src/tmp_init_map.c	/^int	init_map(t_mlx_data *data)$/;"	f
 init_mlx	src/init_data.c	/^void	init_mlx(t_mlx_data *mlx_data)$/;"	f
 init_text_to_null	src/init_cub_file_option.c	/^void	init_text_to_null(t_mlx_data *data)$/;"	f
@@ -6898,13 +6912,14 @@ isGrayICCProfile	mlx42/lib/png/lodepng.c	/^static unsigned isGrayICCProfile(cons
 isRGBICCProfile	mlx42/lib/png/lodepng.c	/^static unsigned isRGBICCProfile(const unsigned char* profile, unsigned size) {$/;"	f	file:
 is_all_option_load	src/init_cub_file_option.c	/^void	is_all_option_load(t_mlx_data *data)$/;"	f
 is_map	src/map_check_util.c	/^int	is_map(const char *read_line)$/;"	f
-is_map_line	src/map_check_util.c	/^int	is_map_line(const char *read_line)$/;"	f
+is_map_line	src/map_check_util.c	/^int	is_map_line(char *read_line)$/;"	f
 itext_keys	mlx42/include/lodepng/lodepng.h	/^  char** itext_keys; \/*the English keyword of the text chunk (e.g. "Comment")*\/$/;"	m	struct:LodePNGInfo
 itext_langtags	mlx42/include/lodepng/lodepng.h	/^  char** itext_langtags; \/*language tag for this text's language, ISO\/IEC 646 string, e.g. ISO 639 language tag*\/$/;"	m	struct:LodePNGInfo
 itext_num	mlx42/include/lodepng/lodepng.h	/^  size_t itext_num; \/*the amount of international texts in this PNG*\/$/;"	m	struct:LodePNGInfo
 itext_strings	mlx42/include/lodepng/lodepng.h	/^  char** itext_strings; \/*the actual international text - UTF-8 string*\/$/;"	m	struct:LodePNGInfo
 itext_transkeys	mlx42/include/lodepng/lodepng.h	/^  char** itext_transkeys; \/*keyword translated to the international language - UTF-8 string*\/$/;"	m	struct:LodePNGInfo
 join_list	doubly_linked_list/dlinkedlist_mergesort.c	/^t_node	*join_list(t_node **headptr, t_node *mid, size_t len, t_comp comp)$/;"	f
+jump_to_map	src/init_map_util.c	/^int	jump_to_map(const char *path, int map_line_num)$/;"	f
 jump_to_map	src/tmp_init_map.c	/^int	jump_to_map(t_mlx_data *data, char *map_path, int map_line_count)$/;"	f
 key	mlx42/include/MLX42/MLX42.h	/^	keys_t			key;$/;"	m	struct:mlx_key_data
 key	mlx42/include/lodepng/lodepng.h	/^  unsigned key; \/*image is not opaque and color key is possible instead of full alpha*\/$/;"	m	struct:LodePNGColorStats
@@ -7296,6 +7311,7 @@ print_addr	libft/ft_print_memory.c	/^void	print_addr(void	*addr)$/;"	f
 print_content	libft/ft_print_memory.c	/^void	print_content(void *addr, size_t len)$/;"	f
 print_hex	libft/ft_print_memory.c	/^void	print_hex(unsigned char hex)$/;"	f
 print_hexcontent	libft/ft_print_memory.c	/^void	print_hexcontent(void *addr, size_t len)$/;"	f
+print_map_info	src/init_map.c	/^void print_map_info(t_map *map)$/;"	f
 ptr	src/garbage_collector/garbage_collector.h	/^	void	*ptr;$/;"	m	struct:s_garbage
 ptr_2d	src/garbage_collector/garbage_collector.h	/^	void	**ptr_2d;$/;"	m	struct:s_garbage
 push_back	doubly_linked_list/dlinkedlist_new.c	/^int	push_back(t_dlist *list, void *content)$/;"	f
@@ -7332,6 +7348,7 @@ rwildcard	mlx42/test/Makefile	/^rwildcard = $(subst \\,\/,$(sort $(foreach d,$(w
 s_dlist	doubly_linked_list/dlinkedlist.h	/^typedef struct s_dlist$/;"	s
 s_font	mlx42/src/font/font.h	/^static struct s_font$/;"	s
 s_garbage	src/garbage_collector/garbage_collector.h	/^typedef struct s_garbage$/;"	s
+s_ivec2	src/init_map.h	/^typedef struct s_ivec2$/;"	s
 s_list	libft/libft.h	/^typedef struct s_list$/;"	s
 s_map	src/cub3d.h	/^typedef struct s_map$/;"	s
 s_mlx_data	src/cub3d.h	/^typedef struct s_mlx_data$/;"	s
@@ -7365,6 +7382,7 @@ sys	mlx42/tools/xpm3_conv.py	/^import sys$/;"	i
 t_comp	doubly_linked_list/dlinkedlist.h	/^typedef int	(*t_comp)(const void *, const void *);$/;"	t
 t_dlist	doubly_linked_list/dlinkedlist.h	/^}				t_dlist;$/;"	t	typeref:struct:s_dlist
 t_garbage	src/garbage_collector/garbage_collector.h	/^}	t_garbage;$/;"	t	typeref:struct:s_garbage
+t_ivec2	src/init_map.h	/^}t_ivec2;$/;"	t	typeref:struct:s_ivec2
 t_list	libft/libft.h	/^}			t_list;$/;"	t	typeref:struct:s_list
 t_map	src/cub3d.h	/^}	t_map;$/;"	t	typeref:struct:s_map
 t_mlx_data	src/cub3d.h	/^}	t_mlx_data;$/;"	t	typeref:struct:s_mlx_data
@@ -7403,6 +7421,7 @@ unfilter	mlx42/lib/png/lodepng.c	/^static unsigned unfilter(unsigned char* out, 
 unfilterScanline	mlx42/lib/png/lodepng.c	/^static unsigned unfilterScanline(unsigned char* recon, const unsigned char* scanline, const unsigned char* precon,$/;"	f	file:
 unknown_chunks_data	mlx42/include/lodepng/lodepng.h	/^  unsigned char* unknown_chunks_data[3];$/;"	m	struct:LodePNGInfo
 unknown_chunks_size	mlx42/include/lodepng/lodepng.h	/^  size_t unknown_chunks_size[3]; \/*size in bytes of the unknown chunks, given for protection*\/$/;"	m	struct:LodePNGInfo
+unmask_map	src/check_map_validity.c	/^static void	unmask_map(char **map, int rows, int cols)$/;"	f	file:
 updateHashChain	mlx42/lib/png/lodepng.c	/^static void updateHashChain(Hash* hash, size_t wpos, unsigned hashval, unsigned short numzeros) {$/;"	f	file:
 update_adler32	mlx42/lib/png/lodepng.c	/^static unsigned update_adler32(unsigned adler, const unsigned char* data, unsigned len) {$/;"	f	file:
 usage	mlx42/tools/compile_shader.bat	/^:usage$/;"	l
@@ -7428,10 +7447,12 @@ writeLZ77data	mlx42/lib/png/lodepng.c	/^static void writeLZ77data(LodePNGBitWrit
 writeSignature	mlx42/lib/png/lodepng.c	/^static unsigned writeSignature(ucvector* out) {$/;"	f	file:
 x	mlx42/include/MLX42/MLX42.h	/^	int32_t	x;$/;"	m	struct:mlx_instance
 x	mlx42/include/MLX42/MLX42_Int.h	/^	float	x;$/;"	m	struct:vertex
+x	src/init_map.h	/^	long long int x;$/;"	m	struct:s_ivec2
 xpm	mlx42/include/MLX42/MLX42.h	/^typedef struct xpm$/;"	s
 xpm_t	mlx42/include/MLX42/MLX42.h	/^}	xpm_t;$/;"	t	typeref:struct:xpm
 y	mlx42/include/MLX42/MLX42.h	/^	int32_t	y;$/;"	m	struct:mlx_instance
 y	mlx42/include/MLX42/MLX42_Int.h	/^	float	y;$/;"	m	struct:vertex
+y	src/init_map.h	/^	long long int y;$/;"	m	struct:s_ivec2
 year	mlx42/include/lodepng/lodepng.h	/^  unsigned year;    \/*2 bytes used (0-65535)*\/$/;"	m	struct:LodePNGTime
 z	mlx42/include/MLX42/MLX42.h	/^	int32_t	z;$/;"	m	struct:mlx_instance
 z	mlx42/include/MLX42/MLX42_Int.h	/^	float	z;$/;"	m	struct:vertex

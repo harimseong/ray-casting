@@ -36,3 +36,16 @@ char*	remove_newline(char *read_line)
 	free(read_line);
 	return (ret);
 }
+
+void	gnl_flush(int fd)
+{
+	char *read_line;
+
+	read_line = get_next_line(fd);
+	while (read_line)
+	{
+		free(read_line);
+		read_line = get_next_line(fd);
+	}
+	collect_fd_garbage(0);
+}

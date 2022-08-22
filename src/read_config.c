@@ -63,6 +63,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 	if (option_bit_flag != ALL_OPTION_FILLED)
 		error_handler(CONFIG_NOT_ENOUGH_OPTION_ERROR);
 	free(read_line);
+	gnl_flush(fd);
 	close(fd);
 }
 

@@ -7,5 +7,6 @@ int main(int argc, char **argv)
 	init_data(argc, argv, &mlx_data);
 	/** mlx_loop_hook(mlx_data.mlx_ptr, my_hook, &mlx_data); */
 	mlx_loop(mlx_data.mlx_ptr);
+	/** system("leaks ./cub3d"); */
 	return (0);
 }
