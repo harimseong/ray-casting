@@ -1,11 +1,5 @@
 #include "minimap.h"
 
-inline static t_ivec2	transfer_pos(const t_player player, int x, int y,
-	const t_map map);
-
-// transfer pixel position to map position to grid position
-inline static uint32_t	get_color(const t_ivec2 pos, const t_map map);
-
 static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	0
 	0x000000ff,	//	1
@@ -139,6 +133,13 @@ static const uint32_t	g_color_table[128] = {
 
 static const int		g_map_per_pixel = MINIMAP_GRID_NUM * GRID_LEN / MINIMAP_WIDTH;
 
+// transfer pixel position to map position to grid position
+inline static t_ivec2	transfer_pos(const t_player player, int x, int y,
+	const t_map map);
+inline static uint32_t	get_color(const t_ivec2 pos, const t_map map);
+// transfer map position to pixel position
+static void				draw_player(mlx_image_t *minimap);//, const t_player player, const t_map map);
+
 void	render_minimap(t_mlx_data data)
 {
 	uint32_t	y;
@@ -157,6 +158,7 @@ void	render_minimap(t_mlx_data data)
 		}
 		++y;
 	}
+	draw_player(data.minimap);//, data.player, data.map);
 }
 
 inline static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_map map)
@@ -177,4 +179,27 @@ inline static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 	if (pos.x == -1)
 		return (0x000000ff);
 	return (g_color_table[(int)map.map[pos.y][pos.x]]);
+}
+
+// player icon: arrow, circle, triangle, square, ...
+static void	draw_player(mlx_image_t *minimap)//, const t_player player, const t_map map)
+{
+	int		start_y;
+	int		start_x;
+	int		i;
+	int		j;
+
+	start_y = (MINIMAP_HEIGHT >> 1) - (PLAYER_SIZE >> 1);
+	start_x = (MINIMAP_WIDTH >> 1) - (PLAYER_SIZE >> 1);
+	i = 0;
+	while (i < PLAYER_SIZE)
+	{
+		j = 0;
+		while (j < PLAYER_SIZE)
+		{
+			mlx_put_pixel(minimap, start_x + j, start_y + i, PLAYER_COLOR);
+			++j;
+		}
+		++i;
+	}
 }

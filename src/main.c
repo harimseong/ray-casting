@@ -12,12 +12,10 @@ int main(int argc, char **argv)
 	if (mlx_image_to_window(mlx_data.mlx_ptr, mlx_data.main_img, 0, 0) < 0
 		|| mlx_image_to_window(mlx_data.mlx_ptr, mlx_data.minimap, 0, 0) < 0)
 		error_handler(MLX_IMG_TO_WIN_ERROR);
-//	mlx_put_string(mlx_data.mlx_ptr, "press [m] to open minimap", 0, 0);
-//	mlx_key_hook(mlx_data.mlx_ptr, key_hook, &mlx_data);
-//	mlx_cursor_hook(mlx_data.mlx_ptr, cursor_hook, &mlx_data);
+	/** mlx_cursor_hook(mlx_data.mlx_ptr, cursor_hook, &mlx_data); */
+	mlx_key_hook(mlx_data.mlx_ptr, key_hook, &mlx_data);
 	mlx_loop_hook(mlx_data.mlx_ptr, screen_renderer, &mlx_data);
 	mlx_loop(mlx_data.mlx_ptr);
 	mlx_terminate(mlx_data.mlx_ptr);
-	/** system("leaks ./cub3d"); */
 	return (0);
 }

@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "init_data.h"
 #include "minimap.h"
 #include "error.h"
@@ -43,9 +45,9 @@ static void	init_player(t_mlx_data *mlx_data)
 	const t_map		map = mlx_data->map;
 	const char		direction = map.map[player->grid.y][player->grid.x];
 
-	player->angle = 90.0 * (direction == 'E')
-		+ 180.0 * (direction == 'S')
-		+ 270.0 * (direction == 'W');
+	player->angle = M_PI_2 * (direction == 'E')
+		+ M_PI * (direction == 'S')
+		+ 3 * M_PI_2 * (direction == 'W');
 	player->x = GRID_LEN * player->grid.x + GRID_LEN / 2.0;
 	player->y = GRID_LEN * player->grid.y + GRID_LEN / 2.0;
 }
