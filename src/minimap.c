@@ -20,7 +20,7 @@ void	render_minimap(t_mlx_data *data)
 		x = 0;
 		while (x < MINIMAP_WIDTH)
 		{
-			color = get_color(transfer_pos(data->player, x, y), data->map);
+			color = get_color(transfer_pos(data->player, x, y, data->map), data->map);
 			mlx_put_pixel(data->minimap, x, y, color);
 			++x;
 		}
@@ -43,5 +43,10 @@ static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_map map
 
 static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 {
-	
+	if (pos.x == -1)
+		return (0x000000ff);
+	if (map.map[pos.y][pos.x] == '1')
+		return (0x000000ff);
+	else
+		return (0xffffffff);
 }

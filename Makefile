@@ -19,6 +19,11 @@ SRC		=	main.c\
 			check_map_validity.c\
 			init_map.c\
 			init_map_util.c\
+			minimap.c\
+			screen_renderer.c\
+			hook.c\
+			player_move.c\
+
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)
