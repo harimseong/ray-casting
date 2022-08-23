@@ -2,23 +2,26 @@ NAME	=	cub3d
 
 
 CC		=	cc
-#CFLAGS	=	-Wall -Wextra -Werror
-DEBUG	=	-g3 -fsanitize=address -DDEBUG_FLAG=1
+CFLAGS	=	-Wall -Wextra -Werror
+DEBUG	=	-g3 -fsanitize=address -DDEBUG_FLAG=1 #-fsanitize=address 
 RM		=	rm -f
 
 SRC		=	main.c\
 			get_next_line.c\
 			get_next_line_utils.c\
-			config_utils.c\
 			error.c\
+			garbage_collector/garbage_collector.c\
 			exit.c\
 			init_data.c\
-			map_check_util.c\
 			read_config.c\
-			garbage_collector/garbage_collector.c\
-			check_map_validity.c\
+			read_config_utils.c\
 			init_map.c\
 			init_map_util.c\
+			check_map_validity.c\
+			check_map_util.c\
+			minimap.c\
+			screen_renderer.c\
+			hook.c
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)
@@ -51,7 +54,7 @@ INC_DIR		+=	-I$(MLX42_DIR)/include/MLX42
 ifeq ($(shell uname), Darwin)
 LIBFLAGS	+= -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 else
-LIBFLAGS	+= -ldl -lglfw3 -pthread -lm
+LIBFLAGS	+= -ldl -lglfw -pthread -lm
 endif
 
 

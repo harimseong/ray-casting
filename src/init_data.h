@@ -4,7 +4,6 @@
 # include <stdio.h>
 
 # include "cub3d.h"
-# include "error.h"
 # include "read_config.h"
 # include "init_map.h"
 

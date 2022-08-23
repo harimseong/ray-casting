@@ -20,6 +20,7 @@ enum e_error_status
 	MALLOC_ERROR,
 	MLX_INIT_ERROR,
 	MLX_IMG_ERROR,
+	MLX_IMG_TO_WIN_ERROR,
 };
 
 void	error_handler(int status);

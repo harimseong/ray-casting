@@ -5,9 +5,9 @@
 
 # define MINIMAP_WIDTH (384)
 # define MINIMAP_HEIGHT (384)
-# define MINIMAP_GRID_LEN (64)
-# define MINIMAP_GRID_NUM (6)
+# define MINIMAP_GRID_LEN (32)
+# define MINIMAP_GRID_NUM (12)
 
-void	render_minimap(t_mlx_data *data);
+void	render_minimap(t_mlx_data data);
 
 #endif

@@ -1,5 +1,4 @@
 #include "init_data.h"
-#include "cub3d.h"
 #include "minimap.h"
 #include "error.h"
 
@@ -27,16 +26,15 @@ static void	init_mlx(t_mlx_data *mlx_data)
 	if (mlx_data->mlx_ptr == NULL)
 		error_handler(MLX_INIT_ERROR);
 	mlx_data->main_img = mlx_new_image(mlx_data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	if (mlx_data->main_img == NULL)
-		error_handler(MLX_IMG_ERROR);
 	mlx_data->minimap = mlx_new_image(mlx_data->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
-	if (mlx_data->minimap == NULL)
+	if (mlx_data->main_img == NULL || mlx_data->minimap == NULL)
 		error_handler(MLX_IMG_ERROR);
 	mlx_set_cursor_mode(mlx_data->mlx_ptr, MLX_MOUSE_HIDDEN);
 }
 
 static void	init_sprite(t_mlx_data *mlx_data)
 {
+	(void)mlx_data;
 }
 
 static void	init_player(t_mlx_data *mlx_data)

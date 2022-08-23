@@ -17,6 +17,7 @@ static const char	*g_error_msg_list[] = {
 	"memory allocation error",
 	"mlx initializaion failed",
 	"mlx new image failed",
+	"mlx image to window error",
 };
 
 void	error_handler(int status)
@@ -25,6 +26,6 @@ void	error_handler(int status)
 		return ;
 	ft_putendl_fd(g_error_msg_list[status - 1], STDERR_FILENO);
 	dump_garbage();
-	system("leaks cub3d");
+//	system("leaks cub3d");
 	exit(status);
 }
