@@ -1,5 +1,4 @@
-#include "init_map.h"
-#include "read_config.h"
+#include "init_data.h"
 
 static void get_map_size(int fd, t_mlx_data *mlx_data);
 static void load_map(int fd, t_mlx_data *mlx_data);

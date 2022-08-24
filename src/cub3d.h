@@ -18,6 +18,20 @@ typedef struct s_ivec2
 	int64_t	y;
 }	t_ivec2;
 
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}	t_vec2;
+
+typedef struct s_ray
+{
+	double	x;
+	double	y;
+	double	distance;
+	int		direction;
+} t_ray;
+
 typedef struct s_map
 {
 	char	**map;

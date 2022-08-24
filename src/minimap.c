@@ -49,7 +49,7 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	45
 	0x000000ff,	//	46
 	0x000000ff,	//	47
-	0x000000ff,	//	48 = '0'
+	0x0f0f0fff,	//	48 = '0'
 	0x7f7f7fff,	//	49 = '1'
 	0x000000ff,	//	50
 	0x3fbfbfff,	//	51
@@ -57,7 +57,7 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	53
 	0x000000ff,	//	54
 	0x000000ff,	//	55
-	0x000000ff,	//	56
+	0x3f3f3fff,	//	56 = '8'
 	0x000000ff,	//	57
 	0x000000ff,	//	58
 	0x000000ff,	//	59
@@ -132,6 +132,7 @@ static const uint32_t	g_color_table[128] = {
 };
 
 static const int		g_map_per_pixel = MINIMAP_GRID_NUM * GRID_LEN / MINIMAP_WIDTH;
+static const double		g_player_transfer_offset = MINIMAP_GRID_NUM * GRID_LEN * 0.5;
 
 // transfer pixel position to map position to grid position
 inline static t_ivec2	transfer_pos(const t_player player, int x, int y,
@@ -140,10 +141,10 @@ inline static uint32_t	get_color(const t_ivec2 pos, const t_map map);
 // transfer map position to pixel position
 static void				draw_player(mlx_image_t *minimap);//, const t_player player, const t_map map);
 
-void	render_minimap(t_mlx_data data)
+void	render_minimap(const t_mlx_data data)
 {
 	uint32_t	y;
-	uint32_t	x;	
+	uint32_t	x;
 	uint32_t	color;
 
 	y = 0;
@@ -166,8 +167,8 @@ inline static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_
 	double	map_pos_x;
 	double	map_pos_y;
 
-	map_pos_x = (player.x - 3 * GRID_LEN) + g_map_per_pixel * x;
-	map_pos_y = (player.y - 3 * GRID_LEN) + g_map_per_pixel * y;
+	map_pos_x = (player.x - g_player_transfer_offset) + g_map_per_pixel * x;
+	map_pos_y = (player.y - g_player_transfer_offset) + g_map_per_pixel * y;
 	if ((map_pos_x < 0.0 || map_pos_x >= map.width * GRID_LEN)
 		|| (map_pos_y < 0.0 || map_pos_y >= map.height * GRID_LEN))
 		return ((t_ivec2){-1, -1});
@@ -176,9 +177,18 @@ inline static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_
 
 inline static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 {
+	int	flag;
+	int	idx;
+
 	if (pos.x == -1)
 		return (0x000000ff);
-	return (g_color_table[(int)map.map[pos.y][pos.x]]);
+	idx = (int)map.map[pos.y][pos.x];
+	if (idx == '0')
+	{
+		flag = ((pos.x + pos.y) % 2);
+		return (g_color_table[idx + (flag * 8)]);
+	}
+	return (g_color_table[idx]);
 }
 
 // player icon: arrow, circle, triangle, square, ...

@@ -22,7 +22,10 @@ SRC		=	main.c\
 			minimap.c\
 			screen_renderer.c\
 			hook.c\
-			player_move.c
+			player_move.c\
+			raycasting.c\
+			raycasting_util.c\
+
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)

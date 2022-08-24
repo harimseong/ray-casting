@@ -9,7 +9,7 @@
 # define SPEED (50)
 # define ANGULAR_SPEED (0.157) // ~= M_PI / 20
 
-void	key_hook(mlx_key_data_t keydata, void* param);
+void	key_event(t_mlx_data *data);
 void	cursor_hook(double xpos, double ypos, void* param);
 
 void	move_forward(t_mlx_data *mlx_data);

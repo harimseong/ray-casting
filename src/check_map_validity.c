@@ -6,13 +6,11 @@
 /*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:44:09 by hseong            #+#    #+#             */
-/*   Updated: 2022/08/22 20:32:00 by hseong           ###   ########.fr       */
+/*   Updated: 2022/08/24 16:13:47 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "init_map.h"
-#include <stdio.h>
 
 enum e_map_element
 {
@@ -57,6 +55,7 @@ int	check_map_validity(char **map, int rows, int cols, t_ivec2 *player_pos)
 	}
 	ret = !check_closed(map, *player_pos, &boundary);
 	unmask_map(map, rows, cols);
+	map[player_pos->y][player_pos->x] = '0';
 	return (ret);
 }
 

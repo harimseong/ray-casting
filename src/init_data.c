@@ -1,5 +1,6 @@
 #include <math.h>
 
+#include "garbage_collector/garbage_collector.h"
 #include "init_data.h"
 #include "minimap.h"
 #include "error.h"

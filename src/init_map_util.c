@@ -1,5 +1,4 @@
 #include "error.h"
-#include "init_map.h"
 #include "read_config.h"
 
 int get_map_line(const char *path)
