@@ -166,9 +166,14 @@ inline static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_
 {
 	double	map_pos_x;
 	double	map_pos_y;
+	double	temp_x;
 
-	map_pos_x = (player.x - g_player_transfer_offset) + g_map_per_pixel * x;
-	map_pos_y = (player.y - g_player_transfer_offset) + g_map_per_pixel * y;
+	temp_x = -g_player_transfer_offset + g_map_per_pixel * x;
+	map_pos_y = -g_player_transfer_offset + g_map_per_pixel * y;
+	map_pos_x = temp_x * cos(player.angle) - map_pos_y * sin(player.angle);
+	map_pos_y = temp_x * sin(player.angle) + map_pos_y * cos(player.angle);
+	map_pos_x += player.x;
+	map_pos_y += player.y;
 	if ((map_pos_x < 0.0 || map_pos_x >= map.width * GRID_LEN)
 		|| (map_pos_y < 0.0 || map_pos_y >= map.height * GRID_LEN))
 		return ((t_ivec2){-1, -1});
@@ -177,17 +182,13 @@ inline static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_
 
 inline static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 {
-	int	flag;
 	int	idx;
 
 	if (pos.x == -1)
 		return (0x000000ff);
 	idx = (int)map.map[pos.y][pos.x];
 	if (idx == '0')
-	{
-		flag = ((pos.x + pos.y) % 2);
-		return (g_color_table[idx + (flag * 8)]);
-	}
+		return (g_color_table[idx + ((pos.x + pos.y) % 2) * 8]);
 	return (g_color_table[idx]);
 }
 

@@ -6,6 +6,7 @@
 # include "cub3d.h"
 
 # define INF_GUARD (0.015)
+
 # define EAST (0)
 # define WEST (1)
 # define SOUTH (2)

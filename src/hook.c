@@ -18,6 +18,10 @@ void	key_event(t_mlx_data *data)
 		data->player.angle -= ANGULAR_SPEED;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 		data->player.angle += ANGULAR_SPEED;
+	if (data->player.angle >= 2.0 * M_PI)
+		data->player.angle -= 2.0 * M_PI;
+	else if (data->player.angle < 0.0)
+		data->player.angle += 2.0 * M_PI;
 	/** if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_M)) */
 	/**     data->screen.toggle_minimap = !data->screen.toggle_minimap; */
 	/** if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_F) && data->player.near_door) */
