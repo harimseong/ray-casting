@@ -1,21 +1,28 @@
+#include "minimap.h"
 #include "raycasting.h"
 
 #include <stdio.h>
 
 static uint32_t	to_le(uint32_t color);
 
-uint32_t	get_color(t_mlx_data data, t_ray point, uint32_t y)
+static const int32_t	g_half_screen_height = SCREEN_HEIGHT / 2;
+static const int32_t	g_canvas_dist = 4 * PLAYER_SIZE;
+
+uint32_t	get_color(t_mlx_data data, t_ray point, int32_t y)
 {
 	int				pos;
 	mlx_texture_t	*wall_texture;
 	uint32_t		color;
+	int32_t			range;
 
 	// TODO: lround may not be work
-	pos = (lround(point.x) % GRID_LEN + (lround(point.y)) % GRID_LEN);
 	wall_texture = data.texture_list.wall[point.direction];
-	pos = wall_texture->width * pos / GRID_LEN;
-	if (y >= wall_texture->height)
-		y = 0;
+	pos = (lround(point.x) % GRID_LEN) + (lround(point.y) % GRID_LEN);
+	range = g_canvas_dist * g_half_screen_height / point.distance;
+	if (-range + g_half_screen_height > y
+		|| range + g_half_screen_height <= y)
+		return (0x000000ff);
+	y = (y - g_half_screen_height + range) * wall_texture->height / (2 * range);
 	color = *((uint32_t *)wall_texture->pixels + \
 			((int)y * wall_texture->width + pos));
 	color = to_le(color);

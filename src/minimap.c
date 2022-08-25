@@ -200,13 +200,13 @@ static void	draw_player(mlx_image_t *minimap)//, const t_player player, const t_
 	int		y;
 	int		x;
 
-	start_y = (MINIMAP_HEIGHT >> 1) - (PLAYER_SIZE >> 1);
-	start_x = (MINIMAP_WIDTH >> 1) - (PLAYER_SIZE >> 1);
+	start_y = (MINIMAP_HEIGHT >> 1) - (MINIMAP_PLAYER_SIZE >> 1);
+	start_x = (MINIMAP_WIDTH >> 1) - (MINIMAP_PLAYER_SIZE >> 1);
 	y = 0;
-	while (y < PLAYER_SIZE)
+	while (y < MINIMAP_PLAYER_SIZE)
 	{
 		x = 0;
-		while (x < PLAYER_SIZE)
+		while (x < MINIMAP_PLAYER_SIZE)
 		{
 			mlx_put_pixel(minimap, start_x + x, start_y + y, PLAYER_COLOR);
 			++x;

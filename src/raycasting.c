@@ -1,4 +1,5 @@
 #include "raycasting.h"
+#include "cub3d.h"
 #include <stdio.h>
 
 t_ray detect_x_wall(t_camera camera, t_map map);
@@ -59,16 +60,15 @@ t_ray detect_x_wall(t_camera camera, t_map map)
 	}
 	ray.y = camera.y - (ray.x - camera.x) / tan(camera.angle);
 	dy = -GRID_LEN * direction_flag / tan(camera.angle);
-	ray.distance = INT32_MAX;
-	/** if (boundary_check(ray, map)) */
-	while (!boundary_check(ray, map) && map.map[lround(ray.y) / GRID_LEN][lround(ray.x) / GRID_LEN] != '1')
+	while (!boundary_check(ray, map)
+		&& map.map[lround(ray.y) / GRID_LEN][lround(ray.x) / GRID_LEN] != '1')
 	{
 		ray.x += GRID_LEN * direction_flag;
 		ray.y += dy;
 	}
-	ray.distance = get_distance(ray, camera);
-	if (camera.angle >= M_PI)
-		ray.x++;
+	ray.distance = get_distance(ray, camera)
+		+ boundary_check(ray, map) * INT32_MAX;
+	ray.x += (direction_flag == -1);
 	return (ray);
 }
 
@@ -89,17 +89,15 @@ t_ray detect_y_wall(t_camera camera, t_map map)
 	}
 	ray.x = camera.x - (ray.y - camera.y) * tan(camera.angle);
 	dx = -GRID_LEN * direction_flag * tan(camera.angle);
-	ray.distance = INT32_MAX;
-	/** if (boundary_check(ray, map)) */
-	/**     return (ray); */
-	while (!boundary_check(ray, map) && map.map[lround(ray.y) / GRID_LEN][lround(ray.x) / GRID_LEN] != '1')
+	while (!boundary_check(ray, map)
+		&& map.map[lround(ray.y) / GRID_LEN][lround(ray.x) / GRID_LEN] != '1')
 	{
 		ray.y += GRID_LEN * direction_flag;
 		ray.x += dx;
 	}
-	ray.distance = get_distance(ray, camera);
-	if (camera.angle <= M_PI_2 || camera.angle >= M_PI_2 * 3)
-		ray.y++;
+	ray.distance = get_distance(ray, camera)
+		+ boundary_check(ray, map) * INT32_MAX;
+	ray.y += (direction_flag == -1);
 	return (ray);
 }
 

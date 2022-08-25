@@ -1,5 +1,4 @@
 #include "player_move.h"
-#include "minimap.h"
 
 static int is_y_grid(char **map, int player_xy[2]);
 static int is_x_grid(char **map, int player_xy[2]);
