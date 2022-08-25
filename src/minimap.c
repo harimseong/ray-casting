@@ -197,20 +197,20 @@ static void	draw_player(mlx_image_t *minimap)//, const t_player player, const t_
 {
 	int		start_y;
 	int		start_x;
-	int		i;
-	int		j;
+	int		y;
+	int		x;
 
 	start_y = (MINIMAP_HEIGHT >> 1) - (PLAYER_SIZE >> 1);
 	start_x = (MINIMAP_WIDTH >> 1) - (PLAYER_SIZE >> 1);
-	i = 0;
-	while (i < PLAYER_SIZE)
+	y = 0;
+	while (y < PLAYER_SIZE)
 	{
-		j = 0;
-		while (j < PLAYER_SIZE)
+		x = 0;
+		while (x < PLAYER_SIZE)
 		{
-			mlx_put_pixel(minimap, start_x + j, start_y + i, PLAYER_COLOR);
-			++j;
+			mlx_put_pixel(minimap, start_x + x, start_y + y, PLAYER_COLOR);
+			++x;
 		}
-		++i;
+		++y;
 	}
 }

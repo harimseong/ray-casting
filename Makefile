@@ -2,8 +2,8 @@ NAME	=	cub3d
 
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
-DEBUG	=	-g3 -fsanitize=address -DDEBUG_FLAG=1 #-fsanitize=address 
+CFLAGS	=	-Wall -Wextra -Werror -O3
+DEBUG	=	-g3 -fsanitize=address -DDEBUG_FLAG=1 #-fsanitize=address
 RM		=	rm -f
 
 SRC		=	main.c\
