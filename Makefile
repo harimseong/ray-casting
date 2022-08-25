@@ -25,6 +25,8 @@ SRC		=	main.c\
 			player_move.c\
 			raycasting.c\
 			raycasting_util.c\
+			drawline.c\
+			drawline_util.c\
 
 
 SRC		:=	$(SRC:%=src/%)

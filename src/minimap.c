@@ -131,14 +131,14 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	127
 };
 
-static const int		g_map_per_pixel = MINIMAP_GRID_NUM * GRID_LEN / MINIMAP_WIDTH;
-static const double		g_player_transfer_offset = MINIMAP_GRID_NUM * GRID_LEN * 0.5;
+static const int		g_map_per_pixel
+	= MINIMAP_GRID_NUM * GRID_LEN / MINIMAP_WIDTH;
+static const double		g_player_transfer_offset
+	= MINIMAP_GRID_NUM * GRID_LEN * 0.5;
 
-// transfer pixel position to map position to grid position
 inline static t_ivec2	transfer_pos(const t_player player, int x, int y,
 	const t_map map);
 inline static uint32_t	get_color(const t_ivec2 pos, const t_map map);
-// transfer map position to pixel position
 static void				draw_player(mlx_image_t *minimap);//, const t_player player, const t_map map);
 
 void	render_minimap(const t_mlx_data data)
@@ -153,7 +153,8 @@ void	render_minimap(const t_mlx_data data)
 		x = 0;
 		while (x < MINIMAP_WIDTH)
 		{
-			color = get_color(transfer_pos(data.player, x, y, data.map), data.map);
+			color
+				= get_color(transfer_pos(data.player, x, y, data.map), data.map);
 			mlx_put_pixel(data.minimap, x, y, color);
 			++x;
 		}
