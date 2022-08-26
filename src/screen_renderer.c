@@ -34,10 +34,12 @@ void render_main_img(t_mlx_data data)
 	while (idx < g_ray_cnt)
 	{
 		point = detect_wall(camera, data.map);
+		/** if (idx == g_ray_cnt / 2) */
+		/**     print_detect_wall(camera, data.map); */
 		point.distance *= cos(camera.angle - data.player.angle);
 		/** printf("x : %f y : %f dis : %f direction : %d\n", point.x, point.y, point.distance, point.direction); */
 		draw_col_line(data, point, idx);
-		if (idx % MINIMAP_RAY_NUM == 0)
+		if (idx == g_ray_cnt / 2)
 			draw_minimap_ray(&data, camera, point);
 		camera.angle += (double)FOV / g_ray_cnt;
 		++idx;
