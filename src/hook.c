@@ -5,9 +5,13 @@ void	key_event(t_mlx_data *data)
 {
 	double		move_x;
 	double		move_y;
+	double		side_x;
+	double		side_y;
 
 	move_x = SPEED * sin(data->player.angle);
 	move_y = SPEED * -cos(data->player.angle);
+	side_x = SPEED * -cos(data->player.angle);
+	side_y = SPEED * -sin(data->player.angle);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
 		exit(1);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
@@ -15,9 +19,9 @@ void	key_event(t_mlx_data *data)
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
 		player_move(&data->player, -move_x, -move_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
-		data->player.angle -= ANGULAR_SPEED;
+		player_move(&data->player, side_x, side_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
-		data->player.angle += ANGULAR_SPEED;
+		player_move(&data->player, -side_x, -side_y, data);
 	if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
 	else if (data->player.angle < 0.0)

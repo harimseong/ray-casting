@@ -122,13 +122,14 @@ uint32_t	char_to_color(char **text)
 	}
 	while (idx < 3)
 	{
-		bytes = ft_atoi(text[idx++]);
+		bytes = ft_atoi(text[idx]);
 		if (bytes < 0 || bytes > 255)
 		{
 			free_splited_arr(text);
 			error_handler(CONFIG_INVALID_RGB_ERROR);
 		}
-		color |= (uint32_t)bytes << (3 - idx++) * 8;
+		color |= (uint32_t)bytes << (3 - idx) * 8;
+		++idx;
 	}
 	color |= 190;
 	free_splited_arr(text);

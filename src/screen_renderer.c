@@ -1,8 +1,11 @@
 #include "screen_renderer.h"
 #include "MLX42_Input.h"
 
+# include <sys/time.h>
+
 void		render_main_img(t_mlx_data data);
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
+void		print_frame(void);
 
 static const int 	g_ray_cnt = SCREEN_WIDTH / 2;
 static const double	g_scale = (double)MINIMAP_GRID_LEN / GRID_LEN;
@@ -10,16 +13,27 @@ static const double	g_scale = (double)MINIMAP_GRID_LEN / GRID_LEN;
 void	screen_renderer(void *data)
 {
 	t_mlx_data	*mlx_data;
-	/** static int	frame; */
 
 	mlx_data = (t_mlx_data *)data;
 	(void)mlx_data;
-	/** printf("%d\n", frame++); */
 //	render_sprite(mlx_data);
 	key_event(mlx_data);
 	cursor_event(mlx_data);
 	render_minimap(*mlx_data);
 	render_main_img(*mlx_data);
+	print_frame();
+}
+
+void	print_frame(void)
+{
+	struct timeval	time1;
+	static uint64_t		old_ms;
+	uint64_t		ms;
+
+	gettimeofday(&time1, NULL);
+	ms = time1.tv_sec * 1000 + time1.tv_usec / 1000;
+	printf("fps: %f\n", 1000.0 / (ms - old_ms));
+	old_ms = ms;
 }
 
 void render_main_img(t_mlx_data data)
@@ -40,8 +54,8 @@ void render_main_img(t_mlx_data data)
 		/**     print_detect_wall(camera, data.map); */
 		point.distance *= cos(camera.angle - data.player.angle);
 		/** printf("x : %f y : %f dis : %f direction : %d\n", point.x, point.y, point.distance, point.direction); */
-		draw_col_line(data, point, idx);
-		if (idx == g_ray_cnt / 2)
+		draw_col_line(&data, point, idx);
+		if (idx % 6 == 0)
 			draw_minimap_ray(&data, camera, point);
 		camera.angle += (double)FOV / g_ray_cnt;
 		++idx;
