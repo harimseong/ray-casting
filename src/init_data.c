@@ -1,5 +1,6 @@
 #include <math.h>
 
+#include "MLX42_Input.h"
 #include "garbage_collector/garbage_collector.h"
 #include "init_data.h"
 #include "minimap.h"
@@ -32,7 +33,7 @@ static void	init_mlx(t_mlx_data *mlx_data)
 	mlx_data->minimap = mlx_new_image(mlx_data->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	if (mlx_data->main_img == NULL || mlx_data->minimap == NULL)
 		error_handler(MLX_IMG_ERROR);
-	mlx_set_cursor_mode(mlx_data->mlx_ptr, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(mlx_data->mlx_ptr, MLX_MOUSE_DISABLED);
 }
 
 static void	init_sprite(t_mlx_data *mlx_data)

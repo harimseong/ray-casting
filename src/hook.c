@@ -1,5 +1,5 @@
 #include "hook.h"
-#include <stdio.h>
+# include <stdio.h>
 
 void	key_event(t_mlx_data *data)
 {
@@ -28,9 +28,13 @@ void	key_event(t_mlx_data *data)
 	/**     act_door(&data->map, data->pnt); */
 }
 
-void	cursor_hook(double xpos, double ypos, void* param)
+void	cursor_event(t_mlx_data *data)
 {
-	(void)xpos;
-	(void)ypos;
-	(void)param;
+	int32_t			x;
+	int32_t			y;
+	static int32_t	old_x;
+
+	mlx_get_mouse_pos(data->mlx_ptr, &x, &y);
+	data->player.angle += (x - old_x) * MOUSE_SENSITIVITY;
+	old_x = x;
 }

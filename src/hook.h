@@ -9,9 +9,10 @@
 # define SPEED (50)
 /** # define ANGULAR_SPEED (0.157) // ~= M_PI / 20 */
 # define ANGULAR_SPEED (0.06)
+# define MOUSE_SENSITIVITY (0.001)
 
 void	key_event(t_mlx_data *data);
-void	cursor_hook(double xpos, double ypos, void* param);
+void	cursor_event(t_mlx_data *data);
 
 void	move_forward(t_mlx_data *mlx_data);
 void	move_left(t_mlx_data *mlx_data);
