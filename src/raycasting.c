@@ -26,22 +26,6 @@ t_ray detect_wall(t_camera camera, t_map map)
 	return (y_point);
 }
 
-void draw_col_line(t_mlx_data *data, t_ray point, int idx)
-{
-	// put pixel cnt
-	uint32_t y;
-	uint32_t color;
-
-	y = 0;
-	while (y < SCREEN_HEIGHT)
-	{
-		color = get_color(data, &point, y);
-		mlx_put_pixel(data->main_img, 2 * idx, y, color);
-		mlx_put_pixel(data->main_img, 2 * idx + 1, y, color);
-		y++;
-	}
-}
-
 t_ray detect_x_wall(t_camera camera, t_map map)
 {
 	t_ray	ray;

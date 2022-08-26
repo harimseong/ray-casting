@@ -38,6 +38,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 	char			**splited_words;
 	int				option_bit_flag;
 
+	option_bit_flag = 0;
 	while (1)
 	{
 		read_line = get_next_line(fd);
