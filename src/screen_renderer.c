@@ -1,4 +1,5 @@
 #include "screen_renderer.h"
+#include "MLX42_Input.h"
 
 void		render_main_img(t_mlx_data data);
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
@@ -16,6 +17,7 @@ void	screen_renderer(void *data)
 	/** printf("%d\n", frame++); */
 //	render_sprite(mlx_data);
 	key_event(mlx_data);
+	cursor_event(mlx_data);
 	render_minimap(*mlx_data);
 	render_main_img(*mlx_data);
 }
@@ -42,6 +44,26 @@ void render_main_img(t_mlx_data data)
 		camera.angle += (double)FOV / g_ray_cnt;
 		++idx;
 	}
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) + 5, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) + 6, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) + 7, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) + 8, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) + 9, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) - 5, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) - 6, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) - 7, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) - 8, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, (data.main_img->width >> 1) - 9, data.main_img->height >> 1, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) + 5, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) + 6, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) + 7, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) + 8, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) + 9, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) - 5, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) - 6, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) - 7, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) - 8, 0x3fbf1fff);
+	mlx_put_pixel(data.main_img, data.main_img->width >> 1, (data.main_img->height >> 1) - 9, 0x3fbf1fff);
 }
 
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1)
