@@ -19,5 +19,6 @@
 
 void	screen_renderer(void *data);
 void	draw_col_line(t_mlx_data *data, t_ray point, int idx);
+void	render_main_img(t_mlx_data data);
 
 #endif

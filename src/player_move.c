@@ -21,6 +21,8 @@ void player_move(t_player *player, double move_x, double move_y, t_mlx_data *dat
 		player_top_left[0] = re_pos;
 	player->x = player_top_left[0];
 	player->y = player_top_left[1];
+	player->grid.x = player_top_left[0] / GRID_LEN;
+	player->grid.y = player_top_left[1] / GRID_LEN;
 }
 
 static int is_y_grid(char **map, int player_xy[2])

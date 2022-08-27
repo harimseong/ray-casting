@@ -27,7 +27,7 @@ SRC		=	main.c\
 			raycasting_util.c\
 			drawline.c\
 			drawline_util.c\
-
+			door.c\
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)

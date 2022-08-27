@@ -44,8 +44,8 @@ void render_main_img(t_mlx_data data)
 	idx = 0;
 	camera = data.player;
 	camera.angle -= FOV * 0.5;
-	camera.grid.x = lround(camera.x) / GRID_LEN;
-	camera.grid.y = lround(camera.y) / GRID_LEN;
+	/** camera.grid.x = lround(camera.x) / GRID_LEN; */
+	/** camera.grid.y = lround(camera.y) / GRID_LEN; */
 	angle_diff = FOV / g_ray_cnt;
 	while (idx < g_ray_cnt)
 	{

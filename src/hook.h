@@ -5,6 +5,7 @@
 
 # include "cub3d.h"
 # include "player_move.h"
+# include "door.h"
 
 # define SPEED (50)
 /** # define ANGULAR_SPEED (0.157) // ~= M_PI / 20 */

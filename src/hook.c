@@ -1,5 +1,4 @@
 #include "hook.h"
-# include <stdio.h>
 
 void	key_event(t_mlx_data *data)
 {
@@ -22,14 +21,12 @@ void	key_event(t_mlx_data *data)
 		player_move(&data->player, side_x, side_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 		player_move(&data->player, -side_x, -side_y, data);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_F))
+		door_event(data);
 	if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
 	else if (data->player.angle < 0.0)
 		data->player.angle += 2.0 * M_PI;
-	/** if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_M)) */
-	/**     data->screen.toggle_minimap = !data->screen.toggle_minimap; */
-	/** if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_F) && data->player.near_door) */
-	/**     act_door(&data->map, data->pnt); */
 }
 
 void	cursor_event(t_mlx_data *data)

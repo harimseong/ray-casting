@@ -49,10 +49,10 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	45
 	0x000000ff,	//	46
 	0x000000ff,	//	47
-	0x0f0f0fff,	//	48 = '0'
-	0x7f7f7fff,	//	49 = '1'
-	0x000000ff,	//	50
-	0x3fbfbfff,	//	51
+	0x0f0f0fff,	//	48 = '0' (empty)
+	0x7f7f7fff,	//	49 = '1' (wall)
+	0xcf9e17ff,	//	50 = '2' (open door)
+	0x3fbfbfff,	//	51 = '3' (closed door)
 	0x000000ff,	//	52
 	0x000000ff,	//	53
 	0x000000ff,	//	54
