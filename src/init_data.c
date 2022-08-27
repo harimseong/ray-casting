@@ -1,14 +1,9 @@
-#include <math.h>
-
-#include "MLX42_Input.h"
-#include "garbage_collector/garbage_collector.h"
 #include "init_data.h"
-#include "minimap.h"
-#include "error.h"
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
 static void	init_player(t_mlx_data *mlx_data);
+static void	postprocess_map(t_map *map);
 
 int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 {
@@ -20,6 +15,7 @@ int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 	init_mlx(mlx_data);
 	init_sprite(mlx_data);
 	init_player(mlx_data);
+	postprocess_map(&mlx_data->map);
 	return (0);
 }
 
@@ -45,11 +41,37 @@ static void	init_player(t_mlx_data *mlx_data)
 {
 	t_player		*player = &mlx_data->player;
 	const t_map		map = mlx_data->map;
-	const char		direction = map.map[player->grid.y][player->grid.x];
+	const uint32_t	direction = map.map[player->grid.y][player->grid.x];
 
 	player->angle = M_PI_2 * (direction == 'E')
 		+ M_PI * (direction == 'S')
 		+ 3 * M_PI_2 * (direction == 'W');
 	player->x = GRID_LEN * player->grid.x + GRID_LEN / 2.0;
 	player->y = GRID_LEN * player->grid.y + GRID_LEN / 2.0;
+	map.map[player->grid.y][player->grid.x] = '0';
+}
+
+static void	postprocess_map(t_map *map)
+{
+	int			idx;
+	int			jdx;
+	uint32_t	val;
+
+	idx = 0;
+	while (idx < map->height)
+	{
+		jdx = 0;
+		while (jdx < map->width)
+		{
+			val = map->map[idx][jdx];
+			if (val == ' ' || val == '0')
+				map->map[idx][jdx] = MAP_EMPTY;
+			else if (val == '1')
+				map->map[idx][jdx] = MAP_WALL;
+			else if (val == '3')
+				map->map[idx][jdx] = MAP_DOOR;
+			++jdx;
+		}
+		++idx;
+	}
 }

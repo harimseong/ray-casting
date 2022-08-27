@@ -1,28 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_map_validity.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 14:44:09 by hseong            #+#    #+#             */
-/*   Updated: 2022/08/24 16:13:47 by soum             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 enum e_map_element
 {
-	WALL = '1',
-	DOOR = '3',
-	EMPTY = '0',
-	CHECKED = 0b10000000
+	CHECK_MAP_WALL = '1',
+	CHECK_MAP_DOOR = '3',
+	CHECK_MAP_EMPTY = '0',
+	CHECK_MAP_CHECKED = 0b10000000
 };
 
-static int	check_closed(char **map, t_ivec2 pos, t_ivec2 *boundary);
-static void	unmask_map(char **map, int rows, int cols);
-static int	check_door(char **map, int rows, int cols,
+static int	check_closed(uint32_t **map, t_ivec2 pos, t_ivec2 *boundary);
+static void	unmask_map(uint32_t **map, int rows, int cols);
+static int	check_door(uint32_t **map, int rows, int cols,
 		t_ivec2 *boundary);
 
 /*
@@ -30,7 +18,7 @@ static int	check_door(char **map, int rows, int cols,
  * return value of check_closed()
  * 		1: SUCCESS, 0:FAIL
  */
-int	check_map_validity(char **map, int rows, int cols, t_ivec2 *player_pos)
+int	check_map_validity(uint32_t **map, int rows, int cols, t_ivec2 *player_pos)
 {
 	int		i;
 	int		j;
@@ -59,14 +47,15 @@ int	check_map_validity(char **map, int rows, int cols, t_ivec2 *player_pos)
 	return (ret);
 }
 
-static int	check_closed(char **map, t_ivec2 pos, t_ivec2 *boundary)
+static int	check_closed(uint32_t **map, t_ivec2 pos, t_ivec2 *boundary)
 {
 	if (pos.y < 0 || pos.y >= boundary->y || pos.x < 0 || pos.x >= boundary->x
 		|| map[pos.y][pos.x] == ' ')
 		return (0);
-	if (map[pos.y][pos.x] & CHECKED || map[pos.y][pos.x] == WALL)
+	if (map[pos.y][pos.x] & CHECK_MAP_CHECKED
+		|| map[pos.y][pos.x] == CHECK_MAP_WALL)
 		return (1);
-	map[pos.y][pos.x] |= CHECKED;
+	map[pos.y][pos.x] |= CHECK_MAP_CHECKED;
 	return (check_closed(map, (t_ivec2){pos.x - 1, pos.y - 1}, boundary)
 		&& check_closed(map, (t_ivec2){pos.x, pos.y - 1}, boundary)
 		&& check_closed(map, (t_ivec2){pos.x + 1, pos.y - 1}, boundary)
@@ -77,7 +66,7 @@ static int	check_closed(char **map, t_ivec2 pos, t_ivec2 *boundary)
 		&& check_closed(map, (t_ivec2){pos.x + 1, pos.y + 1}, boundary));
 }
 
-static void	unmask_map(char **map, int rows, int cols)
+static void	unmask_map(uint32_t **map, int rows, int cols)
 {
 	int		i;
 	int		j;
@@ -97,7 +86,7 @@ static void	unmask_map(char **map, int rows, int cols)
 	}
 }
 
-static int	check_door(char **map, int rows, int cols,
+static int	check_door(uint32_t **map, int rows, int cols,
 	t_ivec2 *boundary)
 {
 	int	vertical;

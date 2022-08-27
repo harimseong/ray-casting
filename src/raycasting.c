@@ -41,11 +41,10 @@ t_ray detect_x_wall(t_camera camera, t_map map)
 		ray.x = camera.grid.x * GRID_LEN - 1;
 		ray.direction = EAST;
 	}
-	ray.y = camera.y - (ray.x - 0.5 * direction_flag - camera.x) / tan(camera.angle);
+	ray.y = camera.y
+		- (ray.x - 0.5 * direction_flag - camera.x) / tan(camera.angle);
 	dy = -GRID_LEN * direction_flag / tan(camera.angle);
-	while (!boundary_check(ray, map)
-			&& map_type_check(&ray, &map, &camera))
-		/** && map.map[lround(ray.y) / GRID_LEN][lround(ray.x) / GRID_LEN] != '1') */
+	while (!boundary_check(ray, map) && map_type_check(&ray, &map, camera.angle))
 	{
 		ray.x += GRID_LEN * direction_flag;
 		ray.y += dy;
@@ -71,11 +70,10 @@ t_ray detect_y_wall(t_camera camera, t_map map)
 		ray.y = camera.grid.y * GRID_LEN - 1;
 		ray.direction = NORTH;
 	}
-	ray.x = camera.x - (ray.y - 0.5 * direction_flag - camera.y) * tan(camera.angle);
+	ray.x = camera.x
+		- (ray.y - 0.5 * direction_flag - camera.y) * tan(camera.angle);
 	dx = -GRID_LEN * direction_flag * tan(camera.angle);
-	while (!boundary_check(ray, map)
-			&& map_type_check(&ray, &map, &camera))
-		/** && map.map[lround(ray.y) / GRID_LEN][lround(ray.x) / GRID_LEN] != '1') */
+	while (!boundary_check(ray, map) && map_type_check(&ray, &map, camera.angle))
 	{
 		ray.y += GRID_LEN * direction_flag;
 		ray.x += dx;

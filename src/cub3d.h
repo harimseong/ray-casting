@@ -4,6 +4,7 @@
 # include <stdint.h>
 
 # include "MLX42.h"
+# include "MLX42_Input.h"
 # include "libft.h"
 
 # define SCREEN_WIDTH (2560)
@@ -11,6 +12,30 @@
 # define SCREEN_TITLE ("cub3d")
 
 # define GRID_LEN (512)
+
+# define EAST (0)
+# define WEST (1)
+# define SOUTH (2)
+# define NORTH (3)
+# define DOOR (4)
+
+//		  0123  4567  89		31
+// type: [0000][0000][0000...0000]
+// 0123 : type
+// 4567 : door & sprite
+# define TYPE_BITMASK (0xf)
+# define TYPE_BITSHIFT (4)
+# define SPECIAL_TYPE_BITMASK (0xf0)
+# define INFO_BITMASK (0xffff0000)
+# define INFO_BITSHIFT (16)
+
+enum e_map_value_list
+{
+	MAP_EMPTY = 0,
+	MAP_WALL = 1,
+	MAP_DOOR = 16,
+	MAP_SPRITE = 32
+};
 
 typedef struct s_ivec2
 {
@@ -34,9 +59,9 @@ typedef struct s_ray
 
 typedef struct s_map
 {
-	char	**map;
-	int		width;
-	int		height;
+	uint32_t	**map;
+	int			width;
+	int			height;
 }	t_map;
 
 typedef struct s_texture_list

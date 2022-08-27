@@ -1,15 +1,16 @@
 #include "minimap.h"
+#include "cub3d.h"
 
 static const uint32_t	g_color_table[128] = {
-	0x000000ff,	//	0
-	0x000000ff,	//	1
-	0x000000ff,	//	2
-	0x000000ff,	//	3
+	0x0f0f0fff,	//	0 = '0' (empty)
+	0x7f7f7fff,	//	1 = '1' (wall)
+	0xcf9e17ff,	//	2 = '2' (open door)
+	0x3fbfbfff,	//	3 = '3' (closed door)
 	0x000000ff,	//	4
 	0x000000ff,	//	5
 	0x000000ff,	//	6
 	0x000000ff,	//	7
-	0x000000ff,	//	8
+	0x3f3f3fff,	//	8 = '8' check pattern
 	0x000000ff,	//	9
 	0x000000ff,	//	10
 	0x000000ff,	//	11
@@ -49,15 +50,15 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	45
 	0x000000ff,	//	46
 	0x000000ff,	//	47
-	0x0f0f0fff,	//	48 = '0' (empty)
-	0x7f7f7fff,	//	49 = '1' (wall)
-	0xcf9e17ff,	//	50 = '2' (open door)
-	0x3fbfbfff,	//	51 = '3' (closed door)
+	0x000000ff,	//	48
+	0x000000ff,	//	49
+	0x000000ff,	//	50
+	0x000000ff,	//	51
 	0x000000ff,	//	52
 	0x000000ff,	//	53
 	0x000000ff,	//	54
 	0x000000ff,	//	55
-	0x3f3f3fff,	//	56 = '8'
+	0x000000ff,	//	56
 	0x000000ff,	//	57
 	0x000000ff,	//	58
 	0x000000ff,	//	59
@@ -70,7 +71,7 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	66
 	0x000000ff,	//	67
 	0x000000ff,	//	68
-	0xffffffff,	//	69 = 'E'
+	0x000000ff,	//	69 = 'E'
 	0x000000ff,	//	70
 	0x000000ff,	//	71
 	0x000000ff,	//	72
@@ -79,16 +80,16 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	75
 	0x000000ff,	//	76
 	0x000000ff,	//	77
-	0xffffffff,	//	78 = 'N'
+	0x000000ff,	//	78 = 'N'
 	0x000000ff,	//	79
 	0x000000ff,	//	80
 	0x000000ff,	//	81
 	0x000000ff,	//	82
-	0xffffffff,	//	83 = 'S'
+	0x000000ff,	//	83 = 'S'
 	0x000000ff,	//	84
 	0x000000ff,	//	85
 	0x000000ff,	//	86
-	0xffffffff,	//	87 = 'W'
+	0x000000ff,	//	87 = 'W'
 	0x000000ff,	//	88
 	0x000000ff,	//	89
 	0x000000ff,	//	90
@@ -154,7 +155,8 @@ void	render_minimap(const t_mlx_data data)
 		while (x < MINIMAP_WIDTH)
 		{
 			color
-				= get_color(transfer_pos(data.player, x, y, data.map), data.map);
+				= get_color(transfer_pos(data.player, x, y, data.map),
+					data.map);
 			mlx_put_pixel(data.minimap, x, y, color);
 			++x;
 		}
@@ -187,8 +189,8 @@ inline static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 
 	if (pos.x == -1)
 		return (0x000000ff);
-	idx = (int)map.map[pos.y][pos.x];
-	if (idx == '0')
+	idx = (int)map.map[pos.y][pos.x] & TYPE_BITMASK;
+	if (idx == 0)
 		return (g_color_table[idx + ((pos.x + pos.y) % 2) * 8]);
 	return (g_color_table[idx]);
 }

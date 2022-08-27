@@ -1,7 +1,7 @@
-#include "MLX42.h"
 #include "cub3d.h"
 #include "raycasting.h"
-#include <stdio.h>
+
+typedef int	(*t_special_type_func)(t_ray *ray, uint32_t *type, double angle);
 
 static uint32_t	to_le(uint32_t color, double fog);
 static uint32_t	apply_fog(uint32_t color, double fog);
@@ -9,6 +9,12 @@ static int get_pos(mlx_texture_t* texture, t_ray *point);
 
 static const int32_t	g_half_screen_height = SCREEN_HEIGHT / 2;
 static const int32_t	g_canvas_dist = 4 * PLAYER_SIZE;
+static const t_special_type_func	g_special_type_table[4] = {
+	check_east_door,
+	check_west_door,
+	check_south_door,
+	check_north_door
+};
 
 uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t y)
 {
@@ -89,36 +95,17 @@ static int get_pos(mlx_texture_t* texture, t_ray *point)
 	return (pos);
 }
 
-int map_type_check(t_ray *ray, t_map *map, t_camera *camera)
+int map_type_check(t_ray *ray, t_map *map, double angle)
 {
-	char type;
+	int			table_idx;
+	uint32_t	*type;
 
-	type = map->map[lround(ray->y) / GRID_LEN][lround(ray->x) / GRID_LEN];
-	if (type == '0' || type == '2')
+	type = &map->map[lround(ray->y) / GRID_LEN][lround(ray->x) / GRID_LEN];
+	if (*type == MAP_EMPTY)
 		return (1);
-	else if (type == '3')
-	{
-		if (ray->direction == NORTH)
-		{
-			ray->y -= GRID_LEN / 2.0;
-			ray->x += -GRID_LEN / 2.0 * -1 * tan(camera->angle);
-		}
-		else if (ray->direction == SOUTH)
-		{
-			ray->y += GRID_LEN / 2.0;
-			ray->x += -GRID_LEN / 2.0 * tan(camera->angle);
-		}
-		else if (ray->direction == EAST)
-		{
-			ray->x -= GRID_LEN / 2.0;
-			ray->y += -GRID_LEN / 2.0 * -1 / tan(camera->angle);
-		}
-		else if (ray->direction == WEST)
-		{
-			ray->x += GRID_LEN / 2.0;
-			ray->y += -GRID_LEN / 2.0 / tan(camera->angle);
-		}
-		ray->direction = DOOR;
-	}
-	return (0);
+	else if (*type == MAP_WALL)
+		return (0);
+	table_idx = (*type & SPECIAL_TYPE_BITMASK)
+		- TYPE_BITMASK - 1 + ray->direction;
+	return (g_special_type_table[table_idx](ray, type, angle));
 }
