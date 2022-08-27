@@ -10,8 +10,8 @@ void	key_event(t_mlx_data *data)
 
 	move_x = SPEED * sin(data->player.angle);
 	move_y = SPEED * -cos(data->player.angle);
-	side_x = SPEED * -cos(data->player.angle);
-	side_y = SPEED * -sin(data->player.angle);
+	side_x = (SPEED / 2.0) * -cos(data->player.angle);
+	side_y = (SPEED / 2.0) * -sin(data->player.angle);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
 		exit(1);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))

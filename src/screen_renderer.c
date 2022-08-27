@@ -19,7 +19,7 @@ void	screen_renderer(void *data)
 	cursor_event(mlx_data);
 	render_minimap(*mlx_data);
 	render_main_img(*mlx_data);
-	print_frame();
+	/** print_frame(); */
 }
 
 void	print_frame(void)
@@ -50,10 +50,7 @@ void render_main_img(t_mlx_data data)
 	while (idx < g_ray_cnt)
 	{
 		point = detect_wall(camera, data.map);
-		/** if (idx == g_ray_cnt / 2) */
-		/**     print_detect_wall(camera, data.map); */
 		point.distance *= cos(camera.angle - data.player.angle);
-		/** printf("x : %f y : %f dis : %f direction : %d\n", point.x, point.y, point.distance, point.direction); */
 		draw_col_line(&data, point, idx);
 		if (idx % 6 == 0)
 			draw_minimap_ray(&data, camera, point);
