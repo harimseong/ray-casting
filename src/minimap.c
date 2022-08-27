@@ -4,8 +4,8 @@
 static const uint32_t	g_color_table[128] = {
 	0x0f0f0fff,	//	0 = '0' (empty)
 	0x7f7f7fff,	//	1 = '1' (wall)
-	0xcf9e17ff,	//	2 = '2' (open door)
-	0x3fbfbfff,	//	3 = '3' (closed door)
+	0x000000ff,	//	2
+	0x000000ff,	//	3
 	0x000000ff,	//	4
 	0x000000ff,	//	5
 	0x000000ff,	//	6
@@ -18,8 +18,8 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	13
 	0x000000ff,	//	14
 	0x000000ff,	//	15
-	0x000000ff,	//	16
-	0x000000ff,	//	17
+	0xcf9e17ff,	//	16 (open door)
+	0x3fbfbfff,	//	17 (closed door)
 	0x000000ff,	//	18
 	0x000000ff,	//	19
 	0x000000ff,	//	20
@@ -189,7 +189,7 @@ inline static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 
 	if (pos.x == -1)
 		return (0x000000ff);
-	idx = (int)map.map[pos.y][pos.x] & TYPE_BITMASK;
+	idx = (int)map.map[pos.y][pos.x] & (TYPE_BITMASK | SPECIAL_TYPE_BITMASK);
 	if (idx == 0)
 		return (g_color_table[idx + ((pos.x + pos.y) % 2) * 8]);
 	return (g_color_table[idx]);

@@ -1,12 +1,14 @@
+#include "cub3d.h"
+#include "door.h"
 #include "raycasting.h"
 
-static t_ray detect_x_wall(t_camera camera, t_map map);
-static t_ray detect_y_wall(t_camera camera, t_map map);
+t_ray detect_x_door(t_camera camera, t_map map);
+t_ray detect_y_door(t_camera camera, t_map map);
+static double	get_distance(t_ray ray, t_camera camera);
+static int	boundary_check(t_ray ray, t_map map);
+static int door_check(t_ray *ray, t_map *map);
 
-inline static double	get_distance(t_ray ray, t_camera camera);
-inline static int		boundary_check(t_ray ray, t_map map);
-
-t_ray detect_wall(t_camera camera, t_map map)
+t_ray detect_door(t_camera camera, t_map map)
 {
 	t_ray x_point;
 	t_ray y_point;
@@ -15,14 +17,14 @@ t_ray detect_wall(t_camera camera, t_map map)
 		camera.angle += 2.0 * M_PI;
 	else if (camera.angle >= 2.0 * M_PI)
 		camera.angle -= 2.0 * M_PI;
-		y_point = detect_y_wall(camera, map);
-		x_point = detect_x_wall(camera, map);
+	y_point = detect_y_door(camera, map);
+	x_point = detect_x_door(camera, map);
 	if (x_point.distance <= y_point.distance)
 		return (x_point);
 	return (y_point);
 }
 
-t_ray detect_x_wall(t_camera camera, t_map map)
+t_ray detect_x_door(t_camera camera, t_map map)
 {
 	t_ray	ray;
 	double	dy;
@@ -40,18 +42,17 @@ t_ray detect_x_wall(t_camera camera, t_map map)
 	ray.y = camera.y
 		- (ray.x - 0.5 * direction_flag - camera.x) / tan(camera.angle);
 	dy = -GRID_LEN * direction_flag / tan(camera.angle);
-	while (boundary_check(ray, map) && map_type_check(&ray, &map, camera.angle))
+	while (boundary_check(ray, map) && door_check(&ray, &map))
 	{
 		ray.x += GRID_LEN * direction_flag;
 		ray.y += dy;
 	}
 	ray.distance = get_distance(ray, camera)
 		+ !boundary_check(ray, map) * INT32_MAX;
-	ray.x += (direction_flag == -1);
 	return (ray);
 }
 
-t_ray detect_y_wall(t_camera camera, t_map map)
+t_ray detect_y_door(t_camera camera, t_map map)
 {
 	t_ray	ray;
 	double	dx;
@@ -69,26 +70,41 @@ t_ray detect_y_wall(t_camera camera, t_map map)
 	ray.x = camera.x
 		- (ray.y - 0.5 * direction_flag - camera.y) * tan(camera.angle);
 	dx = -GRID_LEN * direction_flag * tan(camera.angle);
-	while (boundary_check(ray, map) && map_type_check(&ray, &map, camera.angle))
+	while (boundary_check(ray, map) && door_check(&ray, &map))
 	{
 		ray.y += GRID_LEN * direction_flag;
 		ray.x += dx;
 	}
 	ray.distance = get_distance(ray, camera)
 		+ !boundary_check(ray, map) * INT32_MAX;
-	ray.y += (direction_flag == -1);
 	return (ray);
 }
 
-inline static double	get_distance(t_ray ray, t_camera camera)
+static double	get_distance(t_ray ray, t_camera camera)
 {
 	return (sqrt(pow(ray.x - camera.x, 2.0) + pow(ray.y - camera.y, 2.0)));
 }
 
-inline static int	boundary_check(t_ray ray, t_map map)
+static int	boundary_check(t_ray ray, t_map map)
 {
 	if (ray.x >= 0 && lround(ray.x) < GRID_LEN * map.width
 		&& ray.y >= 0 && lround(ray.y) < GRID_LEN * map.height)
 		return (1);
 	return (0);
+}
+
+static int door_check(t_ray *ray, t_map *map)
+{
+	uint32_t *type;
+
+	type = &map->map[lround(ray->y) / GRID_LEN][lround(ray->x) / GRID_LEN];
+	if ((*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK)) == MAP_WALL)
+		return (0);
+	if ((*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK)) == MAP_DOOR_CLOSED
+		|| (*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK)) == MAP_DOOR_OPENED)
+	{
+		ray->direction = DOOR;
+		return (0);
+	}
+	return (1);
 }

@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/27 23:57:30 by hseong            #+#    #+#             */
+/*   Updated: 2022/08/28 04:08:43 by hseong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "init_data.h"
+#include "cub3d.h"
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
@@ -68,8 +81,11 @@ static void	postprocess_map(t_map *map)
 				map->map[idx][jdx] = MAP_EMPTY;
 			else if (val == '1')
 				map->map[idx][jdx] = MAP_WALL;
+			else if (val == '2')
+				map->map[idx][jdx] = MAP_DOOR_OPENED
+					| (GRID_LEN << INFO_BITSHIFT);
 			else if (val == '3')
-				map->map[idx][jdx] = MAP_DOOR;
+				map->map[idx][jdx] = MAP_DOOR_CLOSED;
 			++jdx;
 		}
 		++idx;

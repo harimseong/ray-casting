@@ -28,6 +28,7 @@ SRC		=	main.c\
 			drawline.c\
 			drawline_util.c\
 			door.c\
+			door_util.c\
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)

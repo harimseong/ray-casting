@@ -33,8 +33,10 @@ enum e_map_value_list
 {
 	MAP_EMPTY = 0,
 	MAP_WALL = 1,
-	MAP_DOOR = 16,
-	MAP_SPRITE = 32
+	MAP_DOOR_OPENED = 16,
+	MAP_DOOR_CLOSED = 17,
+	MAP_SPRITE_NONBLOCK = 32,
+	MAP_SPRITE_BLOCK = 33,
 };
 
 typedef struct s_ivec2
