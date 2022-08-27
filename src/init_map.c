@@ -3,17 +3,6 @@
 static void get_map_size(int fd, t_mlx_data *mlx_data);
 static void load_map(int fd, t_mlx_data *mlx_data);
 
-void print_map_info(t_map *map)
-{
-	int idx;
-
-	idx = 0;
-	printf("map width : %d\n", map->width);
-	printf("map hegiht : %d\n", map->height);
-	while (map->map[idx])
-		printf("%s\n", map->map[idx++]);
-}
-
 void init_map(const char *path, t_mlx_data *mlx_data)
 {
 	int 	map_line_num;
@@ -22,7 +11,6 @@ void init_map(const char *path, t_mlx_data *mlx_data)
 	map_line_num = get_map_line(path);
 	get_map_size(jump_to_map(path, map_line_num), mlx_data);
 	load_map(jump_to_map(path, map_line_num), mlx_data);
-	print_map_info(&mlx_data->map);
 	if (check_map_validity(mlx_data->map.map, mlx_data->map.height,
 		mlx_data->map.width, &mlx_data->player.grid))
 		error_handler(MAP_INVALID_ERROR);
