@@ -1,9 +1,7 @@
 #include "screen_renderer.h"
 
-void		render_main_img(t_mlx_data data);
+static void	render_main_img(t_mlx_data data);
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
-static void	crosshair_line(t_mlx_data *data, int pos, int len);
-void		print_frame(void);
 
 static const int 	g_ray_cnt = SCREEN_WIDTH / 2;
 static const double	g_transfer_ratio = (double)MINIMAP_GRID_LEN / GRID_LEN;
@@ -13,39 +11,24 @@ void	screen_renderer(void *data)
 	t_mlx_data	*mlx_data;
 
 	mlx_data = (t_mlx_data *)data;
-	(void)mlx_data;
-//	render_sprite(mlx_data);
 	key_event(mlx_data);
 	cursor_event(mlx_data);
 	render_minimap(*mlx_data);
 	render_main_img(*mlx_data);
-	/** print_frame(); */
+	user_interface(mlx_data);
 }
 
-void	print_frame(void)
+static void render_main_img(t_mlx_data data)
 {
-	struct timeval	time1;
-	static uint64_t		old_ms;
-	uint64_t		ms;
-
-		gettimeofday(&time1, NULL);
-	ms = time1.tv_sec * 1000 + time1.tv_usec / 1000;
-	printf("fps: %f\n", 1000.0 / (ms - old_ms));
-	old_ms = ms;
-}
-
-void render_main_img(t_mlx_data data)
-{
-	int			idx;
-	t_ray		point;
-	t_player	camera;
-	double		angle_diff;
+	int				idx;
+	t_ray			point;
+	t_player		camera;
+	double			angle_diff;
+	static double	depth_buffer[SCREEN_WIDTH];
 
 	idx = 0;
 	camera = data.player;
 	camera.angle -= FOV * 0.5;
-	/** camera.grid.x = lround(camera.x) / GRID_LEN; */
-	/** camera.grid.y = lround(camera.y) / GRID_LEN; */
 	angle_diff = FOV / g_ray_cnt;
 	while (idx < g_ray_cnt)
 	{
@@ -55,9 +38,10 @@ void render_main_img(t_mlx_data data)
 		if (idx % 6 == 0)
 			draw_minimap_ray(&data, camera, point);
 		camera.angle += angle_diff;
+		depth_buffer[idx] = point.distance;
 		++idx;
 	}
-	crosshair_line(&data, 6, 6);
+	render_sprite(data, depth_buffer, g_ray_cnt);
 }
 
 void draw_col_line(t_mlx_data *data, t_ray point, int idx)
@@ -75,7 +59,6 @@ void draw_col_line(t_mlx_data *data, t_ray point, int idx)
 		y++;
 	}
 }
-
 
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1)
 {
@@ -102,23 +85,3 @@ static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1)
 	drawline(data->minimap, origin, point);
 }
 
-void	crosshair_line(t_mlx_data *data, int pos, int len)
-{
-	int	idx;
-	mlx_image_t	*img;
-
-	idx = 0;
-	img = data->main_img;
-	while (idx < len)
-	{
-		mlx_put_pixel(img, (img->width >> 1) + pos + idx, img->height >> 1, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) + pos + idx + 1, (img->height >> 1) + 1, 0x000000ff);
-		mlx_put_pixel(img, (img->width >> 1) - pos - idx, img->height >> 1, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) - pos - idx + 1, (img->height >> 1) + 1, 0x000000ff);
-		mlx_put_pixel(img, img->width >> 1, (img->height >> 1) + pos + idx, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) + 1, (img->height >> 1) + pos + idx + 1, 0x000000ff);
-		mlx_put_pixel(img, img->width >> 1, (img->height >> 1) - pos - idx, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) + 1, (img->height >> 1) - pos - idx + 1, 0x000000ff);
-		++idx;
-	}
-}

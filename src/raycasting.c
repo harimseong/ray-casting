@@ -15,8 +15,8 @@ t_ray detect_wall(t_camera camera, t_map map)
 		camera.angle += 2.0 * M_PI;
 	else if (camera.angle >= 2.0 * M_PI)
 		camera.angle -= 2.0 * M_PI;
-		y_point = detect_y_wall(camera, map);
-		x_point = detect_x_wall(camera, map);
+	y_point = detect_y_wall(camera, map);
+	x_point = detect_x_wall(camera, map);
 	if (x_point.distance <= y_point.distance)
 		return (x_point);
 	return (y_point);

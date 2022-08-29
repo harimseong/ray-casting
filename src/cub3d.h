@@ -6,6 +6,7 @@
 # include "MLX42.h"
 # include "MLX42_Input.h"
 # include "libft.h"
+# include "dlinkedlist.h"
 
 # define SCREEN_WIDTH (2560)
 # define SCREEN_HEIGHT (1440)
@@ -90,6 +91,7 @@ typedef struct s_mlx_data
 	t_map			map;
 	t_player		player;
 	t_texture_list	texture_list;
+	t_dlist			sprite_list;
 }	t_mlx_data;
 
 #endif

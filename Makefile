@@ -29,11 +29,13 @@ SRC		=	main.c\
 			drawline_util.c\
 			door.c\
 			door_util.c\
+			sprite.c\
+			user_interface.c\
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)
 
-INC_DIR	=
+INC_DIR	=	-Isrc
 
 
 LIBFLAGS 	+=	-L.
@@ -41,7 +43,7 @@ LIBFLAGS 	+=	-L.
 # NOTE: library order (-ldlinkedlist and -lft) can be problem
 LIBFLAGS 	+=	-ldlinkedlist
 DLLIST		=	libdlinkedlist.a
-DLLIST_DIR	=	doubly_linked_list
+DLLIST_DIR	=	dlinkedlist
 LIBRARYS	+=	DLLIST.lib
 INC_DIR		+=	-I$(DLLIST_DIR)
 

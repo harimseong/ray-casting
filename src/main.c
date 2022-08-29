@@ -1,6 +1,5 @@
 #include "cub3d.h"
 #include "init_data.h"
-#include "hook.h"
 #include "screen_renderer.h"
 #include "error.h"
 
