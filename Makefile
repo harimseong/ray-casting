@@ -30,6 +30,7 @@ SRC		=	main.c\
 			door.c\
 			door_util.c\
 			sprite.c\
+			sprite_util.c\
 			user_interface.c\
 
 SRC		:=	$(SRC:%=src/%)

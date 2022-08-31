@@ -13,7 +13,6 @@
 # include "user_interface.h"
 # include "sprite.h"
 
-# define FOV (M_PI / 3)
 # define MINIMAP_RAY_NUM (1)
 
 void	screen_renderer(void *data);

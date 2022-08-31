@@ -52,6 +52,8 @@ static void	init_sprite(t_mlx_data *mlx_data)
 			if (mlx_data->map.map[idx][jdx] == MAP_SPRITE_NONBLOCK)
 			{
 				new_sprite = (t_sprite*)malloc(sizeof(t_sprite));
+//				*new_sprite = (t_sprite){{NULL,}, 1, 0, 0, 0, 0};
+				*new_sprite = (t_sprite){mlx_data->texture_list.wall, 4, 0, 0, 0, 0};
 				new_sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
 				new_sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
 				push_back(&mlx_data->sprite_list, new_sprite);

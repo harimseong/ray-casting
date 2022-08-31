@@ -13,6 +13,9 @@
 # define SCREEN_TITLE ("cub3d")
 
 # define GRID_LEN (512)
+# define FOV (M_PI / 3)
+# define RAY_CNT (SCREEN_WIDTH / 2)
+# define RAY_TO_PIXEL (SCREEN_WIDTH / RAY_CNT)
 
 # define EAST (0)
 # define WEST (1)

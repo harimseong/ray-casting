@@ -5,7 +5,7 @@
 static void	render_main_img(t_mlx_data *data);
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
 
-static const int 	g_ray_cnt = SCREEN_WIDTH / 2;
+static const int 	g_ray_cnt = RAY_CNT;
 static const double	g_transfer_ratio = (double)MINIMAP_GRID_LEN / GRID_LEN;
 
 void	screen_renderer(void *data)

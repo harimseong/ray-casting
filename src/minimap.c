@@ -34,7 +34,7 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	29
 	0x000000ff,	//	30
 	0x000000ff,	//	31
-	0x000000ff,	//	32
+	0x1f2fbfff,	//	32
 	0x000000ff,	//	33
 	0x000000ff,	//	34
 	0x000000ff,	//	35

@@ -25,6 +25,7 @@ uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t y)
 	double 			fog;
 
 	fog = fabs((double)y - g_half_screen_height) / g_half_screen_height;
+	fog = fabs((double)y - g_half_screen_height) / g_half_screen_height;
 	wall_texture = data->texture_list.wall[point->direction];
 	pos = get_pos(wall_texture, point,
 		data->map.map[lround(point->y) / GRID_LEN]
