@@ -1,9 +1,7 @@
-#include "cub3d.h"
 #include "raycasting.h"
 
 typedef int	(*t_special_type_func)(t_ray *ray, uint32_t *type, double angle);
 
-static uint32_t	to_le(uint32_t color, double fog);
 static uint32_t	apply_fog(uint32_t color, double fog);
 static int get_pos(mlx_texture_t* texture, t_ray *point, uint32_t type);
 
@@ -25,7 +23,6 @@ uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t y)
 	double 			fog;
 
 	fog = fabs((double)y - g_half_screen_height) / g_half_screen_height;
-	fog = fabs((double)y - g_half_screen_height) / g_half_screen_height;
 	wall_texture = data->texture_list.wall[point->direction];
 	pos = get_pos(wall_texture, point,
 		data->map.map[lround(point->y) / GRID_LEN]
@@ -42,7 +39,7 @@ uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t y)
 	return (color);
 }
 
-static uint32_t	to_le(uint32_t color, double fog)
+uint32_t	to_le(uint32_t color, double fog)
 {
 	unsigned char	bytes[4];
 	uint32_t		ret;

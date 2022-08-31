@@ -1,8 +1,4 @@
 #include "init_data.h"
-#include "MLX42.h"
-#include "cub3d.h"
-#include "dlinkedlist.h"
-#include "sprite.h"
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
@@ -38,10 +34,13 @@ static void	init_mlx(t_mlx_data *mlx_data)
 
 static void	init_sprite(t_mlx_data *mlx_data)
 {
-	int			idx;
-	int			jdx;
-	t_sprite	*new_sprite;
+	int				idx;
+	int				jdx;
+	t_sprite		*new_sprite;
+	mlx_texture_t	**texture;
 
+	texture = malloc(sizeof(mlx_texture_t *));
+	texture[0] = mlx_load_png(SPRITE_TEXTURE_PATH_1);
 	dlist_local_init(&mlx_data->sprite_list);
 	idx = 0;
 	while (idx < mlx_data->map.height)
@@ -53,7 +52,7 @@ static void	init_sprite(t_mlx_data *mlx_data)
 			{
 				new_sprite = (t_sprite*)malloc(sizeof(t_sprite));
 //				*new_sprite = (t_sprite){{NULL,}, 1, 0, 0, 0, 0};
-				*new_sprite = (t_sprite){mlx_data->texture_list.wall, 4, 0, 0, 0, 0};
+				*new_sprite = (t_sprite){texture, 1, 0, 0, 0, 0};
 				new_sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
 				new_sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
 				push_back(&mlx_data->sprite_list, new_sprite);

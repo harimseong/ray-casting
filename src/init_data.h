@@ -8,10 +8,12 @@
 # include "read_config.h"
 # include "minimap.h"
 # include "error.h"
+# include "sprite.h"
 # include "get_next_line.h"
 # include "garbage_collector/garbage_collector.h"
 
 # define RESIZABLE (0)
+# define SPRITE_TEXTURE_PATH_1 ("./images/goodgreenlight.png")
 
 int		init_data(int argc, char **argv, t_mlx_data *mlx_data);
 void	init_map(const char *path, t_mlx_data *mlx_data);

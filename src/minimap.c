@@ -2,15 +2,15 @@
 #include "cub3d.h"
 
 static const uint32_t	g_color_table[128] = {
-	0x0f0f0fff,	//	0 = '0' (empty)
-	0x7f7f7fff,	//	1 = '1' (wall)
+	0x0f0f0fff,	//	0 empty
+	0x7f7f7fff,	//	1 wall
 	0x000000ff,	//	2
 	0x000000ff,	//	3
 	0x000000ff,	//	4
 	0x000000ff,	//	5
 	0x000000ff,	//	6
 	0x000000ff,	//	7
-	0x3f3f3fff,	//	8 = '8' check pattern
+	0x3f3f3fff,	//	8 check-pattern
 	0x000000ff,	//	9
 	0x000000ff,	//	10
 	0x000000ff,	//	11
@@ -18,8 +18,8 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	13
 	0x000000ff,	//	14
 	0x000000ff,	//	15
-	0xcf9e17ff,	//	16 (open door)
-	0x3fbfbfff,	//	17 (closed door)
+	0xcf9e17ff,	//	16 opened door
+	0x3fbfbfff,	//	17 closed door
 	0x000000ff,	//	18
 	0x000000ff,	//	19
 	0x000000ff,	//	20
@@ -34,8 +34,8 @@ static const uint32_t	g_color_table[128] = {
 	0x000000ff,	//	29
 	0x000000ff,	//	30
 	0x000000ff,	//	31
-	0x1f2fbfff,	//	32
-	0x000000ff,	//	33
+	0x1f2fbfff,	//	32 non-block sprite
+	0x000000ff,	//	33 block sprite
 	0x000000ff,	//	34
 	0x000000ff,	//	35
 	0x000000ff,	//	36

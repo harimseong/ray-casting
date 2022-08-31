@@ -1,15 +1,11 @@
 #include "sprite.h"
-#include "MLX42.h"
-#include "cub3d.h"
-
-#include <stdio.h>
 
 static void	load_distance(t_mlx_data *mlx_data);
 //static void print_sprite_info(t_dlist *sprite_list);
 static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 		const double *depth_buffer);
-void	draw_sprite_col_line(t_mlx_data *mlx_data,
-		mlx_texture_t *sprite, int32_t idx, int32_t texture_pos);
+static void	draw_sprite_col_line(t_mlx_data *mlx_data,
+		t_sprite *sprite, int32_t idx, int32_t texture_pos);
 
 static const int 	g_ray_cnt = RAY_CNT;
 static const int32_t	g_canvas_dist = 4 * PLAYER_SIZE;
@@ -70,10 +66,11 @@ static void	load_distance(t_mlx_data *mlx_data)
 static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 		const double *depth_buffer)
 {
+	static uint32_t	frame;
 	t_vec2	position_diff;
 	double	sprite_angle;
 	int		idx;
-	double	width;
+	int		width;
 	int32_t	mid;
 	t_player	*player;
 
@@ -82,16 +79,12 @@ static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 	sprite_angle = atan2(position_diff.y, position_diff.x) + M_PI_2;
 	if (sprite_angle < 0)
 		sprite_angle += 2 * M_PI;
-//	-M_PI <= angle < M_PI
-
 	mid = g_ray_cnt * (sprite_angle - player->angle + 0.5 * FOV) / FOV;
-	/*
-	sprite_start_angle = sprite_start_angle - GRID_LEN * 0.5 * g_canvas_dist / sprite->distance;
-	sprite_end_angle = sprite_start_angle + GRID_LEN * g_canvas_dist / sprite->distance;
-	width = (sprite_end_angle - sprite_start_angle) * g_ray_cnt / (sprite_end_angle - sprite_start_angle) * 0.5;
-	angle_diff = FOV / g_ray_cnt;
-	*/
-	width = 200 * g_canvas_dist / sprite->distance;
+	if (sprite_angle - player->angle > 2 * M_PI - M_PI_2)
+		mid = g_ray_cnt * (sprite_angle - player->angle - 2 * M_PI + 0.5 * FOV) / FOV;
+	else if (player->angle - sprite_angle > 2 * M_PI - M_PI_2)
+		mid = g_ray_cnt * (sprite_angle - player->angle + 2 * M_PI + 0.5 * FOV) / FOV;
+	width = SPRITE_WIDTH * g_canvas_dist / sprite->distance;
 	idx = mid - width;
 	while (idx < mid + width)
 	{
@@ -100,26 +93,33 @@ static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 			++idx;
 			continue ;
 		}
-		draw_sprite_col_line(mlx_data, sprite->texture[sprite->idx], idx,
-			(idx + width) / (2 * width) * sprite->texture[sprite->idx]->width);
+		draw_sprite_col_line(mlx_data, sprite, idx,
+			sprite->texture[sprite->idx]->width
+			* (double)(idx - mid + width) / (2.0 * width));
 		++idx;
 	}
-	sprite->idx = (sprite->idx + 1) % sprite->size;
+	if (frame % 10 == 0)
+		sprite->idx = (sprite->idx + 1) % sprite->size;
+	++frame;
 }
 
 void	draw_sprite_col_line(t_mlx_data *mlx_data,
-		mlx_texture_t *sprite, int32_t idx, int32_t texture_pos)
+		t_sprite *sprite, int32_t idx, int32_t texture_pos)
 {
 	int32_t	y;
-	uint32_t	color;
+	uint32_t		color;
+	mlx_texture_t	*texture;
 
 	y = 0;
+	texture = sprite->texture[sprite->idx];
 	while (y < SCREEN_HEIGHT)
 	{
-		color = *((uint32_t *)sprite->pixels
-			+ y * sprite->width + texture_pos);
-		mlx_put_pixel(mlx_data->main_img, 2 * idx, y, color);
-		mlx_put_pixel(mlx_data->main_img, 2 * idx + 1, y, color);
+		color = get_sprite_color(sprite, texture_pos, y);
+		if (color != 0)
+		{
+			mlx_put_pixel(mlx_data->main_img, 2 * idx, y, color);
+			mlx_put_pixel(mlx_data->main_img, 2 * idx + 1, y, color);
+		}
 		++y;
 	}
 }

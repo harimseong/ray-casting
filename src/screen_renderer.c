@@ -37,7 +37,7 @@ static void render_main_img(t_mlx_data *data)
 		point = detect_wall(camera, data->map);
 		point.distance *= cos(camera.angle - data->player.angle);
 		draw_col_line(data, point, idx);
-		if (idx % 6 == 0)
+		if (idx % 128 == 0)
 			draw_minimap_ray(data, camera, point);
 		camera.angle += angle_diff;
 		depth_buffer[idx] = point.distance;

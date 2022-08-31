@@ -56,3 +56,4 @@ dkms.conf
 compile_commands.json
 .*.swp
 tags
+.DS_Store
