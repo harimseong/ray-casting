@@ -18,6 +18,6 @@ typedef struct s_sprite
 	double			distance;
 }	t_sprite;
 
-void	render_sprite(t_mlx_data mlx_data, const double *depth_buffer, int size);
+void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer, int size);
 
 #endif

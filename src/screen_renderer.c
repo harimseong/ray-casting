@@ -2,7 +2,7 @@
 #include "MLX42.h"
 #include "cub3d.h"
 
-static void	render_main_img(t_mlx_data data);
+static void	render_main_img(t_mlx_data *data);
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
 
 static const int 	g_ray_cnt = SCREEN_WIDTH / 2;
@@ -16,11 +16,11 @@ void	screen_renderer(void *data)
 	key_event(mlx_data);
 	cursor_event(mlx_data);
 	render_minimap(*mlx_data);
-	render_main_img(*mlx_data);
+	render_main_img(mlx_data);
 	user_interface(mlx_data);
 }
 
-static void render_main_img(t_mlx_data data)
+static void render_main_img(t_mlx_data *data)
 {
 	int				idx;
 	t_ray			point;
@@ -29,16 +29,16 @@ static void render_main_img(t_mlx_data data)
 	static double	depth_buffer[SCREEN_WIDTH];
 
 	idx = 0;
-	camera = data.player;
+	camera = data->player;
 	camera.angle -= FOV * 0.5;
 	angle_diff = FOV / g_ray_cnt;
 	while (idx < g_ray_cnt)
 	{
-		point = detect_wall(camera, data.map);
-		point.distance *= cos(camera.angle - data.player.angle);
-		draw_col_line(&data, point, idx);
+		point = detect_wall(camera, data->map);
+		point.distance *= cos(camera.angle - data->player.angle);
+		draw_col_line(data, point, idx);
 		if (idx % 6 == 0)
-			draw_minimap_ray(&data, camera, point);
+			draw_minimap_ray(data, camera, point);
 		camera.angle += angle_diff;
 		depth_buffer[idx] = point.distance;
 		++idx;
