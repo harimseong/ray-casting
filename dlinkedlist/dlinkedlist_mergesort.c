@@ -6,12 +6,14 @@
 /*   By: gson <gson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 20:18:17 by hseong            #+#    #+#             */
-/*   Updated: 2022/06/14 22:23:51 by gson             ###   ########.fr       */
+/*   Updated: 2022/08/31 16:01:17 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "dlinkedlist.h"
+
+#include <stdio.h>
 
 static t_node	*split_list(t_node **head, size_t len, t_comp comp);
 static t_node	*join_list(t_node **headptr, t_node *mid, size_t len,

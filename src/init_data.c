@@ -1,17 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 23:57:30 by hseong            #+#    #+#             */
-/*   Updated: 2022/08/28 04:08:43 by hseong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "init_data.h"
+#include "MLX42.h"
 #include "cub3d.h"
+#include "dlinkedlist.h"
+#include "sprite.h"
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
@@ -26,9 +17,9 @@ int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 	get_config_info(check_config_path(argv[1]), mlx_data);
 	init_map(argv[1], mlx_data);
 	init_mlx(mlx_data);
-	init_sprite(mlx_data);
 	init_player(mlx_data);
 	postprocess_map(&mlx_data->map);
+	init_sprite(mlx_data);
 	return (0);
 }
 
@@ -47,7 +38,28 @@ static void	init_mlx(t_mlx_data *mlx_data)
 
 static void	init_sprite(t_mlx_data *mlx_data)
 {
-	(void)mlx_data;
+	int			idx;
+	int			jdx;
+	t_sprite	*new_sprite;
+
+	dlist_local_init(&mlx_data->sprite_list);
+	idx = 0;
+	while (idx < mlx_data->map.height)
+	{
+		jdx = 0;
+		while (jdx < mlx_data->map.width)
+		{
+			if (mlx_data->map.map[idx][jdx] == MAP_SPRITE_NONBLOCK)
+			{
+				new_sprite = (t_sprite*)malloc(sizeof(t_sprite));
+				new_sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
+				new_sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
+				push_back(&mlx_data->sprite_list, new_sprite);
+			}
+			jdx++;
+		}
+		idx++;
+	}
 }
 
 static void	init_player(t_mlx_data *mlx_data)
@@ -86,6 +98,8 @@ static void	postprocess_map(t_map *map)
 					| (GRID_LEN << INFO_BITSHIFT);
 			else if (val == '3')
 				map->map[idx][jdx] = MAP_DOOR_CLOSED;
+			else if (val == '4')
+				map->map[idx][jdx] = MAP_SPRITE_NONBLOCK;
 			++jdx;
 		}
 		++idx;

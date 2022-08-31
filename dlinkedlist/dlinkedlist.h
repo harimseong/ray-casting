@@ -1,19 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dlinkedlist.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gson <gson@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 20:19:18 by hseong            #+#    #+#             */
-/*   Updated: 2022/07/11 20:51:30 by hseong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef DLINKEDLIST_H
 # define DLINKEDLIST_H
 
 # include <stddef.h>
+# include <stdio.h>
 
 typedef int	(*t_comp)(const void *, const void *);
 

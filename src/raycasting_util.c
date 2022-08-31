@@ -113,6 +113,9 @@ int map_type_check(t_ray *ray, t_map *map, double angle)
 	type = &map->map[lround(ray->y) / GRID_LEN][lround(ray->x) / GRID_LEN];
 	if ((*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK)) == MAP_EMPTY)
 		return (1);
+	else if ((*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK))
+			== MAP_SPRITE_NONBLOCK)
+		return (1);
 	else if ((*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK)) == MAP_WALL)
 		return (0);
 	table_idx = (*type & SPECIAL_TYPE_BITMASK)

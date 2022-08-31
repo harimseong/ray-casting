@@ -1,4 +1,6 @@
 #include "screen_renderer.h"
+#include "MLX42.h"
+#include "cub3d.h"
 
 static void	render_main_img(t_mlx_data data);
 static void	draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
