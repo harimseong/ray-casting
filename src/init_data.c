@@ -1,5 +1,4 @@
 #include "init_data.h"
-#include "cub3d.h"
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
@@ -18,6 +17,7 @@ int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 	postprocess_map(&mlx_data->map);
 	init_sprite_texture(mlx_data);
 	init_sprite(mlx_data);
+	collect_ptr_2d_garbage((void **)mlx_data->map.map);
 	return (0);
 }
 
