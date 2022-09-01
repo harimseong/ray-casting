@@ -1,12 +1,13 @@
 #include "hook.h"
-#include "cub3d.h"
+#include "gun.h"
+
+static int	gun_event(t_mlx_data *mlx_data);
 
 static int	get_player_move_input(t_mlx_data *data, t_player *player);
 
 void	key_event(t_mlx_data *data)
 {
 	static uint32_t	*door_ptr;
-
 	if (!get_player_move_input(data, &data->player)
 		&& mlx_is_key_down(data->mlx_ptr, MLX_KEY_F) && door_ptr == NULL)
 		door_ptr = door_event(data);
@@ -46,13 +47,14 @@ void	cursor_event(t_mlx_data *data)
 
 static int	get_player_move_input(t_mlx_data *data, t_player *player)
 {
+	static int	is_gun_event;
 	double	move_x;
 	double	move_y;
 	double	side_x;
 	double	side_y;
-	int		has_moved;
+	int		is_event_occur;
 
-	has_moved = 0;
+	is_event_occur = 0;
 	move_x = SPEED * sin(player->angle);
 	move_y = SPEED * -cos(player->angle);
 	side_x = (SPEED / 2.0) * -cos(player->angle);
@@ -60,12 +62,40 @@ static int	get_player_move_input(t_mlx_data *data, t_player *player)
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
 		exit(1);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
-		has_moved = player_move(player, move_x, move_y, data);
+		is_event_occur = player_move(player, move_x, move_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
-		has_moved = player_move(player, -move_x, -move_y, data);
+		is_event_occur = player_move(player, -move_x, -move_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
-		has_moved = player_move(player, side_x, side_y, data);
+		is_event_occur = player_move(player, side_x, side_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
-		has_moved = player_move(player, -side_x, -side_y, data);
-	return (has_moved);
+		is_event_occur = player_move(player, -side_x, -side_y, data);
+	if (is_gun_event || mlx_is_key_down(data->mlx_ptr, MLX_KEY_SPACE))
+	{
+		is_gun_event = gun_event(data);
+		is_event_occur = 1;
+	}
+	return (is_event_occur);
+}
+
+static int	gun_event(t_mlx_data *mlx_data)
+{
+	static int idx;
+	static int ammo = 10;
+
+	if (ammo == 0)
+		return (0);
+	if (idx == 0)
+		gun_image_to_window(mlx_data, 1);
+	else if (idx == 2)
+		gun_image_to_window(mlx_data, 2);
+	else if (idx == 4)
+	{
+		ammo--;
+		gun_image_to_window(mlx_data, 0);
+		ammo_string_to_window(mlx_data, ft_itoa(ammo));
+		idx = 0;
+		return (0);
+	}
+	idx++;
+	return (1);
 }

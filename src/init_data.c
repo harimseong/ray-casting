@@ -1,4 +1,5 @@
 #include "init_data.h"
+#include "cub3d.h"
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
@@ -15,6 +16,7 @@ int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 	init_mlx(mlx_data);
 	init_player(mlx_data->map, &mlx_data->player);
 	postprocess_map(&mlx_data->map);
+	init_sprite_texture(mlx_data);
 	init_sprite(mlx_data);
 	return (0);
 }
@@ -42,7 +44,7 @@ static void	init_sprite(t_mlx_data *mlx_data)
 	mlx_texture_t	**texture;
 
 	texture = malloc(sizeof(mlx_texture_t *));
-	texture[0] = mlx_load_png(SPRITE_TEXTURE_PATH_1);
+	texture[0] = mlx_load_png(BARREL_SPRITE_TEXTURE);
 	dlist_local_init(&mlx_data->sprite_list);
 	idx = 0;
 	while (idx < mlx_data->map.height)
@@ -68,8 +70,6 @@ static void	init_player(t_map map, t_player *player)
 {
 	const uint32_t	direction = map.map[player->grid.y][player->grid.x];
 
-	printf("y : %lld x : %lld\n", player->grid.y, player->grid.x);
-	printf("direction : %c\n", direction);
 	player->angle = M_PI_2 * (direction == 'E')
 		+ M_PI * (direction == 'S')
 		+ 3 * M_PI_2 * (direction == 'W');
