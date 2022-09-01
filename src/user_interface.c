@@ -9,7 +9,7 @@ void	user_interface(t_mlx_data *mlx_data)
 void	print_frame(void)
 {
 	struct timeval	time1;
-	static uint64_t		old_ms;
+	static uint64_t	old_ms;
 	uint64_t		ms;
 
 	gettimeofday(&time1, NULL);
@@ -18,24 +18,31 @@ void	print_frame(void)
 	old_ms = ms;
 }
 
-
 void	crosshair_line(t_mlx_data *data, int pos, int len)
 {
-	int	idx;
+	int			idx;
 	mlx_image_t	*img;
 
 	idx = 0;
 	img = data->main_img;
 	while (idx < len)
 	{
-		mlx_put_pixel(img, (img->width >> 1) + pos + idx, img->height >> 1, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) + pos + idx + 1, (img->height >> 1) + 1, 0x000000ff);
-		mlx_put_pixel(img, (img->width >> 1) - pos - idx, img->height >> 1, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) - pos - idx + 1, (img->height >> 1) + 1, 0x000000ff);
-		mlx_put_pixel(img, img->width >> 1, (img->height >> 1) + pos + idx, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) + 1, (img->height >> 1) + pos + idx + 1, 0x000000ff);
-		mlx_put_pixel(img, img->width >> 1, (img->height >> 1) - pos - idx, 0x3fbf1fff);
-		mlx_put_pixel(img, (img->width >> 1) + 1, (img->height >> 1) - pos - idx + 1, 0x000000ff);
+		mlx_put_pixel(img, (img->width >> 1) + pos + idx,
+				img->height >> 1, 0x3fbf1fff);
+		mlx_put_pixel(img, (img->width >> 1) + pos + idx + 1,
+				(img->height >> 1) + 1, 0x000000ff);
+		mlx_put_pixel(img, (img->width >> 1) - pos - idx,
+				img->height >> 1, 0x3fbf1fff);
+		mlx_put_pixel(img, (img->width >> 1) - pos - idx + 1,
+				(img->height >> 1) + 1, 0x000000ff);
+		mlx_put_pixel(img, img->width >> 1,
+				(img->height >> 1) + pos + idx, 0x3fbf1fff);
+		mlx_put_pixel(img, (img->width >> 1) + 1,
+				(img->height >> 1) + pos + idx + 1, 0x000000ff);
+		mlx_put_pixel(img, img->width >> 1,
+				(img->height >> 1) - pos - idx, 0x3fbf1fff);
+		mlx_put_pixel(img, (img->width >> 1) + 1,
+				(img->height >> 1) - pos - idx + 1, 0x000000ff);
 		++idx;
 	}
 }

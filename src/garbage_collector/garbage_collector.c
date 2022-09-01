@@ -7,6 +7,7 @@
 t_garbage	*get_garbage_ptr(void)
 {
 	static t_garbage	bucket;
+
 	return (&bucket);
 }
 

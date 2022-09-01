@@ -3,7 +3,7 @@
 
 static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_sprite(t_mlx_data *mlx_data);
-static void	init_player(t_mlx_data *mlx_data);
+static void	init_player(t_map map, t_player *player);
 static void	postprocess_map(t_map *map);
 
 int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
@@ -14,7 +14,7 @@ int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 	get_config_info(check_config_path(argv[1]), mlx_data);
 	init_map(argv[1], mlx_data);
 	init_mlx(mlx_data);
-	init_player(mlx_data);
+	init_player(mlx_data->map, &mlx_data->player);
 	postprocess_map(&mlx_data->map);
 	init_sprite_texture(mlx_data);
 	init_sprite(mlx_data);
@@ -27,8 +27,10 @@ static void	init_mlx(t_mlx_data *mlx_data)
 		RESIZABLE);
 	if (mlx_data->mlx_ptr == NULL)
 		error_handler(MLX_INIT_ERROR);
-	mlx_data->main_img = mlx_new_image(mlx_data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	mlx_data->minimap = mlx_new_image(mlx_data->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	mlx_data->main_img
+		= mlx_new_image(mlx_data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	mlx_data->minimap
+		= mlx_new_image(mlx_data->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	if (mlx_data->main_img == NULL || mlx_data->minimap == NULL)
 		error_handler(MLX_IMG_ERROR);
 	mlx_set_cursor_mode(mlx_data->mlx_ptr, MLX_MOUSE_DISABLED);
@@ -52,8 +54,7 @@ static void	init_sprite(t_mlx_data *mlx_data)
 		{
 			if (mlx_data->map.map[idx][jdx] == MAP_SPRITE_NONBLOCK)
 			{
-				new_sprite = (t_sprite*)malloc(sizeof(t_sprite));
-//				*new_sprite = (t_sprite){{NULL,}, 1, 0, 0, 0, 0};
+				new_sprite = (t_sprite *)malloc(sizeof(t_sprite));
 				*new_sprite = (t_sprite){texture, 1, 0, 0, 0, 0};
 				new_sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
 				new_sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
@@ -65,10 +66,8 @@ static void	init_sprite(t_mlx_data *mlx_data)
 	}
 }
 
-static void	init_player(t_mlx_data *mlx_data)
+static void	init_player(t_map map, t_player *player)
 {
-	t_player		*player = &mlx_data->player;
-	const t_map		map = mlx_data->map;
 	const uint32_t	direction = map.map[player->grid.y][player->grid.x];
 
 	player->angle = M_PI_2 * (direction == 'E')

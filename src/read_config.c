@@ -10,11 +10,10 @@ static const char	*g_texture_id_list[TEXTURE_LIST_NUM] = {
 	"C"
 };
 
-static int	check_read_line(char **splited_words);
-static int	load_info(int texture_idx, t_texture_list *texture_list,
+static int		check_read_line(char **splited_words);
+static int		load_info(int texture_idx, t_texture_list *texture_list,
 	const char *option);
 static uint32_t	char_to_color(char **text);
-
 
 int	check_config_path(const char *path)
 {
@@ -50,7 +49,7 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 		{
 			collect_ptr_2d_garbage((void **)splited_words);
 			option_bit_flag = load_info(check_read_line(splited_words),
-				&mlx_data->texture_list, splited_words[1]);
+					&mlx_data->texture_list, splited_words[1]);
 		}
 		free_splited_arr(splited_words);
 		collect_ptr_2d_garbage(NULL);
@@ -59,7 +58,6 @@ void	get_config_info(int fd, t_mlx_data *mlx_data)
 		error_handler(CONFIG_NOT_ENOUGH_OPTION_ERROR);
 	free(read_line);
 	gnl_flush(fd);
-	close(fd);
 }
 
 int	check_read_line(char **splited_words)
@@ -74,7 +72,7 @@ int	check_read_line(char **splited_words)
 	while (txt_idx < TEXTURE_LIST_NUM)
 	{
 		if (ft_strncmp(splited_words[0], g_texture_id_list[txt_idx],
-			ft_strlen(g_texture_id_list[txt_idx]) + 1) == 0)
+				ft_strlen(g_texture_id_list[txt_idx]) + 1) == 0)
 			break ;
 		txt_idx++;
 	}
@@ -95,8 +93,8 @@ int	load_info(int texture_idx, t_texture_list *texture_list,
 	if (texture_idx >= 5)
 	{
 		split_rgb = ft_split(option, ",");
-		*((uint32_t *)texture_list + texture_idx - 5) =
-			char_to_color(split_rgb);
+		*((uint32_t *)texture_list + texture_idx - 5)
+			= char_to_color(split_rgb);
 	}
 	else
 	{

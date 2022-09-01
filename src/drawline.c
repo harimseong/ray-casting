@@ -6,18 +6,26 @@
 /*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:35:23 by hseong            #+#    #+#             */
-/*   Updated: 2022/08/27 04:33:59 by hseong           ###   ########.fr       */
+/*   Updated: 2022/09/01 17:03:07 by hseong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "drawline.h"
+
+typedef void	(*t_drawline_func)(mlx_image_t *, t_vec2, t_vec2);
 
 static void	drawline_low_up(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1);
 static void	drawline_low_down(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1);
 static void	drawline_high_up(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1);
 static void	drawline_high_down(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1);
 
-static const uint32_t	g_color = 0xff0f0fff;
+static const uint32_t			g_color = 0xff0f0fff;
+static const t_drawline_func	g_drawline_tab[4] = {
+	drawline_low_down,
+	drawline_low_up,
+	drawline_high_down,
+	drawline_high_up
+};
 
 void	drawline(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1)
 {
@@ -29,22 +37,14 @@ void	drawline(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1)
 	if ((uint32_t)p0.x >= MINIMAP_WIDTH || (uint32_t)p0.y >= MINIMAP_HEIGHT
 		|| (uint32_t)p1.x >= MINIMAP_WIDTH || (uint32_t)p1.y >= MINIMAP_HEIGHT)
 		return ;
-	*((uint32_t *)minimap->pixels + (int)p0.x + minimap->width * (int)p0.y) = g_color;
+	*((uint32_t *)minimap->pixels + (int)p0.x + minimap->width * (int)p0.y)
+		= g_color;
 	if ((int)(p1.x - p0.x) > ft_abs(dy))
-	{
-		if (dy > 0)
-			drawline_low_up(minimap, p0, p1);
-		else
-			drawline_low_down(minimap, p0, p1);
-	}
+		g_drawline_tab[dy > 0](minimap, p0, p1);
 	else
-	{
-		if (dy > 0)
-			drawline_high_up(minimap, p0, p1);
-		else
-			drawline_high_down(minimap, p0, p1);
-	}
-	*((uint32_t *)minimap->pixels + (int)p1.x + minimap->width * (int)p1.y) = g_color;
+		g_drawline_tab[(dy > 0) + 2](minimap, p0, p1);
+	*((uint32_t *)minimap->pixels + (int)p1.x + minimap->width * (int)p1.y)
+		= g_color;
 }
 
 void	drawline_low_down(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1)

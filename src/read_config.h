@@ -12,15 +12,13 @@
 # define TEXTURE_LIST_NUM (7)
 # define ALL_OPTION_FILLED (0b1111111)
 
-
-
 void	get_config_info(int fd, t_mlx_data *mlx_data);
 int		check_config_path(const char *path);
 int		is_map(const char *read_line);
 int		is_map_line(const char *read_line);
 void	free_splited_arr(char **splited_words);
 int		count_splited_words(char **splited_words);
-char*	remove_newline(char *read_line);
+char	*remove_newline(char *read_line);
 void	gnl_flush(int fd);
 
 #endif

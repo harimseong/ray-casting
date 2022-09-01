@@ -137,10 +137,10 @@ static const int		g_map_per_pixel
 static const double		g_player_transfer_offset
 	= MINIMAP_GRID_NUM * GRID_LEN * 0.5;
 
-inline static t_ivec2	transfer_pos(const t_player player, int x, int y,
-	const t_map map);
+static void			draw_player(mlx_image_t *minimap);
 inline static uint32_t	get_color(const t_ivec2 pos, const t_map map);
-static void				draw_player(mlx_image_t *minimap);//, const t_player player, const t_map map);
+inline static t_ivec2		transfer_pos(const t_player player, int x, int y,
+						const t_map map);
 
 void	render_minimap(const t_mlx_data data)
 {
@@ -162,10 +162,11 @@ void	render_minimap(const t_mlx_data data)
 		}
 		++y;
 	}
-	draw_player(data.minimap);//, data.player, data.map);
+	draw_player(data.minimap);
 }
 
-inline static t_ivec2	transfer_pos(const t_player player, int x, int y, const t_map map)
+inline static t_ivec2	transfer_pos(const t_player player, int x, int y,
+		const t_map map)
 {
 	double	map_pos_x;
 	double	map_pos_y;
@@ -196,7 +197,7 @@ inline static uint32_t	get_color(const t_ivec2 pos, const t_map map)
 }
 
 // player icon: arrow, circle, triangle, square, ...
-static void	draw_player(mlx_image_t *minimap)//, const t_player player, const t_map map)
+static void	draw_player(mlx_image_t *minimap)
 {
 	int		start_y;
 	int		start_x;

@@ -3,7 +3,7 @@
 #include "screen_renderer.h"
 #include "error.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_mlx_data	mlx_data;
 

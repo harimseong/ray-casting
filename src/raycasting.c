@@ -1,15 +1,12 @@
 #include "raycasting.h"
 
-static t_ray detect_x_wall(t_camera camera, t_map map);
-static t_ray detect_y_wall(t_camera camera, t_map map);
+static t_ray	detect_x_wall(t_camera camera, t_map map);
+static t_ray	detect_y_wall(t_camera camera, t_map map);
 
-inline static double	get_distance(t_ray ray, t_camera camera);
-inline static int		boundary_check(t_ray ray, t_map map);
-
-t_ray detect_wall(t_camera camera, t_map map)
+t_ray	detect_wall(t_camera camera, t_map map)
 {
-	t_ray x_point;
-	t_ray y_point;
+	t_ray	x_point;
+	t_ray	y_point;
 
 	if (camera.angle < 0.0)
 		camera.angle += 2.0 * M_PI;
@@ -22,7 +19,7 @@ t_ray detect_wall(t_camera camera, t_map map)
 	return (y_point);
 }
 
-t_ray detect_x_wall(t_camera camera, t_map map)
+t_ray	detect_x_wall(t_camera camera, t_map map)
 {
 	t_ray	ray;
 	double	dy;
@@ -51,7 +48,7 @@ t_ray detect_x_wall(t_camera camera, t_map map)
 	return (ray);
 }
 
-t_ray detect_y_wall(t_camera camera, t_map map)
+t_ray	detect_y_wall(t_camera camera, t_map map)
 {
 	t_ray	ray;
 	double	dx;
@@ -80,12 +77,12 @@ t_ray detect_y_wall(t_camera camera, t_map map)
 	return (ray);
 }
 
-inline static double	get_distance(t_ray ray, t_camera camera)
+double	get_distance(t_ray ray, t_camera camera)
 {
 	return (sqrt(pow(ray.x - camera.x, 2.0) + pow(ray.y - camera.y, 2.0)));
 }
 
-inline static int	boundary_check(t_ray ray, t_map map)
+int	boundary_check(t_ray ray, t_map map)
 {
 	if (ray.x >= 0 && lround(ray.x) < GRID_LEN * map.width
 		&& ray.y >= 0 && lround(ray.y) < GRID_LEN * map.height)

@@ -3,32 +3,13 @@
 
 static int	gun_event(t_mlx_data *mlx_data);
 
+static int	get_player_move_input(t_mlx_data *data, t_player *player);
+
 void	key_event(t_mlx_data *data)
 {
 	static uint32_t	*door_ptr;
-	static int	is_gun_event;
-	double		move_x;
-	double		move_y;
-	double		side_x;
-	double		side_y;
-
-	move_x = SPEED * sin(data->player.angle);
-	move_y = SPEED * -cos(data->player.angle);
-	side_x = (SPEED / 2.0) * -cos(data->player.angle);
-	side_y = (SPEED / 2.0) * -sin(data->player.angle);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
-		exit(1);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
-		player_move(&data->player, -move_x, -move_y, data);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
-		player_move(&data->player, side_x, side_y, data);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
-		player_move(&data->player, -side_x, -side_y, data);
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
-		player_move(&data->player, move_x, move_y, data);
-	if (is_gun_event || mlx_is_key_down(data->mlx_ptr, MLX_KEY_SPACE))
-		is_gun_event = gun_event(data);
-	else if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_F) && door_ptr == NULL)
+	if (!get_player_move_input(data, &data->player)
+		&& mlx_is_key_down(data->mlx_ptr, MLX_KEY_F) && door_ptr == NULL)
 		door_ptr = door_event(data);
 	if (door_ptr != NULL)
 	{
@@ -40,10 +21,6 @@ void	key_event(t_mlx_data *data)
 			door_ptr = NULL;
 		}
 	}
-	if (data->player.angle >= 2.0 * M_PI)
-		data->player.angle -= 2.0 * M_PI;
-	else if (data->player.angle < 0.0)
-		data->player.angle += 2.0 * M_PI;
 }
 
 void	cursor_event(t_mlx_data *data)
@@ -62,6 +39,42 @@ void	cursor_event(t_mlx_data *data)
 	mlx_get_mouse_pos(data->mlx_ptr, &x, &y);
 	data->player.angle += (x - old_x) * MOUSE_SENSITIVITY;
 	old_x = x;
+	if (data->player.angle >= 2.0 * M_PI)
+		data->player.angle -= 2.0 * M_PI;
+	else if (data->player.angle < 0.0)
+		data->player.angle += 2.0 * M_PI;
+}
+
+static int	get_player_move_input(t_mlx_data *data, t_player *player)
+{
+	static int	is_gun_event;
+	double	move_x;
+	double	move_y;
+	double	side_x;
+	double	side_y;
+	int		is_event_occur;
+
+	is_event_occur = 0;
+	move_x = SPEED * sin(player->angle);
+	move_y = SPEED * -cos(player->angle);
+	side_x = (SPEED / 2.0) * -cos(player->angle);
+	side_y = (SPEED / 2.0) * -sin(player->angle);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
+		exit(1);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
+		is_event_occur = player_move(player, move_x, move_y, data);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
+		is_event_occur = player_move(player, -move_x, -move_y, data);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
+		is_event_occur = player_move(player, side_x, side_y, data);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
+		is_event_occur = player_move(player, -side_x, -side_y, data);
+	if (is_gun_event || mlx_is_key_down(data->mlx_ptr, MLX_KEY_SPACE))
+	{
+		is_gun_event = gun_event(data);
+		is_event_occur = 1;
+	}
+	return (is_event_occur);
 }
 
 static int	gun_event(t_mlx_data *mlx_data)
