@@ -1,5 +1,4 @@
 #include "hook.h"
-#include "gun.h"
 
 static int	gun_event(t_mlx_data *mlx_data);
 
@@ -60,7 +59,7 @@ static int	get_player_move_input(t_mlx_data *data, t_player *player)
 	side_x = (SPEED / 2.0) * -cos(player->angle);
 	side_y = (SPEED / 2.0) * -sin(player->angle);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
-		exit(1);
+		esc_exit(data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
 		is_event_occur = player_move(player, move_x, move_y, data);
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
