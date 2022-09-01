@@ -7,18 +7,27 @@
 # include "cub3d.h"
 # include "player_move.h"
 # include "minimap.h"
-# include "door.h"
 
 # define INF_GUARD (0.015)
 # define FOG_FACTOR (800)
 
 # define HALF_GRID_LEN (256)
 
-typedef t_player t_camera;
+static const double		g_fov = M_PI / 3;
+static const int32_t	g_half_screen_height = SCREEN_HEIGHT / 2;
+static const int32_t	g_canvas_dist = 4 * PLAYER_SIZE;
+static const int32_t	g_ray_cnt = SCREEN_WIDTH / 2;
+static const double		g_ray_to_pixel = (double)SCREEN_WIDTH / g_ray_cnt;
+
+typedef t_player		t_camera;
 
 t_ray		detect_wall(t_camera ray, t_map map);
-int 		map_type_check(t_ray *ray, t_map *map, double angle);
+int			map_type_check(t_ray *ray, t_map *map, double angle);
+double		get_distance(t_ray ray, t_camera camera);
+int			boundary_check(t_ray ray, t_map map);
+
 uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t y);
-uint32_t	to_le(uint32_t color, double fog);
+uint32_t	apply_fog_bswap(uint32_t color, double fog);
+uint32_t	apply_fog(uint32_t color, double fog);
 
 #endif

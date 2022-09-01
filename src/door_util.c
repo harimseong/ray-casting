@@ -1,17 +1,13 @@
-#include "cub3d.h"
 #include "door.h"
-#include "raycasting.h"
 
-t_ray detect_x_door(t_camera camera, t_map map);
-t_ray detect_y_door(t_camera camera, t_map map);
-static double	get_distance(t_ray ray, t_camera camera);
-static int	boundary_check(t_ray ray, t_map map);
-static int door_check(t_ray *ray, t_map *map);
+static t_ray	detect_x_door(t_camera camera, t_map map);
+static t_ray	detect_y_door(t_camera camera, t_map map);
+static int		door_check(t_ray *ray, t_map *map);
 
-t_ray detect_door(t_camera camera, t_map map)
+t_ray	detect_door(t_camera camera, t_map map)
 {
-	t_ray x_point;
-	t_ray y_point;
+	t_ray	x_point;
+	t_ray	y_point;
 
 	if (camera.angle < 0.0)
 		camera.angle += 2.0 * M_PI;
@@ -24,7 +20,7 @@ t_ray detect_door(t_camera camera, t_map map)
 	return (y_point);
 }
 
-t_ray detect_x_door(t_camera camera, t_map map)
+t_ray	detect_x_door(t_camera camera, t_map map)
 {
 	t_ray	ray;
 	double	dy;
@@ -52,7 +48,7 @@ t_ray detect_x_door(t_camera camera, t_map map)
 	return (ray);
 }
 
-t_ray detect_y_door(t_camera camera, t_map map)
+t_ray	detect_y_door(t_camera camera, t_map map)
 {
 	t_ray	ray;
 	double	dx;
@@ -80,22 +76,9 @@ t_ray detect_y_door(t_camera camera, t_map map)
 	return (ray);
 }
 
-static double	get_distance(t_ray ray, t_camera camera)
+static int	door_check(t_ray *ray, t_map *map)
 {
-	return (sqrt(pow(ray.x - camera.x, 2.0) + pow(ray.y - camera.y, 2.0)));
-}
-
-static int	boundary_check(t_ray ray, t_map map)
-{
-	if (ray.x >= 0 && lround(ray.x) < GRID_LEN * map.width
-		&& ray.y >= 0 && lround(ray.y) < GRID_LEN * map.height)
-		return (1);
-	return (0);
-}
-
-static int door_check(t_ray *ray, t_map *map)
-{
-	uint32_t *type;
+	uint32_t	*type;
 
 	type = &map->map[lround(ray->y) / GRID_LEN][lround(ray->x) / GRID_LEN];
 	if ((*type & (SPECIAL_TYPE_BITMASK | TYPE_BITMASK)) == MAP_WALL)

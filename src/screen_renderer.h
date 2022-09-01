@@ -4,11 +4,10 @@
 # include <stdio.h>
 # include <math.h>
 
-# include "MLX42_Input.h"
 # include "cub3d.h"
+# include "raycasting.h"
 # include "hook.h"
 # include "minimap.h"
-# include "raycasting.h"
 # include "drawline.h"
 # include "user_interface.h"
 # include "sprite.h"

@@ -96,22 +96,19 @@ uint32_t	*door_event(t_mlx_data *data)
 		& SPECIAL_TYPE_BITMASK) == MAP_DOOR_OPENED)
 		return (NULL);
 	mid_point = detect_door(data->player, data->map);
-	if (mid_point.direction != DOOR || mid_point.distance >= DOOR_DISTANCE)
+	if (mid_point.direction != DOOR || mid_point.distance >= g_door_distance)
 		return (NULL);
 	type = &data->map.map[lround(mid_point.y) / GRID_LEN]
-		[lround(mid_point.x) / GRID_LEN];
+	[lround(mid_point.x) / GRID_LEN];
 	map_pos = *type >> INFO_BITSHIFT;
 	if (map_pos == 2 * GRID_LEN)
 	{
 		*type &= ~INFO_BITMASK;
 		map_pos = 0;
 	}
-	if (map_pos == 0)
+	if (map_pos == 0 || map_pos == 512)
 		*type += DOOR_DIFF << INFO_BITSHIFT;
 	if (map_pos == 512)
-	{
-		*type += DOOR_DIFF << INFO_BITSHIFT;
 		*type ^= 1;
-	}
 	return (type);
 }

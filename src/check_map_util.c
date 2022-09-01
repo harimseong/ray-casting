@@ -22,4 +22,3 @@ int	is_map_line(char *read_line)
 	}
 	return (0);
 }
-

@@ -8,14 +8,11 @@
 # include "libft.h"
 # include "dlinkedlist.h"
 
-# define SCREEN_WIDTH (2560)
-# define SCREEN_HEIGHT (1440)
+# define SCREEN_WIDTH (1920)
+# define SCREEN_HEIGHT (1080)
 # define SCREEN_TITLE ("cub3d")
 
 # define GRID_LEN (512)
-# define FOV (M_PI / 3)
-# define RAY_CNT (SCREEN_WIDTH / 2)
-# define RAY_TO_PIXEL (SCREEN_WIDTH / RAY_CNT)
 
 # define EAST (0)
 # define WEST (1)
@@ -61,7 +58,7 @@ typedef struct s_ray
 	double	y;
 	double	distance;
 	int		direction;
-} t_ray;
+}	t_ray;
 
 typedef struct s_map
 {

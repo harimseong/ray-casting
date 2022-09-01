@@ -1,10 +1,8 @@
-#include "garbage_collector/garbage_collector.h"
-#include "libft.h"
 #include "read_config.h"
 
 void	free_splited_arr(char **splited_words)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (splited_words[idx])
@@ -18,7 +16,7 @@ void	free_splited_arr(char **splited_words)
 
 int	count_splited_words(char **splited_words)
 {
-	int cnt;
+	int	cnt;
 
 	cnt = 0;
 	while (splited_words[cnt])
@@ -26,7 +24,7 @@ int	count_splited_words(char **splited_words)
 	return (cnt);
 }
 
-char*	remove_newline(char *read_line)
+char	*remove_newline(char *read_line)
 {
 	char	*ret;
 
@@ -39,7 +37,7 @@ char*	remove_newline(char *read_line)
 
 void	gnl_flush(int fd)
 {
-	char *read_line;
+	char	*read_line;
 
 	read_line = get_next_line(fd);
 	while (read_line)
@@ -47,5 +45,6 @@ void	gnl_flush(int fd)
 		free(read_line);
 		read_line = get_next_line(fd);
 	}
+	close(fd);
 	collect_fd_garbage(0);
 }

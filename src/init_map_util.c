@@ -1,7 +1,7 @@
 #include "error.h"
 #include "read_config.h"
 
-int get_map_line(const char *path)
+int	get_map_line(const char *path)
 {
 	int		fd;
 	char	*read_line;
@@ -16,7 +16,7 @@ int get_map_line(const char *path)
 	{
 		read_line = get_next_line(fd);
 		if (!read_line || is_map(read_line))
-			break;
+			break ;
 		map_line_num++;
 		free(read_line);
 	}
@@ -24,7 +24,6 @@ int get_map_line(const char *path)
 		error_handler(MAP_FIND_ERROR);
 	free(read_line);
 	gnl_flush(fd);
-	close(fd);
 	return (map_line_num);
 }
 
