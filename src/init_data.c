@@ -69,6 +69,8 @@ static void	init_player(t_mlx_data *mlx_data)
 	const t_map		map = mlx_data->map;
 	const uint32_t	direction = map.map[player->grid.y][player->grid.x];
 
+	printf("y : %lld x : %lld\n", player->grid.y, player->grid.x);
+	printf("direction : %c\n", direction);
 	player->angle = M_PI_2 * (direction == 'E')
 		+ M_PI * (direction == 'S')
 		+ 3 * M_PI_2 * (direction == 'W');

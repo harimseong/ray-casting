@@ -43,7 +43,7 @@ int	check_map_validity(uint32_t **map, int rows, int cols, t_ivec2 *player_pos)
 	}
 	ret = !check_closed(map, *player_pos, &boundary);
 	unmask_map(map, rows, cols);
-	map[player_pos->y][player_pos->x] = '0';
+	/** map[player_pos->y][player_pos->x] = '0'; */
 	return (ret);
 }
 
