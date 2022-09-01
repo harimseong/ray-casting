@@ -13,7 +13,12 @@
 # include "garbage_collector/garbage_collector.h"
 
 # define RESIZABLE (0)
-# define SPRITE_TEXTURE_PATH_1 ("./images/goodgreenlight.png")
+# define LIGHT_SPRITE_TEXTURE ("./images/light.png")
+# define BARREL_SPRITE_TEXTURE ("./images/barrel.png")
+# define PILLAR_SPRITE_TEXTURE ("./images/pillar.png")
+# define GUN_SPRITE_TEXTURE_1 ("./images/gun1.png")
+# define GUN_SPRITE_TEXTURE_2 ("./images/gun2.png")
+# define GUN_SPRITE_TEXTURE_3 ("./images/gun3.png")
 
 int		init_data(int argc, char **argv, t_mlx_data *mlx_data);
 void	init_map(const char *path, t_mlx_data *mlx_data);

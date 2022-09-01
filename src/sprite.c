@@ -1,4 +1,6 @@
 #include "sprite.h"
+#include "MLX42.h"
+#include "init_data.h"
 
 static void	load_distance(t_mlx_data *mlx_data);
 //static void print_sprite_info(t_dlist *sprite_list);
@@ -106,12 +108,10 @@ static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 void	draw_sprite_col_line(t_mlx_data *mlx_data,
 		t_sprite *sprite, int32_t idx, int32_t texture_pos)
 {
-	int32_t	y;
+	int32_t			y;
 	uint32_t		color;
-	mlx_texture_t	*texture;
 
 	y = 0;
-	texture = sprite->texture[sprite->idx];
 	while (y < SCREEN_HEIGHT)
 	{
 		color = get_sprite_color(sprite, texture_pos, y);
@@ -122,4 +122,14 @@ void	draw_sprite_col_line(t_mlx_data *mlx_data,
 		}
 		++y;
 	}
+}
+
+void init_sprite_texture(t_mlx_data *mlx_data)
+{
+	mlx_data->texture_list.barrel = mlx_load_png(BARREL_SPRITE_TEXTURE);
+	mlx_data->texture_list.light = mlx_load_png(LIGHT_SPRITE_TEXTURE);
+	mlx_data->texture_list.pillar = mlx_load_png(PILLAR_SPRITE_TEXTURE);
+	mlx_data->texture_list.gun[0] = mlx_load_png(GUN_SPRITE_TEXTURE_1);
+	mlx_data->texture_list.gun[1] = mlx_load_png(GUN_SPRITE_TEXTURE_2);
+	mlx_data->texture_list.gun[2] = mlx_load_png(GUN_SPRITE_TEXTURE_3);
 }

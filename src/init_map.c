@@ -1,4 +1,5 @@
 #include "init_data.h"
+#include <string.h>
 
 static void get_map_size(int fd, t_mlx_data *mlx_data);
 static void load_map(int fd, t_mlx_data *mlx_data);
@@ -58,7 +59,7 @@ void load_map(int fd, t_mlx_data *mlx_data)
 		if (!read_line)
 			break;
 		map_line = (uint32_t *)malloc(sizeof(uint32_t)
-			* mlx_data->map.width + 1);
+			* mlx_data->map.width);
 		ft_memset(map_line, 0, mlx_data->map.width);
 		jdx = 0;
 		while (read_line[jdx])
@@ -66,6 +67,8 @@ void load_map(int fd, t_mlx_data *mlx_data)
 			map_line[jdx] = read_line[jdx];
 			++jdx;
 		}
+		while (jdx < mlx_data->map.width)
+			map_line[jdx++] = ' ';
 		mlx_data->map.map[idx++] = map_line;
 		free(read_line);
 	}

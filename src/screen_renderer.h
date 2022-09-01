@@ -12,6 +12,7 @@
 # include "drawline.h"
 # include "user_interface.h"
 # include "sprite.h"
+# include "gun.h"
 
 # define MINIMAP_RAY_NUM (1)
 

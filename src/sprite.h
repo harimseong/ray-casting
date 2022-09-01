@@ -25,5 +25,6 @@ void		render_sprite(t_mlx_data *mlx_data, const double *depth_buffer,
 	int size);
 uint32_t	get_sprite_color(t_sprite *sprite, int32_t pos, int32_t y);
 int 		compare(const void* comp1, const void* comp2);
+void		init_sprite_texture(t_mlx_data *mlx_data);
 
 #endif

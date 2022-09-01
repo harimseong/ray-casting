@@ -32,6 +32,7 @@ SRC		=	main.c\
 			sprite.c\
 			sprite_util.c\
 			user_interface.c\
+			gun.c\
 
 SRC		:=	$(SRC:%=src/%)
 OBJ		=	$(SRC:%.c=%.o)

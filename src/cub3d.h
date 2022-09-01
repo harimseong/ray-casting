@@ -76,6 +76,10 @@ typedef struct s_texture_list
 	uint32_t		ceiling_color;
 	mlx_texture_t	*wall[4];
 	mlx_texture_t	*door;
+	mlx_texture_t	*barrel;
+	mlx_texture_t	*pillar;
+	mlx_texture_t	*light;
+	mlx_texture_t	*gun[3];
 }	t_texture_list;
 
 typedef struct s_player
@@ -91,6 +95,9 @@ typedef struct s_mlx_data
 	mlx_t			*mlx_ptr;
 	mlx_image_t		*main_img;
 	mlx_image_t		*minimap;
+	mlx_image_t		*gun_img;
+	mlx_image_t		*ammo_img;
+	int				gun_ammo;
 	t_map			map;
 	t_player		player;
 	t_texture_list	texture_list;

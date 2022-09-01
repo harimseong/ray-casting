@@ -1,5 +1,6 @@
 #include "user_interface.h"
 
+
 void	user_interface(t_mlx_data *mlx_data)
 {
 	crosshair_line(mlx_data, 6, 6);
