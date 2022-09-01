@@ -1,53 +1,55 @@
 #include "sprite.h"
 #include "MLX42.h"
 #include "init_data.h"
+#include <stdint.h>
 
 static void	load_distance(t_mlx_data *mlx_data);
 static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 				t_player *player, const double *depth_buffer);
 static void	draw_sprite_col_line(t_mlx_data *mlx_data,
-				t_sprite *sprite, int32_t idx, int32_t transfer_ratio);
-static void	increment_sprite_idx(t_sprite *sprite);
+				t_sprite *sprite, int32_t idx, double transfer_ratio);
+static void	increment_sprite_idx(t_sprite *sprite, uint32_t frame);
 
 void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer,
 		int size)
 {
-	t_node		*sprite_node;
+	t_node			*sprite_node;
+	static uint32_t	frame;
 
-	(void)depth_buffer;
 	(void)size;
 	load_distance(mlx_data);
 	dlist_mergesort(&mlx_data->sprite_list, compare);
 	sprite_node = mlx_data->sprite_list.head;
+	/** print_sprite_info(&mlx_data->sprite_list); */
 	while (sprite_node != NULL)
 	{
 		draw_sprite(mlx_data, (t_sprite *)sprite_node->content,
 			&mlx_data->player, depth_buffer);
+		increment_sprite_idx(sprite_node->content, frame);
 		sprite_node = sprite_node->next;
 	}
+	frame++;
 }
+/** static void print_sprite_info(t_dlist *sprite_list); */
 
-/*
-static void print_sprite_info(t_dlist *sprite_list);
+/** static void print_sprite_info(t_dlist *sprite_list) */
+/** { */
+/**     size_t		idx; */
+/**     t_node		*sprite_node; */
+/**     t_sprite	*sprite; */
+/**  */
+/**     idx = 0; */
+/**     sprite_node = sprite_list->head; */
+/**     while (sprite_node) */
+/**     { */
+/**         sprite = sprite_node->content; */
+/**         printf("idx : %zu sprite x : %f y : %f distance : %f\n", */
+/**                 idx, sprite->x, sprite->y, sprite->distance); */
+/**         sprite_node = sprite_node->next; */
+/**         ++idx; */
+/**     } */
+/** } */
 
-static void print_sprite_info(t_dlist *sprite_list)
-{
-	size_t		idx;
-	t_node		*sprite_node;
-	t_sprite	*sprite;
-
-	idx = 0;
-	sprite_node = sprite_list->head;
-	while (sprite_node)
-	{
-		sprite = sprite_node->content;
-		printf("idx : %zu sprite x : %f y : %f distance : %f\n",
-				idx, sprite->x, sprite->y, sprite->distance);
-		sprite_node = sprite_node->next;
-		++idx;
-	}
-}
-*/
 static void	load_distance(t_mlx_data *mlx_data)
 {
 	t_player	player;
@@ -80,7 +82,7 @@ static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 	mid = g_ray_cnt * (angle + 0.5 * g_fov) / g_fov;
 	if (angle > 2 * M_PI - M_PI_2)
 		mid = g_ray_cnt * (angle - 2 * M_PI + 0.5 * g_fov) / g_fov;
-	else if (angle < 2 * M_PI - M_PI_2)
+	else if (-angle > 2 * M_PI - M_PI_2)
 		mid = g_ray_cnt * (angle + 2 * M_PI + 0.5 * g_fov) / g_fov;
 	width = SPRITE_WIDTH * g_canvas_dist / sprite->distance;
 	idx = mid - width;
@@ -91,11 +93,10 @@ static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 				(double)(idx - mid + width) / (2.0 * width));
 		++idx;
 	}
-	increment_sprite_idx(sprite);
 }
 
 void	draw_sprite_col_line(t_mlx_data *mlx_data, t_sprite *sprite,
-		int32_t idx, int32_t transfer_ratio)
+		int32_t idx, double transfer_ratio)
 {
 	int32_t			pixel_y;
 	int32_t			texture_x_pos;
@@ -117,13 +118,12 @@ void	draw_sprite_col_line(t_mlx_data *mlx_data, t_sprite *sprite,
 	}
 }
 
-static void	increment_sprite_idx(t_sprite *sprite)
+static void	increment_sprite_idx(t_sprite *sprite, uint32_t frame)
 {
-	static uint32_t	frame;
-
-	if (frame % 10)
+	if (frame % 10 == 1)
 		++sprite->idx;
-	++frame;
+	if (sprite->idx == sprite->size)
+		sprite->idx = 0;
 }
 
 void init_sprite_texture(t_mlx_data *mlx_data)

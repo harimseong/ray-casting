@@ -41,11 +41,17 @@ static void	init_sprite(t_mlx_data *mlx_data)
 	int				idx;
 	int				jdx;
 	t_sprite		*new_sprite;
-	mlx_texture_t	**texture;
+	/** mlx_texture_t	**texture; */
 
-	texture = malloc(sizeof(mlx_texture_t *));
-	texture[0] = mlx_load_png(BARREL_SPRITE_TEXTURE);
-	dlist_local_init(&mlx_data->sprite_list);
+	/** texture = malloc(sizeof(mlx_texture_t *)); */
+	/** texture[0] = mlx_data->texture_list.barrel; */
+	/** texture[1] = mlx_data->texture_list.enemy[1]; */
+	/** texture[2] = mlx_data->texture_list.enemy[2]; */
+	/** texture[3] = mlx_data->texture_list.enemy[3]; */
+	/** texture[4] = mlx_data->texture_list.enemy[4]; */
+	/** texture[5] = mlx_data->texture_list.enemy[5]; */
+	/** texture[6] = mlx_data->texture_list.enemy[6]; */
+	/** texture[7] = mlx_data->texture_list.enemy[7]; */
 	idx = 0;
 	while (idx < mlx_data->map.height)
 	{
@@ -55,7 +61,7 @@ static void	init_sprite(t_mlx_data *mlx_data)
 			if (mlx_data->map.map[idx][jdx] == MAP_SPRITE_NONBLOCK)
 			{
 				new_sprite = (t_sprite *)malloc(sizeof(t_sprite));
-				*new_sprite = (t_sprite){texture, 1, 0, 0, 0, 0};
+				*new_sprite = (t_sprite){mlx_data->texture_list.enemy, 8, 0, 0, 0, 0};
 				new_sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
 				new_sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
 				push_back(&mlx_data->sprite_list, new_sprite);
