@@ -67,14 +67,19 @@ void	cursor_event(t_mlx_data *data)
 static int	gun_event(t_mlx_data *mlx_data)
 {
 	static int idx;
+	static int ammo = 10;
 
+	if (ammo == 0)
+		return (0);
 	if (idx == 0)
 		gun_image_to_window(mlx_data, 1);
 	else if (idx == 2)
 		gun_image_to_window(mlx_data, 2);
 	else if (idx == 4)
 	{
+		ammo--;
 		gun_image_to_window(mlx_data, 0);
+		ammo_string_to_window(mlx_data, ft_itoa(ammo));
 		idx = 0;
 		return (0);
 	}

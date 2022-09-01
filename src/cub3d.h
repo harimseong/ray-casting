@@ -97,7 +97,6 @@ typedef struct s_mlx_data
 	mlx_image_t		*minimap;
 	mlx_image_t		*gun_img;
 	mlx_image_t		*ammo_img;
-	int				gun_ammo;
 	t_map			map;
 	t_player		player;
 	t_texture_list	texture_list;
