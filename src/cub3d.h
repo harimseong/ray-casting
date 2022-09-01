@@ -80,6 +80,7 @@ typedef struct s_texture_list
 	mlx_texture_t	*pillar;
 	mlx_texture_t	*light;
 	mlx_texture_t	*gun[3];
+	mlx_texture_t	*enemy[8];
 }	t_texture_list;
 
 typedef struct s_player
