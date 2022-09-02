@@ -18,7 +18,7 @@ int gun_image_to_window(t_mlx_data *mlx_data, int gun_idx)
 	mlx_data->gun_img = mlx_texture_area_to_image(mlx_data->mlx_ptr, gun_texture, xy, wh);
 	return (mlx_image_to_window(mlx_data->mlx_ptr, mlx_data->gun_img,
 			SCREEN_WIDTH / 2 - wh[0] / 2,
-			SCREEN_HEIGHT - wh[1] - 50 - gun_idx * 10));
+			SCREEN_HEIGHT - wh[1] - gun_idx * 10));
 }
 
 int ammo_string_to_window(t_mlx_data *mlx_data, char *ammo_num)

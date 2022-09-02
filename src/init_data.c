@@ -1,7 +1,8 @@
 #include "init_data.h"
+#include "cub3d.h"
+#include <stdint.h>
 
 static void	init_mlx(t_mlx_data *mlx_data);
-static void	init_sprite(t_mlx_data *mlx_data);
 static void	init_player(t_map map, t_player *player);
 static void	postprocess_map(t_map *map);
 
@@ -34,42 +35,6 @@ static void	init_mlx(t_mlx_data *mlx_data)
 	if (mlx_data->main_img == NULL || mlx_data->minimap == NULL)
 		error_handler(MLX_IMG_ERROR);
 	mlx_set_cursor_mode(mlx_data->mlx_ptr, MLX_MOUSE_DISABLED);
-}
-
-static void	init_sprite(t_mlx_data *mlx_data)
-{
-	int				idx;
-	int				jdx;
-	t_sprite		*new_sprite;
-	/** mlx_texture_t	**texture; */
-
-	/** texture = malloc(sizeof(mlx_texture_t *)); */
-	/** texture[0] = mlx_data->texture_list.barrel; */
-	/** texture[1] = mlx_data->texture_list.enemy[1]; */
-	/** texture[2] = mlx_data->texture_list.enemy[2]; */
-	/** texture[3] = mlx_data->texture_list.enemy[3]; */
-	/** texture[4] = mlx_data->texture_list.enemy[4]; */
-	/** texture[5] = mlx_data->texture_list.enemy[5]; */
-	/** texture[6] = mlx_data->texture_list.enemy[6]; */
-	/** texture[7] = mlx_data->texture_list.enemy[7]; */
-	idx = 0;
-	while (idx < mlx_data->map.height)
-	{
-		jdx = 0;
-		while (jdx < mlx_data->map.width)
-		{
-			if (mlx_data->map.map[idx][jdx] == MAP_SPRITE_NONBLOCK)
-			{
-				new_sprite = (t_sprite *)malloc(sizeof(t_sprite));
-				*new_sprite = (t_sprite){mlx_data->texture_list.enemy, 8, 0, 0, 0, 0};
-				new_sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
-				new_sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
-				push_back(&mlx_data->sprite_list, new_sprite);
-			}
-			jdx++;
-		}
-		idx++;
-	}
 }
 
 static void	init_player(t_map map, t_player *player)
@@ -106,8 +71,8 @@ static void	postprocess_map(t_map *map)
 					| (GRID_LEN << INFO_BITSHIFT);
 			else if (val == '3')
 				map->map[idx][jdx] = MAP_DOOR_CLOSED;
-			else if (val == '4')
-				map->map[idx][jdx] = MAP_SPRITE_NONBLOCK;
+			else if (val > '3' && val < '9')
+				map->map[idx][jdx] = MAP_SPRITE_NONBLOCK + ((val - '3') << INFO_BITSHIFT);
 			++jdx;
 		}
 		++idx;

@@ -78,20 +78,20 @@ static int	get_player_move_input(t_mlx_data *data, t_player *player)
 
 static int	gun_event(t_mlx_data *mlx_data)
 {
-	static int idx;
-	static int ammo = 10;
+	static int	idx;
+	static char ammo[2] = "9";
 
-	if (ammo == 0)
+	if (ammo[0] == '0' - 1)
 		return (0);
-	if (idx == 0)
+	if (idx == 5)
 		gun_image_to_window(mlx_data, 1);
-	else if (idx == 2)
+	else if (idx == 10)
 		gun_image_to_window(mlx_data, 2);
-	else if (idx == 4)
+	else if (idx == 15)
 	{
-		ammo--;
 		gun_image_to_window(mlx_data, 0);
-		ammo_string_to_window(mlx_data, ft_itoa(ammo));
+		ammo_string_to_window(mlx_data, ammo);
+		ammo[0]--;
 		idx = 0;
 		return (0);
 	}

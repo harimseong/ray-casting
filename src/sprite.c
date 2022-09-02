@@ -125,21 +125,3 @@ static void	increment_sprite_idx(t_sprite *sprite, uint32_t frame)
 	if (sprite->idx == sprite->size)
 		sprite->idx = 0;
 }
-
-void init_sprite_texture(t_mlx_data *mlx_data)
-{
-	mlx_data->texture_list.barrel = mlx_load_png(BARREL_SPRITE_TEXTURE);
-	mlx_data->texture_list.light = mlx_load_png(LIGHT_SPRITE_TEXTURE);
-	mlx_data->texture_list.pillar = mlx_load_png(PILLAR_SPRITE_TEXTURE);
-	mlx_data->texture_list.gun[0] = mlx_load_png(GUN_SPRITE_TEXTURE_1);
-	mlx_data->texture_list.gun[1] = mlx_load_png(GUN_SPRITE_TEXTURE_2);
-	mlx_data->texture_list.gun[2] = mlx_load_png(GUN_SPRITE_TEXTURE_3);
-	mlx_data->texture_list.enemy[0] = mlx_load_png(ENEMY_SPRITE_TEXTURE_1);
-	mlx_data->texture_list.enemy[1] = mlx_load_png(ENEMY_SPRITE_TEXTURE_2);
-	mlx_data->texture_list.enemy[2] = mlx_load_png(ENEMY_SPRITE_TEXTURE_3);
-	mlx_data->texture_list.enemy[3] = mlx_load_png(ENEMY_SPRITE_TEXTURE_4);
-	mlx_data->texture_list.enemy[4] = mlx_load_png(ENEMY_SPRITE_TEXTURE_5);
-	mlx_data->texture_list.enemy[5] = mlx_load_png(ENEMY_SPRITE_TEXTURE_6);
-	mlx_data->texture_list.enemy[6] = mlx_load_png(ENEMY_SPRITE_TEXTURE_7);
-	mlx_data->texture_list.enemy[7] = mlx_load_png(ENEMY_SPRITE_TEXTURE_8);
-}

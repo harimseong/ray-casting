@@ -17,6 +17,7 @@ SRC		=	main.c\
 			read_config_utils.c\
 			init_map.c\
 			init_map_util.c\
+			init_sprite.c\
 			check_map_validity.c\
 			check_map_util.c\
 			minimap.c\
