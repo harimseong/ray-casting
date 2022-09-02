@@ -32,7 +32,7 @@ void enemy_got_shot(t_mlx_data *mlx_data)
 	if (mid_point.direction == ENEMY)
 	{
 		type = &map->map[lround(mid_point.y) / GRID_LEN][lround(mid_point.x) / GRID_LEN];
-		*type = MAP_SPRITE_NONBLOCK;
+		*type = MAP_EMPTY;
 	}
 }
 
