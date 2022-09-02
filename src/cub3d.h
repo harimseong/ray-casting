@@ -19,6 +19,7 @@
 # define SOUTH (2)
 # define NORTH (3)
 # define DOOR (4)
+# define ENEMY (5)
 
 //		  0123  4567  89		31
 // type: [0000][0000][0000...0000]

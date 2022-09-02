@@ -34,6 +34,7 @@ typedef struct s_sprite
 	double			x;
 	double			y;
 	double			distance;
+	uint32_t		*type;
 }	t_sprite;
 
 void		render_sprite(t_mlx_data *mlx_data, const double *depth_buffer,
@@ -42,5 +43,7 @@ uint32_t	get_sprite_color(t_sprite *sprite, int32_t pos, int32_t y);
 int 		compare(const void* comp1, const void* comp2);
 void		init_sprite_texture(t_mlx_data *mlx_data);
 void		init_sprite(t_mlx_data *mlx_data);
+int			is_enemy_dead(t_node *sprite_node);
+void		enemy_got_shot(t_mlx_data *mlx_data);
 
 #endif

@@ -23,6 +23,11 @@ void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer,
 	/** print_sprite_info(&mlx_data->sprite_list); */
 	while (sprite_node != NULL)
 	{
+		if (is_enemy_dead(sprite_node))
+		{
+			sprite_node = sprite_node->next;
+			continue;
+		}
 		draw_sprite(mlx_data, (t_sprite *)sprite_node->content,
 			&mlx_data->player, depth_buffer);
 		increment_sprite_idx(sprite_node->content, frame);

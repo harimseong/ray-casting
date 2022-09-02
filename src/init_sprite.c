@@ -24,6 +24,7 @@ void	init_sprite(t_mlx_data *mlx_data)
 			{
 				type >>= INFO_BITSHIFT;
 				sprite = malloc(sizeof(t_sprite));
+				sprite->type = &mlx_data->map.map[idx][jdx];
 				if (type < 4)
 					init_item_sprite(mlx_data, type, sprite);
 				else if (type == 4)
