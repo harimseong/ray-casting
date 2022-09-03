@@ -1,17 +1,21 @@
-#include "MLX42.h"
+#include <math.h>
+
+#include "dlinkedlist.h"
+#include "raycasting.h"
+#include "player_move.h"
 #include "sprite.h"
-#include <stdlib.h>
 
 void	init_item_sprite(t_mlx_data *mlx_data, uint32_t type, t_sprite *sprite);
 void	init_gun_sprite(t_mlx_data *mlx_data, uint32_t type, t_sprite *sprite);
-void	init_enemy_sprite(t_mlx_data *mlx_data, uint32_t type, t_sprite *sprite);
+void	init_enemy_sprite(t_mlx_data *mlx_data, uint32_t type,
+			t_sprite *sprite);
+void	push_sprite(t_mlx_data *mlx_data, int idx, int jdx, uint32_t type);
 
 void	init_sprite(t_mlx_data *mlx_data)
 {
 	int				idx;
 	int				jdx;
 	uint32_t		type;
-	t_sprite		*sprite;
 
 	idx = 0;
 	while (idx < mlx_data->map.height)
@@ -21,25 +25,29 @@ void	init_sprite(t_mlx_data *mlx_data)
 		{
 			type = mlx_data->map.map[idx][jdx];
 			if ((type & SPECIAL_TYPE_BITMASK) == MAP_SPRITE_NONBLOCK)
-			{
-				type >>= INFO_BITSHIFT;
-				sprite = malloc(sizeof(t_sprite));
-				sprite->type = &mlx_data->map.map[idx][jdx];
-				if (type < 4)
-					init_item_sprite(mlx_data, type, sprite);
-				else if (type == 4)
-					init_enemy_sprite(mlx_data, type, sprite);
-				sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
-				sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
-				push_back(&mlx_data->sprite_list, sprite);
-			}
+				push_sprite(mlx_data, idx, jdx, type >> INFO_BITSHIFT);
 			jdx++;
 		}
 		idx++;
 	}
 }
 
-void init_sprite_texture(t_mlx_data *mlx_data)
+void	push_sprite(t_mlx_data *mlx_data, int idx, int jdx, uint32_t type)
+{
+	t_sprite		*sprite;
+
+	sprite = malloc(sizeof(t_sprite));
+	sprite->type = &mlx_data->map.map[idx][jdx];
+	if (type < 4)
+		init_item_sprite(mlx_data, type, sprite);
+	else if (type == 4)
+		init_enemy_sprite(mlx_data, type, sprite);
+	sprite->x = jdx * GRID_LEN + GRID_LEN / 2.0;
+	sprite->y = idx * GRID_LEN + GRID_LEN / 2.0;
+	push_back(&mlx_data->sprite_list, sprite);
+}
+
+void	init_sprite_texture(t_mlx_data *mlx_data)
 {
 	mlx_data->texture_list.barrel = mlx_load_png(BARREL_SPRITE_TEXTURE);
 	mlx_data->texture_list.light = mlx_load_png(LIGHT_SPRITE_TEXTURE);

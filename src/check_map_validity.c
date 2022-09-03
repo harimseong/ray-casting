@@ -11,7 +11,7 @@ enum e_map_element
 static int	check_closed(uint32_t **map, t_ivec2 pos, t_ivec2 *boundary);
 static void	unmask_map(uint32_t **map, int rows, int cols);
 static int	check_door(uint32_t **map, int rows, int cols,
-			t_ivec2 *boundary);
+				t_ivec2 *boundary);
 
 /*
  * return value 1: FAIL, 0: SUCCESS

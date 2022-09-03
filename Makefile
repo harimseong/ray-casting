@@ -101,7 +101,7 @@ $(LIBRARYS): %.lib:
 	@cp -p $($*_DIR)/$($*) .
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFLAGS) $(INC_DIR)
 
 $(OBJ): %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(INC_DIR)

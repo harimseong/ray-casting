@@ -1,12 +1,7 @@
 #ifndef SPRITE_H
 # define SPRITE_H
 
-# include <math.h>
-
 # include "cub3d.h"
-# include "dlinkedlist.h"
-# include "raycasting.h"
-# include "player_move.h"
 
 # define SPRITE_WIDTH (256)
 # define MAX_SPRITE_TEXTURE (8)
@@ -39,10 +34,9 @@ typedef struct s_sprite
 
 void		render_sprite(t_mlx_data *mlx_data, const double *depth_buffer);
 uint32_t	get_sprite_color(t_sprite *sprite, int32_t pos, int32_t y);
-int 		compare(const void* comp1, const void* comp2);
+int			compare(const void *comp1, const void *comp2);
 void		init_sprite_texture(t_mlx_data *mlx_data);
 void		init_sprite(t_mlx_data *mlx_data);
-int			is_enemy_dead(t_node *sprite_node);
 void		enemy_got_shot(t_mlx_data *mlx_data);
 
 #endif

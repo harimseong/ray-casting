@@ -30,5 +30,4 @@ int32_t		get_pos(mlx_texture_t *texture, t_ray *point, uint32_t type);
 uint32_t	apply_fog_bswap(uint32_t color, double fog);
 uint32_t	apply_fog(uint32_t color, double fog);
 
-
 #endif

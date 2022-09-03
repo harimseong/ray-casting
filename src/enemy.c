@@ -1,38 +1,28 @@
+#include <stdint.h>
+
 #include "cub3d.h"
 #include "sprite.h"
-#include <stdint.h>
+#include "raycasting.h"
 
 t_ray		detect_enemy(t_camera camera, t_map map);
 static int	enemy_check(t_ray *ray, t_map *map);
 t_ray		detect_x_enemy(t_camera camera, t_map map);
 t_ray		detect_y_enemy(t_camera camera, t_map map);
 
-int is_enemy_dead(t_node *sprite_node)
+void	enemy_got_shot(t_mlx_data *mlx_data)
 {
-	t_sprite *sprite;
-	uint32_t type;
-
-	sprite = sprite_node->content;
-	type = *sprite->type;
-	if (type >> INFO_BITSHIFT == 0)
-		return (1);
-	return (0);
-}
-
-void enemy_got_shot(t_mlx_data *mlx_data)
-{
-	t_camera	camera;
 	t_map		*map;
+	t_camera	camera;
 	t_ray		mid_point;
-	uint32_t	*type;
 
 	camera = mlx_data->player;
 	map = &mlx_data->map;
 	mid_point = detect_enemy(camera, *map);
 	if (mid_point.direction == ENEMY)
 	{
-		type = &map->map[lround(mid_point.y) / GRID_LEN][lround(mid_point.x) / GRID_LEN];
-		*type = MAP_EMPTY;
+		*(map->map[lround(mid_point.y) / GRID_LEN]
+				+ lround(mid_point.x) / GRID_LEN)
+			= MAP_EMPTY;
 	}
 }
 

@@ -1,6 +1,5 @@
 #include "user_interface.h"
 
-
 void	user_interface(t_mlx_data *mlx_data)
 {
 	crosshair_line(mlx_data, 6, 6);
@@ -28,21 +27,21 @@ void	crosshair_line(t_mlx_data *data, int pos, int len)
 	while (idx < len)
 	{
 		mlx_put_pixel(img, (img->width >> 1) + pos + idx,
-				img->height >> 1, 0x3fbf1fff);
+			img->height >> 1, 0x3fbf1fff);
 		mlx_put_pixel(img, (img->width >> 1) + pos + idx + 1,
-				(img->height >> 1) + 1, 0x000000ff);
+			(img->height >> 1) + 1, 0x000000ff);
 		mlx_put_pixel(img, (img->width >> 1) - pos - idx,
-				img->height >> 1, 0x3fbf1fff);
+			img->height >> 1, 0x3fbf1fff);
 		mlx_put_pixel(img, (img->width >> 1) - pos - idx + 1,
-				(img->height >> 1) + 1, 0x000000ff);
+			(img->height >> 1) + 1, 0x000000ff);
 		mlx_put_pixel(img, img->width >> 1,
-				(img->height >> 1) + pos + idx, 0x3fbf1fff);
+			(img->height >> 1) + pos + idx, 0x3fbf1fff);
 		mlx_put_pixel(img, (img->width >> 1) + 1,
-				(img->height >> 1) + pos + idx + 1, 0x000000ff);
+			(img->height >> 1) + pos + idx + 1, 0x000000ff);
 		mlx_put_pixel(img, img->width >> 1,
-				(img->height >> 1) - pos - idx, 0x3fbf1fff);
+			(img->height >> 1) - pos - idx, 0x3fbf1fff);
 		mlx_put_pixel(img, (img->width >> 1) + 1,
-				(img->height >> 1) - pos - idx + 1, 0x000000ff);
+			(img->height >> 1) - pos - idx + 1, 0x000000ff);
 		++idx;
 	}
 }

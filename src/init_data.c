@@ -6,6 +6,25 @@ static void	init_mlx(t_mlx_data *mlx_data);
 static void	init_player(t_map map, t_player *player);
 static void	postprocess_map(t_map *map);
 
+static const int32_t	g_map_convert_table[64] = {
+	0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+	MAP_EMPTY, // 32 = ' '
+	0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0,
+	MAP_EMPTY, // 48 = '0'
+	MAP_WALL,
+	MAP_DOOR_OPENED | (GRID_LEN << INFO_BITSHIFT),
+	MAP_DOOR_CLOSED,
+	MAP_SPRITE_NONBLOCK + (1 << INFO_BITSHIFT),
+	MAP_SPRITE_NONBLOCK + (2 << INFO_BITSHIFT),
+	MAP_SPRITE_NONBLOCK + (3 << INFO_BITSHIFT),
+	MAP_SPRITE_NONBLOCK + (4 << INFO_BITSHIFT),
+	MAP_SPRITE_NONBLOCK + (5 << INFO_BITSHIFT),
+};
+
 int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 {
 	ft_memset(mlx_data, 0, sizeof(*mlx_data));
@@ -25,7 +44,7 @@ int	init_data(int argc, char **argv, t_mlx_data *mlx_data)
 static void	init_mlx(t_mlx_data *mlx_data)
 {
 	mlx_data->mlx_ptr = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE,
-		RESIZABLE);
+			RESIZABLE);
 	if (mlx_data->mlx_ptr == NULL)
 		error_handler(MLX_INIT_ERROR);
 	mlx_data->main_img
@@ -62,17 +81,7 @@ static void	postprocess_map(t_map *map)
 		while (jdx < map->width)
 		{
 			val = map->map[idx][jdx];
-			if (val == ' ' || val == '0')
-				map->map[idx][jdx] = MAP_EMPTY;
-			else if (val == '1')
-				map->map[idx][jdx] = MAP_WALL;
-			else if (val == '2')
-				map->map[idx][jdx] = MAP_DOOR_OPENED
-					| (GRID_LEN << INFO_BITSHIFT);
-			else if (val == '3')
-				map->map[idx][jdx] = MAP_DOOR_CLOSED;
-			else if (val > '3' && val < '9')
-				map->map[idx][jdx] = MAP_SPRITE_NONBLOCK + ((val - '3') << INFO_BITSHIFT);
+			map->map[idx][jdx] = g_map_convert_table[val];
 			++jdx;
 		}
 		++idx;

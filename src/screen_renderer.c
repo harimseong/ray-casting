@@ -5,7 +5,7 @@ static void		draw_minimap_ray(t_mlx_data *data, t_player p0, t_ray p1);
 static uint32_t	get_color(t_mlx_data *data, t_col_line_info *info, int32_t y);
 
 static const double	g_grid_to_minimap = (double)MINIMAP_GRID_LEN / GRID_LEN;
-static const double g_angle_diff = g_fov / g_ray_cnt;
+static const double	g_angle_diff = g_fov / g_ray_cnt;
 
 void	screen_renderer(void *data)
 {
@@ -45,8 +45,8 @@ static void	render_main_img(t_mlx_data *data)
 
 void	draw_col_line(t_mlx_data *data, t_ray point, int idx)
 {
-	uint32_t	color;
-	int32_t		y;
+	uint32_t		color;
+	int32_t			y;
 	t_col_line_info	col_line_info;
 
 	col_line_info.wall_texture = data->texture_list.wall[point.direction];
@@ -103,7 +103,7 @@ static uint32_t	get_color(t_mlx_data *data, t_col_line_info *info, int32_t y)
 	y = (y - g_half_screen_height + info->range)
 		* info->wall_texture->height / (2 * info->range);
 	return (apply_fog_bswap(
-	*((uint32_t *)info->wall_texture->pixels
-	+ ((int)y * info->wall_texture->width + info->pos)),
-	info->fog_factor));
+			*((uint32_t *)info->wall_texture->pixels
+				+ ((int)y * info->wall_texture->width + info->pos)),
+			info->fog_factor));
 }

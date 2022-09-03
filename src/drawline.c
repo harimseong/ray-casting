@@ -6,13 +6,14 @@
 /*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:35:23 by hseong            #+#    #+#             */
-/*   Updated: 2022/09/01 17:03:07 by hseong           ###   ########.fr       */
+/*   Updated: 2022/09/03 18:20:51 by hseong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "drawline.h"
 
-typedef void	(*t_drawline_func)(mlx_image_t *, t_vec2, t_vec2);
+typedef void					(*t_drawline_func)(mlx_image_t *,
+		t_vec2, t_vec2);
 
 static void	drawline_low_up(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1);
 static void	drawline_low_down(mlx_image_t *minimap, t_vec2 p0, t_vec2 p1);

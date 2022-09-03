@@ -12,7 +12,7 @@ static const char	*g_texture_id_list[TEXTURE_LIST_NUM] = {
 
 static int		check_read_line(char **splited_words);
 static int		load_info(int texture_idx, t_texture_list *texture_list,
-	const char *option);
+					const char *option);
 static uint32_t	char_to_color(char **text);
 
 int	check_config_path(const char *path)

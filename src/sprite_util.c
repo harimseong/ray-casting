@@ -1,3 +1,4 @@
+#include "raycasting.h"
 #include "sprite.h"
 
 uint32_t	get_sprite_color(t_sprite *sprite, int32_t pos, int32_t y)

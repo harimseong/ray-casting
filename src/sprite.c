@@ -1,7 +1,8 @@
-#include "sprite.h"
-#include "MLX42.h"
-#include "init_data.h"
 #include <stdint.h>
+
+#include "MLX42.h"
+#include "raycasting.h"
+#include "sprite.h"
 
 static void	load_distance(t_mlx_data *mlx_data);
 static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
@@ -12,27 +13,29 @@ static void	increment_sprite_idx(t_sprite *sprite, uint32_t frame);
 
 void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer)
 {
-	t_node			*sprite_node;
 	static uint32_t	frame;
+	t_node			*sprite_node;
+	t_sprite		*sprite;
 
 	load_distance(mlx_data);
 	dlist_mergesort(&mlx_data->sprite_list, compare);
 	sprite_node = mlx_data->sprite_list.head;
-	/** print_sprite_info(&mlx_data->sprite_list); */
 	while (sprite_node != NULL)
 	{
-		if (is_enemy_dead(sprite_node))
+		sprite = sprite_node->content;
+		if ((*sprite->type >> INFO_BITSHIFT) == 0)
 		{
 			sprite_node = sprite_node->next;
-			continue;
+			continue ;
 		}
-		draw_sprite(mlx_data, (t_sprite *)sprite_node->content,
+		draw_sprite(mlx_data, sprite,
 			&mlx_data->player, depth_buffer);
-		increment_sprite_idx(sprite_node->content, frame);
+		increment_sprite_idx(sprite, frame);
 		sprite_node = sprite_node->next;
 	}
 	frame++;
 }
+	/** print_sprite_info(&mlx_data->sprite_list); */
 /** static void print_sprite_info(t_dlist *sprite_list); */
 
 /** static void print_sprite_info(t_dlist *sprite_list) */

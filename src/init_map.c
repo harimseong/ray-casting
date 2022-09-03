@@ -48,9 +48,9 @@ void	get_map_size(int fd, t_mlx_data *mlx_data)
 void	load_map(int fd, t_mlx_data *mlx_data)
 {
 	char		*read_line;
+	uint32_t	*map_line;
 	int			idx;
 	int			jdx;
-	uint32_t	*map_line;
 
 	idx = 0;
 	while (1)
@@ -58,8 +58,7 @@ void	load_map(int fd, t_mlx_data *mlx_data)
 		read_line = remove_newline(get_next_line(fd));
 		if (!read_line)
 			break ;
-		map_line = (uint32_t *)malloc(sizeof(uint32_t) * mlx_data->map.width);
-		ft_memset(map_line, 0, mlx_data->map.width);
+		map_line = ft_calloc(1, sizeof(uint32_t) * mlx_data->map.width);
 		jdx = 0;
 		while (read_line[jdx])
 		{
