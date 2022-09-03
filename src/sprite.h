@@ -37,8 +37,7 @@ typedef struct s_sprite
 	uint32_t		*type;
 }	t_sprite;
 
-void		render_sprite(t_mlx_data *mlx_data, const double *depth_buffer,
-				int size);
+void		render_sprite(t_mlx_data *mlx_data, const double *depth_buffer);
 uint32_t	get_sprite_color(t_sprite *sprite, int32_t pos, int32_t y);
 int 		compare(const void* comp1, const void* comp2);
 void		init_sprite_texture(t_mlx_data *mlx_data);

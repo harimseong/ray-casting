@@ -3,8 +3,6 @@
 
 typedef int	(*t_special_type_func)(t_ray *ray, uint32_t *type, double angle);
 
-static int	get_pos(mlx_texture_t *texture, t_ray *point, uint32_t type);
-
 static const
 	t_special_type_func g_special_type_table[16] = {
 	check_east_door,
@@ -12,33 +10,6 @@ static const
 	check_south_door,
 	check_north_door
 };
-
-uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t pixel_height)
-{
-	int				pos;
-	mlx_texture_t	*wall_texture;
-	uint32_t		color;
-	int32_t			range;
-	double			fog;
-
-	fog = fabs((double)pixel_height - g_half_screen_height)
-		/ g_half_screen_height;
-	wall_texture = data->texture_list.wall[point->direction];
-	pos = get_pos(wall_texture, point,
-			data->map.map[lround(point->y) / GRID_LEN]
-		[lround(point->x) / GRID_LEN] >> INFO_BITSHIFT);
-	range = g_canvas_dist * g_half_screen_height / point->distance;
-	if (-range + g_half_screen_height > pixel_height)
-		return (apply_fog(data->texture_list.floor_color, fog));
-	else if (range + g_half_screen_height <= pixel_height)
-		return (apply_fog(data->texture_list.ceiling_color, fog));
-	pixel_height = (pixel_height - g_half_screen_height + range)
-		* wall_texture->height / (2 * range);
-	color = *((uint32_t *)wall_texture->pixels + \
-			((int)pixel_height * wall_texture->width + pos));
-	color = apply_fog_bswap(color, FOG_FACTOR / (point->distance + FOG_FACTOR));
-	return (color);
-}
 
 uint32_t	apply_fog_bswap(uint32_t color, double fog)
 {
@@ -78,7 +49,7 @@ uint32_t	apply_fog(uint32_t color, double fog)
 	return (ret);
 }
 
-static int	get_pos(mlx_texture_t *texture, t_ray *point, uint32_t type)
+int	get_pos(mlx_texture_t *texture, t_ray *point, uint32_t type)
 {
 	int	pos;
 

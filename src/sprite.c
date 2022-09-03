@@ -10,13 +10,11 @@ static void	draw_sprite_col_line(t_mlx_data *mlx_data,
 				t_sprite *sprite, int32_t idx, double transfer_ratio);
 static void	increment_sprite_idx(t_sprite *sprite, uint32_t frame);
 
-void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer,
-		int size)
+void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer)
 {
 	t_node			*sprite_node;
 	static uint32_t	frame;
 
-	(void)size;
 	load_distance(mlx_data);
 	dlist_mergesort(&mlx_data->sprite_list, compare);
 	sprite_node = mlx_data->sprite_list.head;

@@ -26,8 +26,9 @@ int			map_type_check(t_ray *ray, t_map *map, double angle);
 double		get_distance(t_ray ray, t_camera camera);
 int			boundary_check(t_ray ray, t_map map);
 
-uint32_t	get_color(t_mlx_data *data, t_ray *point, int32_t y);
+int32_t		get_pos(mlx_texture_t *texture, t_ray *point, uint32_t type);
 uint32_t	apply_fog_bswap(uint32_t color, double fog);
 uint32_t	apply_fog(uint32_t color, double fog);
+
 
 #endif
