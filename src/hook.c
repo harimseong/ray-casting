@@ -1,6 +1,17 @@
-#include "hook.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 15:06:51 by soum              #+#    #+#             */
+/*   Updated: 2022/09/04 15:55:57 by soum             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	gun_event(t_mlx_data *mlx_data);
+#include "hook.h"
+#include "MLX42_Input.h"
 
 static int	get_player_move_input(t_mlx_data *data, t_player *player);
 
@@ -17,7 +28,9 @@ void	key_event(t_mlx_data *data)
 	if (is_gun_event
 		|| (mlx_is_key_down(data->mlx_ptr, MLX_KEY_SPACE)
 			|| mlx_is_mouse_down(data->mlx_ptr, MLX_MOUSE_BUTTON_LEFT)))
-		is_gun_event = gun_event(data);
+		is_gun_event = gun_event(data, 0);
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT_CONTROL))
+		get_ammo(data);
 	if (door_ptr != NULL)
 	{
 		if ((*door_ptr >> INFO_BITSHIFT) % 512 != 0)
@@ -74,28 +87,4 @@ static int	get_player_move_input(t_mlx_data *data, t_player *player)
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_D))
 		is_event_occur = player_move(player, -side_x, -side_y, data);
 	return (is_event_occur);
-}
-
-static int	gun_event(t_mlx_data *mlx_data)
-{
-	static int	idx;
-	static char	ammo[2] = "9";
-
-	if (ammo[0] == '0' - 1)
-		return (0);
-	if (idx == 5)
-		gun_image_to_window(mlx_data, 1);
-	else if (idx == 10)
-		gun_image_to_window(mlx_data, 2);
-	else if (idx == 15)
-	{
-		enemy_got_shot(mlx_data);
-		gun_image_to_window(mlx_data, 0);
-		ammo_string_to_window(mlx_data, ammo);
-		ammo[0]--;
-		idx = 0;
-		return (0);
-	}
-	idx++;
-	return (1);
 }

@@ -19,7 +19,7 @@ MAX_PATHNAME	ft_execvpe.c	/^#define MAX_PATHNAME /;"	d	file:
 NAME	Makefile	/^NAME = libft.a$/;"	m
 OBJS	Makefile	/^OBJS = $(SRC:%.c=%.o)$/;"	m
 SRC	Makefile	/^SRC = ft_isalpha.c ft_isdigit.c\\$/;"	m
-WORD_BYTES	ft_memset.c	/^# define WORD_BYTES /;"	d	file:
+WORD_BYTES	ft_memset.c	/^#define WORD_BYTES /;"	d	file:
 WORD_BYTES	libft.h	/^# define WORD_BYTES /;"	d
 alloc_words	ft_split.c	/^char	**alloc_words(const char *str, size_t count, const char *delim)$/;"	f
 byte	ft_memset.c	/^	unsigned long long int	byte[WORD_BYTES];$/;"	m	struct:s_word	file:

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_sprite.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 15:07:00 by soum              #+#    #+#             */
+/*   Updated: 2022/09/04 15:17:16 by soum             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <math.h>
 
 #include "dlinkedlist.h"
@@ -51,7 +63,7 @@ void	init_sprite_texture(t_mlx_data *mlx_data)
 {
 	mlx_data->texture_list.barrel = mlx_load_png(BARREL_SPRITE_TEXTURE);
 	mlx_data->texture_list.light = mlx_load_png(LIGHT_SPRITE_TEXTURE);
-	mlx_data->texture_list.pillar = mlx_load_png(PILLAR_SPRITE_TEXTURE);
+	mlx_data->texture_list.ammo = mlx_load_png(AMMO_SPRITE_TEXTURE);
 	mlx_data->texture_list.gun[0] = mlx_load_png(GUN_SPRITE_TEXTURE_1);
 	mlx_data->texture_list.gun[1] = mlx_load_png(GUN_SPRITE_TEXTURE_2);
 	mlx_data->texture_list.gun[2] = mlx_load_png(GUN_SPRITE_TEXTURE_3);
@@ -73,7 +85,7 @@ void	init_item_sprite(t_mlx_data *mlx_data, uint32_t type, t_sprite *sprite)
 	else if (type == 2)
 		sprite->texture[0] = mlx_data->texture_list.light;
 	else if (type == 3)
-		sprite->texture[0] = mlx_data->texture_list.pillar;
+		sprite->texture[0] = mlx_data->texture_list.ammo;
 	sprite->idx = 0;
 	sprite->size = 1;
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 15:07:24 by soum              #+#    #+#             */
+/*   Updated: 2022/09/04 15:17:06 by soum             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SPRITE_H
 # define SPRITE_H
 
@@ -8,7 +20,7 @@
 
 # define LIGHT_SPRITE_TEXTURE ("./images/light.png")
 # define BARREL_SPRITE_TEXTURE ("./images/barrel.png")
-# define PILLAR_SPRITE_TEXTURE ("./images/pillar.png")
+# define AMMO_SPRITE_TEXTURE ("./images/ammo.png")
 # define GUN_SPRITE_TEXTURE_1 ("./images/gun1.png")
 # define GUN_SPRITE_TEXTURE_2 ("./images/gun2.png")
 # define GUN_SPRITE_TEXTURE_3 ("./images/gun3.png")

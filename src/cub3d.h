@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 15:06:27 by soum              #+#    #+#             */
+/*   Updated: 2022/09/04 15:16:35 by soum             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -75,7 +87,7 @@ typedef struct s_texture_list
 	mlx_texture_t	*wall[4];
 	mlx_texture_t	*door;
 	mlx_texture_t	*barrel;
-	mlx_texture_t	*pillar;
+	mlx_texture_t	*ammo;
 	mlx_texture_t	*light;
 	mlx_texture_t	*gun[3];
 	mlx_texture_t	*enemy[8];

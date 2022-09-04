@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   screen_renderer.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 15:07:19 by soum              #+#    #+#             */
+/*   Updated: 2022/09/04 15:07:19 by soum             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "screen_renderer.h"
 
 static void		render_main_img(t_mlx_data *data);
@@ -34,7 +46,7 @@ static void	render_main_img(t_mlx_data *data)
 		point = detect_wall(camera, data->map);
 		point.distance *= cos(camera.angle - data->player.angle);
 		draw_col_line(data, point, idx);
-		if (idx % 64 == 0)
+		if (idx % 32 == 0)
 			draw_minimap_ray(data, camera, point);
 		camera.angle += g_angle_diff;
 		depth_buffer[idx] = point.distance;

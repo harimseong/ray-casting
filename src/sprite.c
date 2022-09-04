@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 15:07:23 by soum              #+#    #+#             */
+/*   Updated: 2022/09/04 16:23:24 by soum             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdint.h>
 
 #include "MLX42.h"
@@ -23,38 +35,16 @@ void	render_sprite(t_mlx_data *mlx_data, const double *depth_buffer)
 	while (sprite_node != NULL)
 	{
 		sprite = sprite_node->content;
-		if ((*sprite->type >> INFO_BITSHIFT) == 0)
+		if ((*sprite->type >> INFO_BITSHIFT) != 0)
 		{
-			sprite_node = sprite_node->next;
-			continue ;
+			draw_sprite(mlx_data, sprite,
+				&mlx_data->player, depth_buffer);
+			increment_sprite_idx(sprite, frame);
 		}
-		draw_sprite(mlx_data, sprite,
-			&mlx_data->player, depth_buffer);
-		increment_sprite_idx(sprite, frame);
 		sprite_node = sprite_node->next;
 	}
 	frame++;
 }
-	/** print_sprite_info(&mlx_data->sprite_list); */
-/** static void print_sprite_info(t_dlist *sprite_list); */
-
-/** static void print_sprite_info(t_dlist *sprite_list) */
-/** { */
-/**     size_t		idx; */
-/**     t_node		*sprite_node; */
-/**     t_sprite	*sprite; */
-/**  */
-/**     idx = 0; */
-/**     sprite_node = sprite_list->head; */
-/**     while (sprite_node) */
-/**     { */
-/**         sprite = sprite_node->content; */
-/**         printf("idx : %zu sprite x : %f y : %f distance : %f\n", */
-/**                 idx, sprite->x, sprite->y, sprite->distance); */
-/**         sprite_node = sprite_node->next; */
-/**         ++idx; */
-/**     } */
-/** } */
 
 static void	load_distance(t_mlx_data *mlx_data)
 {

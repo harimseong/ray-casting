@@ -6,11 +6,11 @@
 /*   By: hseong <hseong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 21:21:20 by hseong            #+#    #+#             */
-/*   Updated: 2022/09/01 13:49:19 by soum             ###   ########.fr       */
+/*   Updated: 2022/09/04 14:46:32 by soum             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define WORD_BYTES (16)
+#define WORD_BYTES (16)
 
 typedef unsigned long long int	t_uint64;
 
