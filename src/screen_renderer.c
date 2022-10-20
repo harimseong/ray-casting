@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:07:19 by soum              #+#    #+#             */
-/*   Updated: 2022/09/04 15:07:19 by soum             ###   ########.fr       */
+/*   Updated: 2022/10/12 14:34:39 by hseong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	draw_col_line(t_mlx_data *data, t_ray point, int idx)
 	uint32_t		color;
 	int32_t			y;
 	t_col_line_info	col_line_info;
+	int				line_idx;
 
 	col_line_info.wall_texture = data->texture_list.wall[point.direction];
 	col_line_info.range = g_canvas_dist * g_half_screen_height / point.distance;
@@ -71,8 +72,13 @@ void	draw_col_line(t_mlx_data *data, t_ray point, int idx)
 	while (y < SCREEN_HEIGHT)
 	{
 		color = get_color(data, &col_line_info, y);
-		mlx_put_pixel(data->main_img, 2 * idx, y, color);
-		mlx_put_pixel(data->main_img, 2 * idx + 1, y, color);
+		line_idx = 0;
+		while (line_idx < g_line_per_ray)
+		{
+			mlx_put_pixel(data->main_img, g_line_per_ray * idx + line_idx, y, color);
+			++line_idx;
+		}
+//		mlx_put_pixel(data->main_img, 2 * idx, y, color);
 		++y;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:06:05 by soum              #+#    #+#             */
-/*   Updated: 2022/09/04 15:07:12 by soum             ###   ########.fr       */
+/*   Updated: 2022/10/20 10:32:10 by hseong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static const int32_t	g_half_screen_height = SCREEN_HEIGHT / 2;
 static const int32_t	g_canvas_dist = 4 * PLAYER_SIZE;
 static const int32_t	g_ray_cnt = SCREEN_WIDTH / 2;
 static const double		g_ray_to_pixel = (double)SCREEN_WIDTH / g_ray_cnt;
+static const int32_t	g_line_per_ray = SCREEN_WIDTH / g_ray_cnt;
 
 typedef t_player		t_camera;
 

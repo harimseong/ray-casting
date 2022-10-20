@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:07:23 by soum              #+#    #+#             */
-/*   Updated: 2022/09/04 16:23:24 by soum             ###   ########.fr       */
+/*   Updated: 2022/10/20 10:28:13 by hseong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	draw_sprite(t_mlx_data *mlx_data, t_sprite *sprite,
 		if (idx >= 0 && idx < g_ray_cnt && depth_buffer[idx] > sprite->distance)
 			draw_sprite_col_line(mlx_data, sprite, idx,
 				(double)(idx - mid + width) / (2.0 * width));
-		++idx;
+		idx += g_line_per_ray / 2;
 	}
 }
 
@@ -97,6 +97,7 @@ void	draw_sprite_col_line(t_mlx_data *mlx_data, t_sprite *sprite,
 	int32_t			pixel_y;
 	int32_t			texture_x_pos;
 	uint32_t		color;
+	int32_t			jdx;
 	mlx_texture_t	*texture;
 
 	pixel_y = 0;
@@ -107,8 +108,10 @@ void	draw_sprite_col_line(t_mlx_data *mlx_data, t_sprite *sprite,
 		color = get_sprite_color(sprite, texture_x_pos, pixel_y);
 		if (color != 0)
 		{
-			mlx_put_pixel(mlx_data->main_img, 2 * idx, pixel_y, color);
-			mlx_put_pixel(mlx_data->main_img, 2 * idx + 1, pixel_y, color);
+			jdx = 0;
+			while (jdx < g_line_per_ray)
+				mlx_put_pixel(mlx_data->main_img,
+					g_line_per_ray * idx + jdx++, pixel_y, color);
 		}
 		++pixel_y;
 	}

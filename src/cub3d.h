@@ -6,7 +6,7 @@
 /*   By: soum <soum@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:06:27 by soum              #+#    #+#             */
-/*   Updated: 2022/09/04 15:16:35 by soum             ###   ########.fr       */
+/*   Updated: 2022/09/07 18:03:02 by hseong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "libft.h"
 # include "dlinkedlist.h"
 
-# define SCREEN_WIDTH (1920)
-# define SCREEN_HEIGHT (1080)
+# define SCREEN_WIDTH (2560)
+# define SCREEN_HEIGHT (1440)
 # define SCREEN_TITLE ("cub3d")
 
 # define GRID_LEN (512)
