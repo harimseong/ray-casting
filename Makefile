@@ -64,10 +64,10 @@ MLX42		=	libmlx42.a
 MLX42_DIR	=	mlx42
 LIBRARYS	+=	MLX42.lib
 INC_DIR		+=	-I$(MLX42_DIR)/include/MLX42
-ifeq ($(shell uname -m), x86_64)
+ifeq ($(shell uname), Darwin)
 LIBFLAGS	+= -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
-else ifeq ($(shell uname -m), arm64)
-LIBFLAGS	+= -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
+#else ifeq ($(shell uname -m), arm64)
+#LIBFLAGS	+= -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
 else
 LIBFLAGS	+= -ldl -lglfw -pthread -lm
 endif
